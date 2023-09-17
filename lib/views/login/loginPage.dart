@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:mero_hostel/widgets/Mytext.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [],
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [MyText(text: 'Login', color: Colors.black)],
+        ),
       ),
     );
   }
