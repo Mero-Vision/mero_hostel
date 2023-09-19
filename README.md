@@ -4,7 +4,10 @@
 
 ## Getting Started
 
-Developer: Hancie Phago
-Nitesh Hamal
-Ajaya Timsina
+Developer: Hancie Phago,
+Nitesh Hamal,
+Ajaya Timsina.
+
+Emails:
+azzaya2060@gmail.com
 
