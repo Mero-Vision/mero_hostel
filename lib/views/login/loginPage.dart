@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/widgets/Mytext.dart';
 import 'package:mero_hostel/widgets/myTextFormField.dart';
@@ -38,7 +36,7 @@ class LoginPage extends StatelessWidget {
                       Center(
                         child: MyText(
                           text: 'Login',
-                          color: Colors.black,
+                          color: KTextColor,
                           size: 32,
                           top: 15,
                           bottom: 30,
@@ -46,7 +44,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       MyText(
                         text: 'Email',
-                        color: Colors.black,
+                        color: KTextColor,
                         size: 20,
                         left: 30,
                       ),
@@ -58,7 +56,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       MyText(
                         text: 'Password',
-                        color: Colors.black,
+                        color: KTextColor,
                         size: 20,
                         top: 20,
                         left: 30,
@@ -68,6 +66,15 @@ class LoginPage extends StatelessWidget {
                         left: 20,
                         right: 20,
                         hintText: 'Enter your password.',
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: MyText(
+                            top: 10,
+                            right: 20,
+                            text: 'Forgot Password?',
+                            color: Color(0xff0E6A28),
+                            size: 18),
                       )
                     ]),
               ),
