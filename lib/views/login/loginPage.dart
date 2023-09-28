@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/widgets/Mytext.dart';
 import 'package:mero_hostel/widgets/myTextFormField.dart';
+import 'package:mero_hostel/widgets/mybutton.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -72,10 +75,16 @@ class LoginPage extends StatelessWidget {
                         child: MyText(
                             top: 10,
                             right: 20,
+                            bottom: 20,
                             text: 'Forgot Password?',
                             color: Color(0xff0E6A28),
                             size: 18),
-                      )
+                      ),
+                      Center(
+                          child: MyButton(
+                        text: 'Login',
+                        ontap: () {},
+                      ))
                     ]),
               ),
             )
