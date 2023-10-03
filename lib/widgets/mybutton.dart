@@ -45,7 +45,7 @@ class MyButton extends StatelessWidget {
               shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(radius ?? 14))),
               fixedSize:
-                  MaterialStatePropertyAll(Size(height ?? 350, width ?? 55)),
+                  MaterialStatePropertyAll(Size(width ?? 350, height ?? 55)),
               backgroundColor: MaterialStatePropertyAll(color ?? KButtonColor)),
           child: Text(
             text,
