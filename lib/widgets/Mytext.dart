@@ -11,6 +11,7 @@ class MyText extends StatelessWidget {
     this.bottom,
     this.left,
     this.right,
+    this.ontap,
   }) : super(key: key);
   //initializing variables
   final String text;
@@ -20,17 +21,21 @@ class MyText extends StatelessWidget {
   final double? bottom;
   final double? left;
   final double? right;
+  final void Function()? ontap;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-          top: top ?? 0,
-          bottom: bottom ?? 0,
-          left: left ?? 0,
-          right: right ?? 0),
-      child: Text(
-        text,
-        style: TextStyle(color: color, fontSize: size),
+    return GestureDetector(
+      onTap: ontap,
+      child: Container(
+        padding: EdgeInsets.only(
+            top: top ?? 0,
+            bottom: bottom ?? 0,
+            left: left ?? 0,
+            right: right ?? 0),
+        child: Text(
+          text,
+          style: TextStyle(color: color, fontSize: size),
+        ),
       ),
     );
   }
