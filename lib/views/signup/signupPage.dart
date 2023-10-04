@@ -8,8 +8,10 @@ import 'package:mero_hostel/widgets/myTextFormField.dart';
 import 'package:mero_hostel/widgets/mybutton.dart';
 
 class SignupPage extends StatelessWidget {
-  const SignupPage({super.key});
-
+  SignupPage({super.key});
+  TextEditingController EmailController = TextEditingController();
+  TextEditingController PasswordController = TextEditingController();
+  TextEditingController ConfPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -74,6 +76,7 @@ class SignupPage extends StatelessWidget {
                                 left: 30,
                               ),
                               MyTextFormField(
+                                controller: EmailController,
                                 top: 10,
                                 left: 20,
                                 right: 20,
@@ -87,6 +90,7 @@ class SignupPage extends StatelessWidget {
                                 left: 30,
                               ),
                               MyTextFormField(
+                                controller: PasswordController,
                                 top: 10,
                                 left: 20,
                                 right: 20,
@@ -100,6 +104,7 @@ class SignupPage extends StatelessWidget {
                                 left: 30,
                               ),
                               MyTextFormField(
+                                controller: ConfPasswordController,
                                 top: 10,
                                 left: 20,
                                 right: 20,
