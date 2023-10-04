@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/login/LoginUI.dart';
 
@@ -13,24 +12,22 @@ class LoginPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                height: ScreenHeight * 0.45,
-                width: ScreenWidth,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(120)),
                 child: Image.asset(
                   'assets/images/login_sign_Background.png',
+                  height: ScreenHeight * 0.35,
+                  width: ScreenWidth,
                   fit: BoxFit.fill,
                 ),
               ),
-            ),
-            Positioned(
-              top: ScreenHeight * 0.35,
-              child: LoginUI(),
-            ),
-          ],
+              LoginUI(),
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mero_hostel/controller/loginController.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/signup/signupPage.dart';
 import 'package:mero_hostel/widgets/Mytext.dart';
@@ -7,12 +9,14 @@ import 'package:mero_hostel/widgets/myTextFormField.dart';
 import 'package:mero_hostel/widgets/mybutton.dart';
 
 class LoginUI extends StatelessWidget {
-  const LoginUI({
+  LoginUI({
     super.key,
   });
-
+  TextEditingController EmailController = TextEditingController();
+  TextEditingController PasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    LoginController controller = Get.put(LoginController());
     return Hero(
       tag: 'Login_SignUp',
       child: Material(
@@ -42,6 +46,7 @@ class LoginUI extends StatelessWidget {
               left: 30,
             ),
             MyTextFormField(
+              controller: EmailController,
               top: 10,
               left: 20,
               right: 20,
@@ -55,6 +60,7 @@ class LoginUI extends StatelessWidget {
               left: 30,
             ),
             MyTextFormField(
+              controller: PasswordController,
               top: 10,
               left: 20,
               right: 20,
@@ -74,7 +80,10 @@ class LoginUI extends StatelessWidget {
             Center(
                 child: MyButton(
               text: 'Login',
-              ontap: () {},
+              ontap: () {
+                controller.login(EmailController.text.toString(),
+                    PasswordController.text.toString());
+              },
               bottom: 20,
             )),
             Center(
