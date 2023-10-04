@@ -16,15 +16,16 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Color(0xff698AFF),
         body: Stack(
           children: [
             Align(
               alignment: Alignment.topCenter,
               child: Container(
-                height: ScreenHeight * 0.45,
-                width: ScreenWidth,
+                height: ScreenHeight * 0.3,
+                width: 270,
                 child: Image.asset(
-                  'assets/images/login_sign_Background.png',
+                  'assets/images/loginlogo.png',
                   fit: BoxFit.fill,
                 ),
               ),
@@ -70,8 +71,22 @@ class SignupPage extends StatelessWidget {
                                 ),
                               ),
                               MyText(
+                                text: 'Name',
+                                color: KTextColor,
+                                size: 20,
+                                left: 30,
+                              ),
+                              MyTextFormField(
+                                controller: EmailController,
+                                top: 10,
+                                left: 20,
+                                right: 20,
+                                hintText: 'Enter your name.',
+                              ),
+                              MyText(
                                 text: 'Email',
                                 color: KTextColor,
+                                top: 20,
                                 size: 20,
                                 left: 30,
                               ),
@@ -95,6 +110,7 @@ class SignupPage extends StatelessWidget {
                                 left: 20,
                                 right: 20,
                                 hintText: 'Enter your password.',
+                                obscureText: true,
                               ),
                               MyText(
                                 text: 'Conform Password',
@@ -110,6 +126,7 @@ class SignupPage extends StatelessWidget {
                                 right: 20,
                                 bottom: 80,
                                 hintText: 'Enter your password again.',
+                                obscureText: true,
                               ),
                               Center(
                                   child: MyButton(

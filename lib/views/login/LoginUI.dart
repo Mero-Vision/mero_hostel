@@ -22,11 +22,12 @@ class LoginUI extends StatelessWidget {
       child: Material(
         type: MaterialType.transparency,
         child: Container(
-          height: ScreenHeight * 0.55,
+          height: ScreenHeight * 0.60,
           width: ScreenWidth,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50), topRight: Radius.circular(50)),
           ),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
