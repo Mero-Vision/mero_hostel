@@ -11,19 +11,17 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xff698AFF),
         body: SingleChildScrollView(
+          
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ClipRRect(
-                borderRadius:
-                    BorderRadius.only(bottomLeft: Radius.circular(120)),
-                child: Image.asset(
-                  'assets/images/login_sign_Background.png',
-                  height: ScreenHeight * 0.35,
-                  width: ScreenWidth,
-                  fit: BoxFit.fill,
-                ),
+              Image.asset(
+                'assets/images/loginlogo.png',
+                height: ScreenHeight * 0.3,
+                width: 270,
+                fit: BoxFit.fill,
               ),
               LoginUI(),
             ],

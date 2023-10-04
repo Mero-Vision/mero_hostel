@@ -11,6 +11,7 @@ class MyTextFormField extends StatelessWidget {
     this.right,
     required this.hintText,
     required this.controller,
+    this.obscureText,
   }) : super(key: key);
   final double? top;
   final double? bottom;
@@ -18,6 +19,7 @@ class MyTextFormField extends StatelessWidget {
   final double? right;
   final String hintText;
   final TextEditingController controller;
+  final bool? obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +30,10 @@ class MyTextFormField extends StatelessWidget {
           left: left ?? 0,
           right: right ?? 0),
       child: TextFormField(
+        obscureText: obscureText??false,
         controller: controller,
         decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(10),
             hintText: hintText,
             helperStyle: TextStyle(fontSize: 20),
             border:
