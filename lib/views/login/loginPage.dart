@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginController.dart';
+import 'package:mero_hostel/views/forgot_password/forgotPassword.dart';
 import 'package:mero_hostel/views/signup/signupPage.dart';
 import 'package:mero_hostel/widgets/Mytext.dart';
 import 'package:mero_hostel/widgets/myRichText.dart';
@@ -114,7 +115,9 @@ class LoginPage extends StatelessWidget {
                                 right: 20,
                                 bottom: 20,
                                 text: 'Forgot Password?',
-                                ontap: () {},
+                                ontap: () {
+                                  Get.to(() => ForgotPassword());
+                                },
                                 color: Color(0xff0E6A28),
                                 size: 18,
                               ),
