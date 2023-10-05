@@ -14,21 +14,22 @@ class LoginUI extends StatelessWidget {
   });
   TextEditingController EmailController = TextEditingController();
   TextEditingController PasswordController = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     LoginController controller = Get.put(LoginController());
-    return Hero(
-      tag: 'Login_SignUp',
-      child: Material(
-        type: MaterialType.transparency,
-        child: Container(
-          height: ScreenHeight * 0.60,
-          width: ScreenWidth,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(50), topRight: Radius.circular(50)),
-          ),
+    return Material(
+      type: MaterialType.transparency,
+      child: Container(
+        height: ScreenHeight * 0.60,
+        width: ScreenWidth,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(50), topRight: Radius.circular(50)),
+        ),
+        child: Form(
+          key: _formkey,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Center(
@@ -51,6 +52,12 @@ class LoginUI extends StatelessWidget {
               top: 10,
               left: 20,
               right: 20,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Email is required!';
+                }
+                return null;
+              },
               hintText: 'Enter your email.',
             ),
             MyText(
@@ -65,6 +72,12 @@ class LoginUI extends StatelessWidget {
               top: 10,
               left: 20,
               right: 20,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Password is required!';
+                }
+                return null;
+              },
               hintText: 'Enter your password.',
             ),
             Align(
@@ -82,8 +95,10 @@ class LoginUI extends StatelessWidget {
                 child: MyButton(
               text: 'Login',
               ontap: () {
-                controller.login(EmailController.text.toString(),
-                    PasswordController.text.toString());
+                if (_formkey.currentState!.validate()) {
+                  controller.login(EmailController.text.toString(),
+                      PasswordController.text.toString());
+                }
               },
               bottom: 20,
             )),

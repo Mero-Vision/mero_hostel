@@ -12,9 +12,11 @@ class MyTextFormField extends StatelessWidget {
     required this.hintText,
     required this.controller,
     this.obscureText,
+    this.validator,
   }) : super(key: key);
   final double? top;
   final double? bottom;
+  final String? Function(String?)? validator;
   final double? left;
   final double? right;
   final String hintText;
@@ -30,8 +32,9 @@ class MyTextFormField extends StatelessWidget {
           left: left ?? 0,
           right: right ?? 0),
       child: TextFormField(
-        obscureText: obscureText??false,
+        obscureText: obscureText ?? false,
         controller: controller,
+        validator: validator,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.all(10),
             hintText: hintText,
