@@ -37,118 +37,111 @@ class LoginPage extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
               Expanded(
-                child: Hero(
-                  tag: 'Login_SignUp',
-                  child: Material(
-                    type: MaterialType.transparency,
-                    child: Container(
-                      width: ScreenWidth,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50),
+                child: Container(
+                  width: ScreenWidth,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50),
+                    ),
+                  ),
+                  child: Form(
+                    key: _formkey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: MyText(
+                            text: 'Login',
+                            color: KTextColor,
+                            size: 32,
+                            top: 15,
+                            bottom: 30,
+                          ),
                         ),
-                      ),
-                      child: Form(
-                        key: _formkey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: MyText(
-                                text: 'Login',
-                                color: KTextColor,
-                                size: 32,
-                                top: 15,
-                                bottom: 30,
-                              ),
-                            ),
-                            MyText(
-                              text: 'Email',
-                              color: KTextColor,
-                              size: 20,
-                              left: 30,
-                            ),
-                            MyTextFormField(
-                              controller: EmailController,
-                              top: 10,
-                              left: 20,
-                              right: 20,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Email is required!';
-                                }
-                                return null;
-                              },
-                              hintText: 'Enter your email.',
-                            ),
-                            MyText(
-                              text: 'Password',
-                              color: KTextColor,
-                              size: 20,
-                              top: 20,
-                              left: 30,
-                            ),
-                            MyTextFormField(
-                              controller: PasswordController,
-                              top: 10,
-                              left: 20,
-                              right: 20,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Password is required!';
-                                }
-                                return null;
-                              },
-                              hintText: 'Enter your password.',
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: MyText(
-                                top: 10,
-                                right: 20,
-                                bottom: 20,
-                                text: 'Forgot Password?',
-                                ontap: () {},
-                                color: Color(0xff0E6A28),
-                                size: 18,
-                              ),
-                            ),
-                            Center(
-                              child: MyButton(
-                                text: 'Login',
-                                ontap: () {
-                                  if (_formkey.currentState!.validate()) {
-                                    controller.login(
-                                      EmailController.text.toString(),
-                                      PasswordController.text.toString(),
-                                    );
-                                  }
-                                },
-                                bottom: 20,
-                              ),
-                            ),
-                            Center(
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (context, a, b) =>
-                                          SignupPage(),
-                                    ),
-                                  );
-                                },
-                                child: MyRichText(
-                                  text1: 'Don\'t have an account?  ',
-                                  text2: 'Sign up',
+                        MyText(
+                          text: 'Email',
+                          color: KTextColor,
+                          size: 20,
+                          left: 30,
+                        ),
+                        MyTextFormField(
+                          controller: EmailController,
+                          top: 10,
+                          left: 20,
+                          right: 20,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Email is required!';
+                            }
+                            return null;
+                          },
+                          hintText: 'Enter your email.',
+                        ),
+                        MyText(
+                          text: 'Password',
+                          color: KTextColor,
+                          size: 20,
+                          top: 20,
+                          left: 30,
+                        ),
+                        MyTextFormField(
+                          controller: PasswordController,
+                          top: 10,
+                          left: 20,
+                          right: 20,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Password is required!';
+                            }
+                            return null;
+                          },
+                          hintText: 'Enter your password.',
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: MyText(
+                            top: 10,
+                            right: 20,
+                            bottom: 20,
+                            text: 'Forgot Password?',
+                            ontap: () {},
+                            color: Color(0xff0E6A28),
+                            size: 18,
+                          ),
+                        ),
+                        Center(
+                          child: MyButton(
+                            text: 'Login',
+                            ontap: () {
+                              if (_formkey.currentState!.validate()) {
+                                controller.login(
+                                  EmailController.text.toString(),
+                                  PasswordController.text.toString(),
+                                );
+                              }
+                            },
+                            bottom: 20,
+                          ),
+                        ),
+                        Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, a, b) => SignupPage(),
                                 ),
-                              ),
+                              );
+                            },
+                            child: MyRichText(
+                              text1: 'Don\'t have an account?  ',
+                              text2: 'Sign up',
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ),
