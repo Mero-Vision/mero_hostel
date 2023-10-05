@@ -7,6 +7,8 @@ import 'package:mero_hostel/widgets/Mytext.dart';
 import 'package:mero_hostel/widgets/myTextFormField.dart';
 import 'package:mero_hostel/widgets/mybutton.dart';
 
+import '../../widgets/myDropMenu.dart';
+
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
   TextEditingController EmailController = TextEditingController();
@@ -128,12 +130,19 @@ class SignupPage extends StatelessWidget {
                                 hintText: 'Enter your password again.',
                                 obscureText: true,
                               ),
+                              MyDropMenu(),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Center(
                                   child: MyButton(
                                 text: 'Login',
                                 ontap: () {},
                                 bottom: 20,
                               )),
+                              SizedBox(
+                                height: 10,
+                              )
                             ]),
                       ),
                     ),
