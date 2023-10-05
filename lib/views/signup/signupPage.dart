@@ -15,6 +15,8 @@ class SignupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double ScreenHeight = Get.height;
+    double ScreenWidth = Get.width;
     return Scaffold(
       backgroundColor: Color(0xff698AFF),
       body: SingleChildScrollView(

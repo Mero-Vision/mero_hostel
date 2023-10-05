@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginController.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
-import 'package:mero_hostel/utils/constant.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double ScreenHeight = Get.height;
+    double ScreenWidth = Get.width;
     LoginController controller = Get.put(LoginController());
     User userData = controller.user.value!.data.user;
     return Scaffold(

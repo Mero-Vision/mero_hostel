@@ -17,16 +17,19 @@ class LoginPage extends StatelessWidget {
   TextEditingController PasswordController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
+  double ScreenHeight = Get.height;
+  double ScreenWidth = Get.width;
   @override
   Widget build(BuildContext context) {
     LoginController controller = Get.put(LoginController());
+
     return Scaffold(
         backgroundColor: Color(0xff698AFF),
         body: Stack(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
+              height: ScreenHeight,
+              width: ScreenWidth,
             ),
             Positioned(
               top: 50,
@@ -43,7 +46,7 @@ class LoginPage extends StatelessWidget {
                 bottom: 0,
                 child: Container(
                   height: 500,
-                  width: MediaQuery.of(context).size.width,
+                  width: ScreenWidth,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.vertical(
