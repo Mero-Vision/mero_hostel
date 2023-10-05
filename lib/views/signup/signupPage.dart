@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/utils/constant.dart';
@@ -14,64 +12,65 @@ class SignupPage extends StatelessWidget {
   TextEditingController EmailController = TextEditingController();
   TextEditingController PasswordController = TextEditingController();
   TextEditingController ConfPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0xff698AFF),
-        body: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                height: ScreenHeight * 0.3,
-                width: 270,
-                child: Image.asset(
-                  'assets/images/loginlogo.png',
-                  fit: BoxFit.fill,
+    return Scaffold(
+      backgroundColor: Color(0xff698AFF),
+      body: SingleChildScrollView(
+        child: Container(
+          height: ScreenHeight,
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    top: ScreenHeight * 0.06,
+                    bottom: ScreenHeight * 0.01,
+                    left: ScreenWidth * 0.1,
+                    right: ScreenWidth * 0.1),
+                child: Container(
+                  height: ScreenHeight * 0.1,
+                  child: Image.asset(
+                    'assets/images/MainRectangleLogo.png',
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              top: ScreenHeight * 0.25,
-              child: Hero(
-                tag: 'Login_SignUp',
-                child: Material(
-                  type: MaterialType.transparency,
-                  child: SingleChildScrollView(
+              Expanded(
+                child: Hero(
+                  tag: 'Login_SignUp',
+                  child: Material(
+                    type: MaterialType.transparency,
                     child: Container(
-                      height: ScreenHeight * 0.71,
                       width: ScreenWidth,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(50),
+                            topRight: Radius.circular(50)),
                       ),
-                      child: SingleChildScrollView(
-                        child: Column(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppBar(
+                            elevation: 0,
+                            shadowColor: Color(0x00),
+                            leading: IconButton(
+                              padding: EdgeInsets.only(left: 20),
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: Icon(Icons.arrow_back),
+                              color: KTextColor,
+                            ),
+                            centerTitle: true,
+                            title: MyText(
+                                text: 'Sign Up', color: KTextColor, size: 25),
+                            backgroundColor: Color(0x00),
+                          ),
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20),
-                                child: AppBar(
-                                  elevation: 0,
-                                  shadowColor: Color(0x00),
-                                  leading: IconButton(
-                                    padding: EdgeInsets.only(left: 20),
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    icon: Icon(Icons.arrow_back),
-                                    color: KTextColor,
-                                  ),
-                                  centerTitle: true,
-                                  title: MyText(
-                                      text: 'Sign Up',
-                                      color: KTextColor,
-                                      size: 25),
-                                  backgroundColor: Color(0x00),
-                                ),
-                              ),
                               MyText(
                                 text: 'Name',
                                 color: KTextColor,
@@ -115,7 +114,7 @@ class SignupPage extends StatelessWidget {
                                 obscureText: true,
                               ),
                               MyText(
-                                text: 'Conform Password',
+                                text: 'Confirm Password',
                                 color: KTextColor,
                                 size: 20,
                                 top: 20,
@@ -126,31 +125,41 @@ class SignupPage extends StatelessWidget {
                                 top: 10,
                                 left: 20,
                                 right: 20,
-                                bottom: 80,
                                 hintText: 'Enter your password again.',
                                 obscureText: true,
                               ),
-                              MyDropMenu(),
+                              MyText(
+                                text: 'Status',
+                                color: KTextColor,
+                                size: 20,
+                                top: 20,
+                                left: 30,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20, right: 20),
+                                child: MyDropMenu(),
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
                               Center(
-                                  child: MyButton(
-                                text: 'Login',
-                                ontap: () {},
-                                bottom: 20,
-                              )),
-                              SizedBox(
-                                height: 10,
-                              )
-                            ]),
+                                child: MyButton(
+                                  text: 'Sign Up',
+                                  ontap: () {},
+                                  bottom: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );

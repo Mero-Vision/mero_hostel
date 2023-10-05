@@ -12,24 +12,21 @@ class LoginController extends GetxController {
 
   Future login(String email, String password) async {
     final data = await repo.userLogin(email, password);
-    if (data != null) {
+    if (data == null) {
+      user.value = null;
+      Get.snackbar("Oops!", "Invalid Credentials ",
+          icon: Icon(Icons.person, color: Colors.white),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.shade300,
+          borderRadius: 20,
+          margin: EdgeInsets.all(15),
+          colorText: Colors.white,
+          forwardAnimationCurve: Curves.easeIn,
+          reverseAnimationCurve: Curves.easeIn,
+          duration: Duration(seconds: 3));
+    } else {
       user.value = data;
       Get.to(() => HomePage());
-    } else {
-      user.value = null;
-      // Get.snackbar(
-      //   "Oops!",
-      //   "Invalid Credentials ",
-      //   icon: Icon(Icons.person, color: Colors.white),
-      //   snackPosition: SnackPosition.BOTTOM,
-      //   backgroundColor: Colors.red.shade300,
-      //   borderRadius: 20,
-      //   margin: EdgeInsets.all(15),
-      //   colorText: Colors.white,
-      //   duration: Duration(seconds: 3),
-      //   isDismissible: true,
-      //   forwardAnimationCurve: Curves.ease,
-      // );
     }
   }
 }
