@@ -24,7 +24,7 @@ class SignupPage extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                    top: ScreenHeight * 0.06,
+                    top: ScreenHeight * 0.1,
                     bottom: ScreenHeight * 0.01,
                     left: ScreenWidth * 0.1,
                     right: ScreenWidth * 0.1),
@@ -132,12 +132,12 @@ class SignupPage extends StatelessWidget {
                                 text: 'Status',
                                 color: KTextColor,
                                 size: 20,
-                                top: 20,
+                                top: 10,
                                 left: 30,
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 20, right: 20),
+                                padding: EdgeInsets.only(
+                                    top: 10, left: 20, right: 20),
                                 child: MyDropMenu(),
                               ),
                               SizedBox(
@@ -146,6 +146,7 @@ class SignupPage extends StatelessWidget {
                               Center(
                                 child: MyButton(
                                   text: 'Sign Up',
+                                  top: 10,
                                   ontap: () {},
                                   bottom: 20,
                                 ),

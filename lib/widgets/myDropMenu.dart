@@ -10,7 +10,8 @@ class MyDropMenu extends StatelessWidget {
 
     return DropdownButtonFormField<String>(
       decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+          contentPadding: EdgeInsets.all(10),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(14))),
       hint: Text(items[0]),
       value: selectedItem, // Set the value to track the selected item
       items: items.map((e) {
