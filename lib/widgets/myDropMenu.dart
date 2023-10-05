@@ -9,7 +9,8 @@ class MyDropMenu extends StatelessWidget {
     String? selectedItem; // Add a variable to track the selected item
 
     return DropdownButtonFormField<String>(
-      decoration: InputDecoration(border: OutlineInputBorder()),
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
       hint: Text(items[0]),
       value: selectedItem, // Set the value to track the selected item
       items: items.map((e) {
@@ -19,7 +20,6 @@ class MyDropMenu extends StatelessWidget {
         );
       }).toList(),
       onChanged: (value) {
-        
         // Update the selected item when an item is selected
         selectedItem = value;
       },
