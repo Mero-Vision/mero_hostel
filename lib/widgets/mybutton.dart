@@ -1,9 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mero_hostel/controller/loginController.dart';
 
 import 'package:mero_hostel/utils/constant.dart';
 
-class MyButton extends StatelessWidget {
+var logincontroller = Get.find<LoginController>();
+
+class MyButton extends GetView<LoginController> {
   MyButton({
     Key? key,
     required this.text,

@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 
 class LoginRepo {
-    Future<UserModel?> userLogin(String email, String password) async {
+  Future<UserModel?> userLogin(String email, String password) async {
     Dio dio = Dio();
     var baseUrl = 'https://merohostel.hancie-phago.com.np/api/login';
 
@@ -20,7 +21,6 @@ class LoginRepo {
           },
         ),
       );
-
       if (response.statusCode == 200) {
         final resultData = jsonDecode(response.toString());
         final userModel = UserModel.fromJson(resultData);
@@ -37,5 +37,4 @@ class LoginRepo {
       return null; // Return null in case of an error
     }
   }
-
 }
