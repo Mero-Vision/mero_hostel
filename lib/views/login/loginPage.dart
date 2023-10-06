@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mero_hostel/utils/constant.dart';
@@ -12,6 +14,8 @@ import 'package:mero_hostel/widgets/myRichText.dart';
 import 'package:mero_hostel/widgets/myTextFormField.dart';
 import 'package:mero_hostel/widgets/mybutton.dart';
 
+var loginController = Get.find<LoginController>();
+
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
   TextEditingController EmailController = TextEditingController();
@@ -23,8 +27,12 @@ class LoginPage extends StatelessWidget {
     double ScreenHeight = MediaQuery.of(context).size.height;
     double ScreenWidth = MediaQuery.of(context).size.width;
     LoginController controller = Get.put(LoginController());
-
+    log(
+      '${loginController.isLoading.value}',
+    );
     return Scaffold(
+        extendBody: true,
+        resizeToAvoidBottomInset: true,
         backgroundColor: Color(0xff698AFF),
         body: Stack(
           children: [
@@ -122,18 +130,27 @@ class LoginPage extends StatelessWidget {
                                 size: 18,
                               ),
                             ),
-                            Center(
-                              child: MyButton(
-                                text: 'Login',
-                                ontap: () {
-                                  if (_formkey.currentState!.validate()) {
-                                    controller.login(
-                                      EmailController.text.toString(),
-                                      PasswordController.text.toString(),
-                                    );
-                                  }
-                                },
-                                bottom: 20,
+                            Obx(
+                              () => Center(
+                                child: loginController.isLoading.value
+                                    ? MyButton(
+                                        text: "Loading...",
+                                        ontap: () {},
+                                      )
+                                    : MyButton(
+                                        text: 'Login',
+                                        ontap: () {
+                                          if (_formkey.currentState!
+                                              .validate()) {
+                                            controller.login(
+                                              EmailController.text.toString(),
+                                              PasswordController.text
+                                                  .toString(),
+                                            );
+                                          }
+                                        },
+                                        bottom: 20,
+                                      ),
                               ),
                             ),
                             Center(
