@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mero_hostel/database/login_Signin/loginRepo.dart';
+import 'package:mero_hostel/apis/login_Signin/loginRepo.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 import 'package:mero_hostel/views/home/homepage.dart';
 
