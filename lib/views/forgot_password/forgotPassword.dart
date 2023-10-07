@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mero_hostel/controller/forgotpasswordController.dart';
 import 'package:mero_hostel/widgets/myTextFormField.dart';
 import 'package:mero_hostel/widgets/mybutton.dart';
+
+import '../../api/forgotpasswordapi.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({super.key});
@@ -58,7 +61,11 @@ class ForgotPassword extends StatelessWidget {
                   SizedBox(
                     height: 30,
                   ),
-                  MyButton(text: "Send Email", ontap: () {}),
+                  MyButton(
+                      text: "Send Email",
+                      ontap: () {
+                        ForgotPasswordController().sendEmail(emailController.text.toString());
+                      }),
                   SizedBox(
                     height: 50,
                   ),
