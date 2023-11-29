@@ -9,10 +9,10 @@ import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginController.dart';
 import 'package:mero_hostel/views/forgot_password/forgotPassword.dart';
 import 'package:mero_hostel/views/signup/signupPage.dart';
-import 'package:mero_hostel/widgets/Mytext.dart';
-import 'package:mero_hostel/widgets/myRichText.dart';
-import 'package:mero_hostel/widgets/myTextFormField.dart';
-import 'package:mero_hostel/widgets/mybutton.dart';
+import 'package:mero_hostel/customWidgets/Mytext.dart';
+import 'package:mero_hostel/customWidgets/myRichText.dart';
+import 'package:mero_hostel/customWidgets/myTextFormField.dart';
+import 'package:mero_hostel/customWidgets/mybutton.dart';
 
 var loginController = Get.find<LoginController>();
 

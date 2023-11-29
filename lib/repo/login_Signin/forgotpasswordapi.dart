@@ -1,23 +1,21 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:mero_hostel/repo/apis/api.dart';
 import 'package:mero_hostel/models/forgotPasswordModel.dart';
 
 class ForgotPasswordApi {
-  final dio = Dio();
-  String baseUri =
-      'https://merohostel.hancie-phago.com.np/api/send-forgot-password-mail';
+  Api _api = Api();
 
   Future<ForgotPasswordModel?> sendforgotpassword(String email) async {
     try {
-      final response = await dio.post(baseUri,
-          data: {'email': email},
-          options: Options(headers: {'Content-Type': 'application/json'}));
+      final response = await _api.sendRequest
+          .post("/send-forgot-password-mail", data: {'email': email});
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.toString());
         final resultData = ForgotPasswordModel.fromJson(data);
-        
+
         return resultData;
       } else {
         print('Failed with status code: ${response.statusCode}');

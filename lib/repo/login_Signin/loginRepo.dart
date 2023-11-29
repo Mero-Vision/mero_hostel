@@ -1,25 +1,20 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:mero_hostel/repo/apis/api.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 
 class LoginRepo {
   Future<UserModel?> userLogin(String email, String password) async {
-    Dio dio = Dio();
-    var baseUrl = 'https://merohostel.hancie-phago.com.np/api/login';
+    Api _api = Api();
 
     try {
-      final response = await dio.post(
-        baseUrl,
+      final response = await _api.sendRequest.post(
+        '/login',
         data: {
           'email': email,
           'password': password,
         },
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        ),
       );
       if (response.statusCode == 200) {
         final resultData = jsonDecode(response.toString());

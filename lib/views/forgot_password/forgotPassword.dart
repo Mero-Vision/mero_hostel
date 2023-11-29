@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/forgotpasswordController.dart';
-import 'package:mero_hostel/widgets/myTextFormField.dart';
-import 'package:mero_hostel/widgets/mybutton.dart';
-
-import '../../apis/login_Signin/forgotpasswordapi.dart';
+import 'package:mero_hostel/customWidgets/myTextFormField.dart';
+import 'package:mero_hostel/customWidgets/mybutton.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({super.key});

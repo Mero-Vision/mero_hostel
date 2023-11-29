@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:mero_hostel/utils/constant.dart';
 
 class MyText extends StatelessWidget {
-  MyText({
+  const MyText({
     Key? key,
     required this.text,
     this.color,
@@ -13,6 +14,9 @@ class MyText extends StatelessWidget {
     this.left,
     this.right,
     this.ontap,
+    this.fontweight,
+    this.fontStyle,
+    this.textDecoration,
   }) : super(key: key);
   //initializing variables
   final String text;
@@ -23,6 +27,9 @@ class MyText extends StatelessWidget {
   final double? left;
   final double? right;
   final void Function()? ontap;
+  final FontWeight? fontweight;
+  final FontStyle? fontStyle;
+  final TextDecoration? textDecoration;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -35,7 +42,13 @@ class MyText extends StatelessWidget {
             right: right ?? 0),
         child: Text(
           text,
-          style: TextStyle(color: color ?? KTextColor, fontSize: size),
+          style: TextStyle(
+              color: color ?? KTextColor,
+              fontSize: size,
+              fontStyle: fontStyle,
+              decoration: textDecoration,
+              decorationColor: Colors.blue,
+              fontWeight: fontweight),
         ),
       ),
     );

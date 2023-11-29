@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/utils/constant.dart';
-import 'package:mero_hostel/widgets/Mytext.dart';
-import 'package:mero_hostel/widgets/myTextFormField.dart';
-import 'package:mero_hostel/widgets/mybutton.dart';
+import 'package:mero_hostel/customWidgets/Mytext.dart';
+import 'package:mero_hostel/customWidgets/myTextFormField.dart';
+import 'package:mero_hostel/customWidgets/mybutton.dart';
 
-import '../../widgets/myDropMenu.dart';
+import '../../customWidgets/myDropMenu.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});

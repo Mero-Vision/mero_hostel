@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mero_hostel/apis/login_Signin/loginRepo.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
-import 'package:mero_hostel/views/home/homepage.dart';
+import 'package:mero_hostel/views/home/widget/bottomNavBar.dart';
+
+
+import '../repo/login_Signin/loginRepo.dart';
 
 class LoginController extends GetxController {
   final LoginRepo repo = LoginRepo();
@@ -32,7 +34,7 @@ class LoginController extends GetxController {
     } else {
       isLoading(false);
       user.value = data;
-      Get.to(() => HomePage());
+      Get.to(() => BottomNavBar());
     }
   }
 }

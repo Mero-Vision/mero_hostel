@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mero_hostel/apis/login_Signin/forgotpasswordapi.dart';
 import 'package:mero_hostel/models/forgotPasswordModel.dart';
+
+import '../repo/login_Signin/forgotpasswordapi.dart';
 
 class ForgotPasswordController extends GetxController {
   //RxList<ForgotPasswordModel> forgotpassworddata = <ForgotPasswordModel>[].obs;
