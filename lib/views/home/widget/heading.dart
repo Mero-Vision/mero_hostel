@@ -18,13 +18,18 @@ class HeadingTitle extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        MyText(text: text, size: 24.sp),
+        MyText(
+          text: text,
+          size: 20.sp,
+          fontweight: FontWeight.w500,
+          color: Colors.black54,
+        ),
         GestureDetector(
             onTap: onTap,
             child: MyText(
               text: 'See more',
               color: Colors.blue,
-              size: 16,
+              size: 16.sp,
               textDecoration: TextDecoration.underline,
             ))
       ],

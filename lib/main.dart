@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       minTextAdapt: true,
       splitScreenMode: true,
-      designSize: Size(430, 957),
+      designSize: const Size(430, 957),
       builder: (_, child) {
         return GetMaterialApp(
-          home: BottomNavBar(),
-          debugShowCheckedModeBanner: false,
-        );
+            theme: ThemeData(scaffoldBackgroundColor: const Color(0xfff4f5f6)),
+            home: BottomNavBar(),
+            debugShowCheckedModeBanner: false);
       },
     );
   }

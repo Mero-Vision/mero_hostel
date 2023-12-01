@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginController.dart';
 
@@ -47,14 +48,15 @@ class MyButton extends GetView<LoginController> {
           onPressed: ontap,
           style: ButtonStyle(
               shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(radius ?? 14))),
-              fixedSize:
-                  MaterialStatePropertyAll(Size(width ?? 350, height ?? 55)),
+                  borderRadius: BorderRadius.circular(radius ?? 14.r))),
+              fixedSize: MaterialStatePropertyAll(
+                  Size(width ?? 350.w, height ?? 55.h)),
               backgroundColor: MaterialStatePropertyAll(color ?? KButtonColor)),
           child: Text(
             text,
             style: TextStyle(
-                fontSize: fontsize ?? 20,
+                fontSize: fontsize ?? 20.sp,
+                color: Colors.white,
                 fontWeight: fontWeight ?? FontWeight.w600),
           )),
     );

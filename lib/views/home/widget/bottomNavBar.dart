@@ -1,56 +1,79 @@
+import 'package:animations/animations.dart';
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mero_hostel/views/home/homepage.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:mero_hostel/views/login/loginPage.dart';
+import 'package:mero_hostel/views/settings/settings.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
+  @override
+  _BottomNavBarState createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  int _selectedIndex = 0;
+
+  List<Widget> tabItems = [
+    HomePage(),
+    SecondScreen(),
+    LoginPage(),
+    SecondScreen(),
+    SettingPage()
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      controller: PersistentTabController(),
-      screens: _buildScreens(),
-      items: _navBarsItems(),
-      confineInSafeArea: true,
-      backgroundColor: Colors.white,
-      handleAndroidBackButtonPress: true,
-      resizeToAvoidBottomInset: true,
-      stateManagement: true,
-      hideNavigationBarWhenKeyboardShows: true,
-      decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.indigo,
+    return Scaffold(
+      body: PageTransitionSwitcher(
+        duration: const Duration(milliseconds: 300),
+        transitionBuilder: (
+          Widget child,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+        ) {
+          return SharedAxisTransition(
+            transitionType: SharedAxisTransitionType.vertical,
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            child: child,
+          );
+        },
+        child: tabItems[_selectedIndex],
       ),
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: ItemAnimationProperties(
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
+      bottomNavigationBar: FlashyTabBar(
+        animationCurve: Curves.linear,
+        selectedIndex: _selectedIndex,
+        iconSize: 25.0,
+        animationDuration: Duration(milliseconds: 250),
+        showElevation: false, // use this to remove appBar's elevation
+        onItemSelected: (index) => setState(() {
+          _selectedIndex = index;
+        }),
+        items: [
+          FlashyTabBarItem(
+            icon: Icon(Icons.home_filled),
+            title: Text('Home'),
+          ),
+          FlashyTabBarItem(
+            icon: Icon(CupertinoIcons.search),
+            title: Text('Search'),
+          ),
+          FlashyTabBarItem(
+            icon: Icon(Icons.person),
+            title: Text('Profile'),
+          ),
+          FlashyTabBarItem(
+            icon: Icon(CupertinoIcons.building_2_fill),
+            title: Text('Hostel'),
+          ),
+          FlashyTabBarItem(
+            icon: Icon(Icons.settings),
+            title: Text('Settings'),
+          ),
+        ],
       ),
-      navBarStyle: NavBarStyle.style6,
     );
-  }
-
-  List<Widget> _buildScreens() {
-    return [
-      HomePage(),
-      SecondScreen(),
-    ];
-  }
-
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return [
-      PersistentBottomNavBarItem(
-        icon: Icon(Icons.home),
-        title: "Home",
-        activeColorPrimary: Colors.indigo,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(Icons.menu),
-        title: "More",
-        activeColorPrimary: Colors.indigo,
-        inactiveColorPrimary: Colors.grey,
-      ),
-    ];
   }
 }

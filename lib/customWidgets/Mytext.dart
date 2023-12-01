@@ -42,6 +42,7 @@ class MyText extends StatelessWidget {
             right: right ?? 0),
         child: Text(
           text,
+          maxLines: 2,
           style: TextStyle(
               color: color ?? KTextColor,
               fontSize: size,
