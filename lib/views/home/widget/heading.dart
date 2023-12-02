@@ -20,7 +20,7 @@ class HeadingTitle extends StatelessWidget {
       children: [
         MyText(
           text: text,
-          size: 20.sp,
+          size: 20.h,
           fontweight: FontWeight.w500,
           color: Colors.black54,
         ),
@@ -29,7 +29,7 @@ class HeadingTitle extends StatelessWidget {
             child: MyText(
               text: 'See more',
               color: Colors.blue,
-              size: 16.sp,
+              size: 16.h,
               textDecoration: TextDecoration.underline,
             ))
       ],

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,11 +16,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      minTextAdapt: true,
+      minTextAdapt: false,
       splitScreenMode: true,
       designSize: const Size(430, 957),
       builder: (_, child) {
         return GetMaterialApp(
+            scrollBehavior: MaterialScrollBehavior().copyWith(dragDevices: {
+              PointerDeviceKind.mouse,
+              PointerDeviceKind.unknown,
+              PointerDeviceKind.stylus,
+              PointerDeviceKind.touch
+            }),
             theme: ThemeData(scaffoldBackgroundColor: const Color(0xfff4f5f6)),
             home: BottomNavBar(),
             debugShowCheckedModeBanner: false);

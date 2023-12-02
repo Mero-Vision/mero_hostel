@@ -52,15 +52,15 @@ class HomePage extends StatelessWidget {
                           children: [
                             HeadingTitle(
                               text: 'Recently added',
-                            ).paddingAll(15.sp).marginOnly(top: 20.h),
+                            ).paddingAll(15.h).marginOnly(top: 20.h),
                             HomeTile(),
                             HeadingTitle(
                               text: 'Boys Hostel',
-                            ).paddingAll(15.sp),
+                            ).paddingAll(15.h),
                             HomeTile(),
                             HeadingTitle(
                               text: 'Girls Hostel',
-                            ).paddingAll(15.sp),
+                            ).paddingAll(15.h),
                             HomeTile()
                           ],
                         ),

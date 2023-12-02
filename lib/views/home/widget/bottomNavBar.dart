@@ -40,36 +40,36 @@ class BottomNavBar extends StatelessWidget {
           child: tabItems[controller.selectedIndex.value],
         ),
       ),
-      bottomNavigationBar: FlashyTabBar(
-        animationCurve: Curves.linear,
-        selectedIndex: controller.selectedIndex.value,
-        iconSize: 25.0,
-        animationDuration: Duration(milliseconds: 250),
-        showElevation: false,
-        onItemSelected: (index) => controller.changeTabIndex(index),
-        items: [
-          FlashyTabBarItem(
-            icon: Icon(Icons.home_filled),
-            title: Text('Home'),
-          ),
-          FlashyTabBarItem(
-            icon: Icon(CupertinoIcons.search),
-            title: Text('Search'),
-          ),
-          FlashyTabBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Profile'),
-          ),
-          FlashyTabBarItem(
-            icon: Icon(CupertinoIcons.building_2_fill),
-            title: Text('Hostel'),
-          ),
-          FlashyTabBarItem(
-            icon: Icon(Icons.settings),
-            title: Text('Settings'),
-          ),
-        ],
-      ),
+      bottomNavigationBar: Obx(() => FlashyTabBar(
+            animationCurve: Curves.linear,
+            selectedIndex: controller.selectedIndex.value,
+            iconSize: 25.0,
+            animationDuration: Duration(milliseconds: 250),
+            showElevation: false,
+            onItemSelected: (index) => controller.changeTabIndex(index),
+            items: [
+              FlashyTabBarItem(
+                icon: Icon(Icons.home_filled),
+                title: Text('Home'),
+              ),
+              FlashyTabBarItem(
+                icon: Icon(CupertinoIcons.search),
+                title: Text('Search'),
+              ),
+              FlashyTabBarItem(
+                icon: Icon(Icons.person),
+                title: Text('Profile'),
+              ),
+              FlashyTabBarItem(
+                icon: Icon(CupertinoIcons.building_2_fill),
+                title: Text('Hostel'),
+              ),
+              FlashyTabBarItem(
+                icon: Icon(Icons.settings),
+                title: Text('Settings'),
+              ),
+            ],
+          )),
     );
   }
 }

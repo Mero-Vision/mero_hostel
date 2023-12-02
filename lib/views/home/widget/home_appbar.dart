@@ -23,13 +23,13 @@ class HomeAppBar extends StatelessWidget {
             children: [
               MyText(
                 text: username ?? 'Hi, User',
-                size: 16,
+                size: 16.h,
                 color: Colors.black,
                 fontweight: FontWeight.w600,
               ),
               MyText(
                 text: 'Find best hostel nearby.',
-                size: 22.sp,
+                size: 22.h,
                 color: Color(0xffA84343),
                 fontweight: FontWeight.w600,
               ),
@@ -38,7 +38,7 @@ class HomeAppBar extends StatelessWidget {
           Container(
             // margin: EdgeInsets.only(right: 16.0),
             height: 54.h,
-            width: 54.w,
+            width: 54.h,
             decoration: BoxDecoration(
               color: Colors.grey.shade400,
               borderRadius: BorderRadius.circular(14.r),
@@ -52,7 +52,7 @@ class HomeAppBar extends StatelessWidget {
                 )),
           ),
         ],
-      ).marginSymmetric(horizontal: 16.w, vertical: 10.h),
+      ).marginSymmetric(horizontal: 16.h, vertical: 10.h),
     );
   }
 }
