@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginController.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
-import 'package:mero_hostel/views/home/homePageSkeleton.dart';
+import 'package:mero_hostel/views/normalUser/home/homePageSkeleton.dart';
 
-import 'package:mero_hostel/views/home/widget/heading.dart';
-import 'package:mero_hostel/views/home/widget/home_appbar.dart';
-import 'package:mero_hostel/views/home/widget/hostelTile.dart';
+import 'package:mero_hostel/views/normalUser/home/widget/heading.dart';
+import 'package:mero_hostel/views/normalUser/home/widget/home_appbar.dart';
+import 'package:mero_hostel/views/normalUser/home/widget/hostelTile.dart';
 
 class SecondScreen extends StatelessWidget {
   @override
@@ -44,7 +44,8 @@ class HomePage extends StatelessWidget {
                   children: [
                     HomeAppBar(
                       username: userData?.name,
-                    ).paddingOnly(top: 20.h),
+                    ).paddingOnly(
+                        right: 10.w, left: 15.h, top: 20.h, bottom: 10.h),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -52,15 +53,18 @@ class HomePage extends StatelessWidget {
                           children: [
                             HeadingTitle(
                               text: 'Recently added',
-                            ).paddingAll(15.h).marginOnly(top: 20.h),
+                            ).paddingOnly(
+                                right: 10.w, left: 15.h, top: 5.h, bottom: 5.h),
                             HomeTile(),
                             HeadingTitle(
                               text: 'Boys Hostel',
-                            ).paddingAll(15.h),
+                            ).paddingOnly(
+                                right: 10.w, left: 15.h, top: 5.h, bottom: 5.h),
                             HomeTile(),
                             HeadingTitle(
                               text: 'Girls Hostel',
-                            ).paddingAll(15.h),
+                            ).paddingOnly(
+                                right: 10.w, left: 15.h, top: 5.h, bottom: 5.h),
                             HomeTile()
                           ],
                         ),

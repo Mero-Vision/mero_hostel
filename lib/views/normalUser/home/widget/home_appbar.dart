@@ -28,7 +28,7 @@ class HomeAppBar extends StatelessWidget {
                 fontweight: FontWeight.w600,
               ),
               MyText(
-                text: 'Find best hostel nearby.',
+                text: 'Find best Hostel nearby.',
                 size: 22.h,
                 color: Color(0xffA84343),
                 fontweight: FontWeight.w600,
@@ -52,7 +52,7 @@ class HomeAppBar extends StatelessWidget {
                 )),
           ),
         ],
-      ).marginSymmetric(horizontal: 16.h, vertical: 10.h),
+      ).marginSymmetric(vertical: 10.h),
     );
   }
 }

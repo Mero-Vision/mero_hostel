@@ -67,14 +67,14 @@ class ForgotPassword extends StatelessWidget {
                       ),
                       MyButton(
                           text: "Send Email",
-                          ontap: () {
+                          onTap: () {
                             ForgotPasswordController()
                                 .sendEmail(emailController.text.toString());
                           }),
                       SizedBox(
                         height: 50,
                       ),
-                      Padding(
+                    const  Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Card(
                           shadowColor: Colors.grey,

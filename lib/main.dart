@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:mero_hostel/views/home/widget/bottomNavBar.dart';
-import 'package:mero_hostel/views/login/loginPage.dart';
+import 'package:mero_hostel/utils/constant.dart';
+import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
               PointerDeviceKind.stylus,
               PointerDeviceKind.touch
             }),
-            theme: ThemeData(scaffoldBackgroundColor: const Color(0xfff4f5f6)),
+            theme: ThemeData(scaffoldBackgroundColor: KBackgroundColor),
             home: BottomNavBar(),
             debugShowCheckedModeBanner: false);
       },

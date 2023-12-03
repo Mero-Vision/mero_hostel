@@ -12,12 +12,12 @@ class MyButton extends GetView<LoginController> {
   MyButton({
     Key? key,
     required this.text,
-    required this.ontap,
+    required this.onTap,
     this.height,
     this.width,
     this.radius,
     this.color,
-    this.fontsize,
+    this.fontSize,
     this.fontWeight,
     this.top,
     this.left,
@@ -25,12 +25,12 @@ class MyButton extends GetView<LoginController> {
     this.bottom,
   }) : super(key: key);
   final String text;
-  final void Function() ontap;
+  final void Function() onTap;
   final double? height;
   final double? width;
   final double? radius;
   final Color? color;
-  final double? fontsize;
+  final double? fontSize;
   final FontWeight? fontWeight;
   final double? top;
   final double? left;
@@ -45,17 +45,17 @@ class MyButton extends GetView<LoginController> {
           left: left ?? 0,
           bottom: bottom ?? 0),
       child: ElevatedButton(
-          onPressed: ontap,
+          onPressed: onTap,
           style: ButtonStyle(
               shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(radius ?? 14.r))),
               fixedSize: MaterialStatePropertyAll(
-                  Size(width ?? 350.w, height ?? 55.h)),
+                  Size(width ?? 350.h, height ?? 55.h)),
               backgroundColor: MaterialStatePropertyAll(color ?? KButtonColor)),
           child: Text(
             text,
             style: TextStyle(
-                fontSize: fontsize ?? 20.sp,
+                fontSize: fontSize ?? 20.h,
                 color: Colors.white,
                 fontWeight: fontWeight ?? FontWeight.w600),
           )),

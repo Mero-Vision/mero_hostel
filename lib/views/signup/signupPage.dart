@@ -149,7 +149,7 @@ class SignupPage extends StatelessWidget {
                                 child: MyButton(
                                   text: 'Sign Up',
                                   top: 10,
-                                  ontap: () {},
+                                  onTap: () {},
                                   bottom: 20,
                                 ),
                               ),
