@@ -7,7 +7,6 @@ import 'package:mero_hostel/controller/bottomNavBarController.dart';
 import 'package:mero_hostel/views/normalUser/home/homepage.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
 import 'package:mero_hostel/views/normalUser/hostel/hostelPage.dart';
-import 'package:mero_hostel/views/settings/settings.dart';
 
 class BottomNavBar extends StatelessWidget {
   final BottomNavBarController controller = Get.put(BottomNavBarController());
@@ -17,7 +16,6 @@ class BottomNavBar extends StatelessWidget {
     SecondScreen(),
     LoginPage(),
     HostelPage(),
-    SettingPage(),
   ];
 
   @override
@@ -47,7 +45,6 @@ class BottomNavBar extends StatelessWidget {
             iconSize: 25.0,
             animationDuration: Duration(milliseconds: 250),
             showElevation: false,
-            
             onItemSelected: (index) => controller.changeTabIndex(index),
             items: [
               FlashyTabBarItem(
@@ -65,10 +62,6 @@ class BottomNavBar extends StatelessWidget {
               FlashyTabBarItem(
                 icon: Icon(CupertinoIcons.building_2_fill),
                 title: Text('Hostel'),
-              ),
-              FlashyTabBarItem(
-                icon: Icon(Icons.settings),
-                title: Text('Settings'),
               ),
             ],
           )),
