@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
-import 'package:mero_hostel/utils/constant.dart';
+
 
 class HomeTile extends StatelessWidget {
   const HomeTile({super.key});

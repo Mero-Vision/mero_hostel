@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'package:dio/dio.dart';
 import 'package:mero_hostel/repo/apis/api.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 

@@ -14,8 +14,8 @@ class BottomNavBar extends StatelessWidget {
   final List<Widget> tabItems = [
     HomePage(),
     SecondScreen(),
-    LoginPage(),
     HostelPage(),
+    LoginPage(),
   ];
 
   @override
@@ -56,12 +56,12 @@ class BottomNavBar extends StatelessWidget {
                 title: Text('Search'),
               ),
               FlashyTabBarItem(
-                icon: Icon(Icons.person),
-                title: Text('Profile'),
-              ),
-              FlashyTabBarItem(
                 icon: Icon(CupertinoIcons.building_2_fill),
                 title: Text('Hostel'),
+              ),
+              FlashyTabBarItem(
+                icon: Icon(Icons.person),
+                title: Text('Profile'),
               ),
             ],
           )),
