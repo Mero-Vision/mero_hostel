@@ -4,17 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:animations/animations.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/bottomNavBarController.dart';
-import 'package:mero_hostel/views/normalUser/home/homepage.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/homepage.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
-import 'package:mero_hostel/views/normalUser/hostel/hostelPage.dart';
+import 'package:mero_hostel/views/normalUser/hostelTab/hostelPage.dart';
 
 class BottomNavBar extends StatelessWidget {
   final BottomNavBarController controller = Get.put(BottomNavBarController());
 
   final List<Widget> tabItems = [
-    HomePage(),
+    const HomePage(),
     SecondScreen(),
-    HostelPage(),
+    const HostelPage(),
     LoginPage(),
   ];
 
@@ -43,25 +43,25 @@ class BottomNavBar extends StatelessWidget {
             animationCurve: Curves.linear,
             selectedIndex: controller.selectedIndex.value,
             iconSize: 25.0,
-            animationDuration: Duration(milliseconds: 250),
+            animationDuration:const Duration(milliseconds: 250),
             showElevation: false,
             onItemSelected: (index) => controller.changeTabIndex(index),
             items: [
               FlashyTabBarItem(
-                icon: Icon(Icons.home_filled),
-                title: Text('Home'),
+                icon:const Icon(Icons.home_filled),
+                title:const Text('Home'),
               ),
               FlashyTabBarItem(
-                icon: Icon(CupertinoIcons.search),
-                title: Text('Search'),
+                icon:const Icon(CupertinoIcons.search),
+                title:const Text('Search'),
               ),
               FlashyTabBarItem(
-                icon: Icon(CupertinoIcons.building_2_fill),
-                title: Text('Hostel'),
+                icon:const Icon(CupertinoIcons.building_2_fill),
+                title:const Text('Hostel'),
               ),
               FlashyTabBarItem(
-                icon: Icon(Icons.person),
-                title: Text('Profile'),
+                icon:const Icon(Icons.person),
+                title:const Text('Profile'),
               ),
             ],
           )),

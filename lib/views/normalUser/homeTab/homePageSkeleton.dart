@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/customWidgets/skeleton.dart';
-import 'package:mero_hostel/views/normalUser/home/widget/heading.dart';
-import 'package:mero_hostel/views/normalUser/home/widget/home_appbar.dart';
-import 'package:mero_hostel/views/normalUser/home/widget/hostelTile.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/widget/heading.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/widget/hostelTile.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomePageSkeleton extends StatelessWidget {

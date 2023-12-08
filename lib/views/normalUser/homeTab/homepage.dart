@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginController.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
-import 'package:mero_hostel/views/normalUser/home/homePageSkeleton.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/homePageSkeleton.dart';
 
-import 'package:mero_hostel/views/normalUser/home/widget/heading.dart';
-import 'package:mero_hostel/views/normalUser/home/widget/home_appbar.dart';
-import 'package:mero_hostel/views/normalUser/home/widget/hostelTile.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/widget/heading.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/widget/hostelTile.dart';
 
 class SecondScreen extends StatelessWidget {
   @override

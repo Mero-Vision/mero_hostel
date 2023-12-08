@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/utils/constant.dart';
-import 'package:mero_hostel/views/normalUser/hostel/widget/filterTab.dart';
-import 'package:mero_hostel/views/normalUser/hostel/widget/listofHostel.dart';
+import 'package:mero_hostel/views/normalUser/hostelTab/widget/filterTab.dart';
+import 'package:mero_hostel/views/normalUser/hostelTab/widget/listofHostel.dart';
 
 class HostelPage extends StatelessWidget {
   const HostelPage({super.key});
