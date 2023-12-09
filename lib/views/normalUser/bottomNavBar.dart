@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:animations/animations.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/bottomNavBarController.dart';
-import 'package:mero_hostel/views/normalUser/homeTab/homepage.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/pages/homepage.dart';
 import 'package:mero_hostel/views/normalUser/hostelTab/hostelPage.dart';
 
 class BottomNavBar extends StatelessWidget {
