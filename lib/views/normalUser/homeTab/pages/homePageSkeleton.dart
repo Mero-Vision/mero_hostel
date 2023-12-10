@@ -5,6 +5,7 @@ import 'package:mero_hostel/customWidgets/skeleton.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/heading.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/hostelTile.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/widget/hostelTileSkeleton.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomePageSkeleton extends StatelessWidget {
@@ -34,19 +35,19 @@ class HomePageSkeleton extends StatelessWidget {
                       text: 'Recently added',
                     ).paddingAll(15.h).marginOnly(top: 20.h),
                     const Skeleton(
-                      widget: HomeTile(),
+                      widget: HomeTileSkeleton(),
                     ),
                     HeadingTitle(
                       text: 'Boys Hostel',
                     ).paddingAll(15.sp),
                     const Skeleton(
-                      widget: HomeTile(),
+                      widget: HomeTileSkeleton(),
                     ),
                     HeadingTitle(
                       text: 'Girls Hostel',
                     ).paddingAll(15.sp),
                     const Skeleton(
-                      widget: HomeTile(),
+                      widget: HomeTileSkeleton(),
                     ),
                   ],
                 ),

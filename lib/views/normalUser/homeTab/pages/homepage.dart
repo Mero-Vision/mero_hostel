@@ -34,53 +34,65 @@ class HomePage extends StatelessWidget {
     LoginController controller = Get.put(LoginController());
     User? userData = controller.user?.value?.data.user;
     HostelController hostelcontroller = Get.put(HostelController());
-    hostelcontroller.getAllHostel();
+
     hostelcontroller.getBoysHostel();
     hostelcontroller.getGirlsHostel();
-
+    Future.delayed(const Duration(seconds: 1), () {
+      hostelcontroller.getAllHostel();
+    });
     //
     return Scaffold(
-      backgroundColor: const Color(0xfff4f5f6),
-      body: (userData?.name != null)
-          ? HomePageSkeleton()
-          : SafeArea(
-              child: SizedBox(
-                height: ScreenHeight,
-                width: ScreenWidth,
-                child: Column(
-                  children: [
-                    HomeAppBar(
-                      username: userData?.name,
-                    ).paddingOnly(
-                        right: 10.w, left: 15.h, top: 20.h, bottom: 10.h),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          //mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            HeadingTitle(
-                              text: 'Recently added',
-                            ).paddingOnly(
-                                right: 10.w, left: 15.h, top: 5.h, bottom: 5.h),
-                            HomeTile(data: hostelcontroller.hostels),
-                            HeadingTitle(
-                              text: 'Boys Hostel',
-                            ).paddingOnly(
-                                right: 10.w, left: 15.h, top: 5.h, bottom: 5.h),
-                            HomeTile(data: hostelcontroller.boysHostels),
-                            HeadingTitle(
-                              text: 'Girls Hostel',
-                            ).paddingOnly(
-                                right: 10.w, left: 15.h, top: 5.h, bottom: 5.h),
-                            HomeTile(data: hostelcontroller.girlsHostels)
-                          ],
+        backgroundColor: const Color(0xfff4f5f6),
+        body: Obx(
+          () => (hostelcontroller.isloading.value == false)
+              ? HomePageSkeleton()
+              : SafeArea(
+                  child: SizedBox(
+                    height: ScreenHeight,
+                    width: ScreenWidth,
+                    child: Column(
+                      children: [
+                        HomeAppBar(
+                          username: userData?.name,
+                        ).paddingOnly(
+                            right: 10.w, left: 15.h, top: 20.h, bottom: 10.h),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              //mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                HeadingTitle(
+                                  text: 'Recently added',
+                                ).paddingOnly(
+                                    right: 10.w,
+                                    left: 15.h,
+                                    top: 5.h,
+                                    bottom: 5.h),
+                                HomeTile(data: hostelcontroller.hostels),
+                                HeadingTitle(
+                                  text: 'Boys Hostel',
+                                ).paddingOnly(
+                                    right: 10.w,
+                                    left: 15.h,
+                                    top: 5.h,
+                                    bottom: 5.h),
+                                HomeTile(data: hostelcontroller.boysHostels),
+                                HeadingTitle(
+                                  text: 'Girls Hostel',
+                                ).paddingOnly(
+                                    right: 10.w,
+                                    left: 15.h,
+                                    top: 5.h,
+                                    bottom: 5.h),
+                                HomeTile(data: hostelcontroller.girlsHostels)
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-    );
+        ));
   }
 }

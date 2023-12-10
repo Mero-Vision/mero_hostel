@@ -6,10 +6,12 @@ class HostelController extends GetxController {
   final RxList<Datum> hostels = <Datum>[].obs;
   final RxList<Datum> boysHostels = <Datum>[].obs;
   final RxList<Datum> girlsHostels = <Datum>[].obs;
+  final RxBool isloading = false.obs;
 
   void getAllHostel() async {
     HostelModel? data = await HostelRepo().getAllHostel();
     hostels.assignAll(data.data ?? []);
+    isloading.value = true;
   }
 
   void getBoysHostel() async {
