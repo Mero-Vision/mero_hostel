@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:mero_hostel/customWidgets/Mytext.dart';
+import 'package:mero_hostel/views/login/loginPage.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
@@ -35,21 +36,26 @@ class HomeAppBar extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            // margin: EdgeInsets.only(right: 16.0),
-            height: 54.h,
-            width: 54.h,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade400,
-              borderRadius: BorderRadius.circular(14.r),
-            ),
-
-            child: ClipRRect(
+          GestureDetector(
+            onTap: () {
+              Get.to(LoginPage());
+            },
+            child: Container(
+              // margin: EdgeInsets.only(right: 16.0),
+              height: 54.h,
+              width: 54.h,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade400,
                 borderRadius: BorderRadius.circular(14.r),
-                child: Image.network(
-                  'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg',
-                  fit: BoxFit.cover,
-                )),
+              ),
+
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14.r),
+                  child: Image.network(
+                    'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg',
+                    fit: BoxFit.cover,
+                  )),
+            ),
           ),
         ],
       ).marginSymmetric(vertical: 10.h),

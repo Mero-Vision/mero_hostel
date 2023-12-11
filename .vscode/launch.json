@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "mero_hostel",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "mero_hostel (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "mero_hostel (cromeMode)",
+            "request": "launch",
+            "type": "dart",
+            "args": ["--web-renderer:html","-d", "chrome", "--debug","--web-port", "4000", "lib/main.dart"],
+        },
+
+        {
+            "name": "mero_hostel (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
