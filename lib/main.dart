@@ -26,7 +26,9 @@ class MyApp extends StatelessWidget {
               PointerDeviceKind.stylus,
               PointerDeviceKind.touch
             }),
-            theme: ThemeData(scaffoldBackgroundColor: KBackgroundColor),
+            theme: ThemeData(
+              scaffoldBackgroundColor: KBackgroundColor,
+            ),
             home: BottomNavBar(),
             debugShowCheckedModeBanner: false);
       },
