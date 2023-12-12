@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:mero_hostel/controller/hostel/hostelController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/utils/constant.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/widget/hostelTile.dart';
 import 'package:mero_hostel/views/normalUser/hostelTab/widget/filterTab.dart';
 import 'package:mero_hostel/views/normalUser/hostelTab/widget/listofHostel.dart';
 
 class HostelPage extends StatelessWidget {
-  const HostelPage({super.key});
+  HostelPage({super.key});
+  HostelController controller = Get.put(HostelController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +39,14 @@ class HostelPage extends StatelessWidget {
       body: Container(
         height: screenHeight,
         width: screenWidth,
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: [FilterTabs(), ListOfHostel()],
+          children: [
+            FilterTabs(),
+            ListOfHostel(
+              data: controller.hostels,
+            ),
+          ],
         ),
       ),
     );
