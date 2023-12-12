@@ -29,7 +29,7 @@ class ViewHostel extends StatelessWidget {
               child: MyButton(
                 text: 'Book Now',
                 onTap: () {},
-                width: 200.h,
+                width: 200.h, 
                 right: 10.h,
               ),
             )

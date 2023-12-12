@@ -14,7 +14,7 @@ class BottomNavBar extends StatelessWidget {
   final List<Widget> tabItems = [
     const HomePage(),
     SecondScreen(),
-    const HostelPage(),
+     HostelPage(),
     LoginPage(),
   ];
 
