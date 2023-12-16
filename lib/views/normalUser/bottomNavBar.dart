@@ -7,14 +7,15 @@ import 'package:mero_hostel/controller/bottomNavBarController.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/pages/homepage.dart';
 import 'package:mero_hostel/views/normalUser/hostelTab/hostelPage.dart';
+import 'package:mero_hostel/views/normalUser/searchTab/searchPage.dart';
 
 class BottomNavBar extends StatelessWidget {
   final BottomNavBarController controller = Get.put(BottomNavBarController());
 
   final List<Widget> tabItems = [
     const HomePage(),
-    SecondScreen(),
-     HostelPage(),
+    SearchPage(),
+    HostelPage(),
     LoginPage(),
   ];
 
@@ -43,25 +44,25 @@ class BottomNavBar extends StatelessWidget {
             animationCurve: Curves.linear,
             selectedIndex: controller.selectedIndex.value,
             iconSize: 25.0,
-            animationDuration:const Duration(milliseconds: 250),
+            animationDuration: const Duration(milliseconds: 250),
             showElevation: false,
             onItemSelected: (index) => controller.changeTabIndex(index),
             items: [
               FlashyTabBarItem(
-                icon:const Icon(Icons.home_filled),
-                title:const Text('Home'),
+                icon: const Icon(Icons.home_filled),
+                title: const Text('Home'),
               ),
               FlashyTabBarItem(
-                icon:const Icon(CupertinoIcons.search),
-                title:const Text('Search'),
+                icon: const Icon(CupertinoIcons.search),
+                title: const Text('Search'),
               ),
               FlashyTabBarItem(
-                icon:const Icon(CupertinoIcons.building_2_fill),
-                title:const Text('Hostel'),
+                icon: const Icon(CupertinoIcons.building_2_fill),
+                title: const Text('Hostel'),
               ),
               FlashyTabBarItem(
-                icon:const Icon(Icons.person),
-                title:const Text('Profile'),
+                icon: const Icon(Icons.person),
+                title: const Text('Profile'),
               ),
             ],
           )),

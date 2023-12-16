@@ -7,12 +7,13 @@ class MyTextFormField extends StatelessWidget {
     Key? key,
     this.top,
     this.bottom,
+    this.validator,
     this.left,
     this.right,
     required this.hintText,
     required this.controller,
     this.obscureText,
-    this.validator,
+    this.prefix,
   }) : super(key: key);
   final double? top;
   final double? bottom;
@@ -22,6 +23,7 @@ class MyTextFormField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final bool? obscureText;
+  final Icon? prefix;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class MyTextFormField extends StatelessWidget {
         controller: controller,
         validator: validator,
         decoration: InputDecoration(
+            prefixIcon: prefix,
             contentPadding: EdgeInsets.all(10),
             hintText: hintText,
             helperStyle: TextStyle(fontSize: 20),

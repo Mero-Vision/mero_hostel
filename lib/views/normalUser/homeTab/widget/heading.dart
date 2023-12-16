@@ -30,7 +30,6 @@ class HeadingTitle extends StatelessWidget {
               text: 'See more',
               color: Colors.blue,
               size: 16.h,
-              textDecoration: TextDecoration.underline,
             ))
       ],
     );
