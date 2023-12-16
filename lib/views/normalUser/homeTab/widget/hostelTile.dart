@@ -23,75 +23,74 @@ class HomeTile extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: data!.length,
               itemBuilder: (context, index) {
+                Datum hostelData = data![index];
                 if (index < data!.length - 1 && index < 6) {
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => ViewHostel(data: data![index])));
+                              builder: (_) => ViewHostel(data: hostelData)));
                     },
-                    child: Hero(
-                      tag: 'View_hostel',
-                      child: Container(
-                        height: 300.h,
-                        width: 220.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14.r),
-                            color: Colors.white),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(14),
-                                  topRight: Radius.circular(14)),
-                              child: Image.network(
-                                data?[index].hostelImages ??
-                                    'https://i.pinimg.com/236x/06/fd/9d/06fd9dde192fe02644663c4bda0cf6ca.jpg',
-                                fit: BoxFit.cover,
-                                height: 190.h,
-                                width: 300.h,
-                              ),
+                    child: Container(
+                      height: 300.h,
+                      width: 220.h,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14.r),
+                          color: Colors.white),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(14),
+                                topRight: Radius.circular(14)),
+                            child: Image.network(
+                              hostelData.hostelImages ??
+                                  'https://i.pinimg.com/236x/06/fd/9d/06fd9dde192fe02644663c4bda0cf6ca.jpg',
+                              fit: BoxFit.cover,
+                              height: 190.h,
+                              width: 300.h,
                             ),
-                            MyText(
-                              text: data![index].hostelName!,
-                              size: 18.h,
-                              fontweight: FontWeight.w600,
-                            ).marginAll(10.h),
-                            MyText(
-                                    text: data?[index].address ?? 'unknown',
-                                    size: 16.h)
-                                .marginOnly(left: 10.h),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                MyText(text: '5.5', size: 16.h)
-                                    .marginOnly(left: 10.h),
-                                Hero(
-                                  tag: 'viewPage_Button',
-                                  child: MyButton(
-                                    // color: Colors.green,
+                          ),
+                          MyText(
+                            text:
+                                (hostelData.hostelName!.characters.length <= 18)
+                                    ? hostelData.hostelName!
+                                    : hostelData.hostelName!.substring(0, 15) +
+                                        '...',
+                            size: 18.h,
+                            fontweight: FontWeight.w600,
+                          ).marginAll(10.h),
+                          MyText(
+                                  text: hostelData.address ?? 'unknown',
+                                  size: 16.h)
+                              .marginOnly(left: 10.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              MyText(text: '5.5', size: 16.h)
+                                  .marginOnly(left: 10.h),
+                              MyButton(
+                                // color: Colors.green,
 
-                                    fontSize: 18.h,
-                                    height: 20.h,
-                                    width: 140.h,
-                                    text: 'View',
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => ViewHostel(
-                                                  data: data![index])));
-                                    },
-                                  ).marginOnly(right: 10),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ).marginOnly(left: 15.h),
-                    ),
+                                fontSize: 18.h,
+                                height: 20.h,
+                                width: 140.h,
+                                text: 'View',
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              ViewHostel(data: data![index])));
+                                },
+                              ).marginOnly(right: 10)
+                            ],
+                          )
+                        ],
+                      ),
+                    ).marginOnly(left: 15.h),
                   );
                 }
                 if (index == data!.length - 1 || index == 6) {

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:mero_hostel/utils/constant.dart';
 
@@ -42,10 +43,10 @@ class MyText extends StatelessWidget {
             right: right ?? 0),
         child: Text(
           text,
-          maxLines: 2,
+          maxLines: 5,
           style: TextStyle(
               color: color ?? KTextColor,
-              fontSize: size,
+              fontSize: size.h,
               fontStyle: fontStyle,
               decoration: textDecoration,
               decorationColor: Colors.blue,

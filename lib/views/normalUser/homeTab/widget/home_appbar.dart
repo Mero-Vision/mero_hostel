@@ -10,8 +10,10 @@ class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
     Key? key,
     this.username,
+    this.userImageURL,
   }) : super(key: key);
   final String? username;
+  final String? userImageURL;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,8 @@ class HomeAppBar extends StatelessWidget {
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(14.r),
                   child: Image.network(
-                    'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg',
+                    userImageURL ??
+                        'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg',
                     fit: BoxFit.cover,
                   )),
             ),
