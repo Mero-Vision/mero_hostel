@@ -74,6 +74,9 @@ class _SignupPageState extends State<SignupPage> {
                   if (value!.isEmpty) {
                     return 'Password Must Not Be Empty !';
                   }
+                  if (passwordController.text.trim().characters.length < 8) {
+                    return 'Password Must Not Be Less than 8 Digits !';
+                  }
                   return null;
                 },
               ),
@@ -142,22 +145,33 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   Widget _buildSignupButton() {
-    return Center(
-      child: MyButton(
-        text: 'Sign Up',
-        top: 10.h,
-        onTap: () {
-          if (_formKey.currentState!.validate()) {
-            controller.sendRegistrationRequest(
-              nameController.text.trim(),
-              emailController.text.trim(),
-              passwordController.text.trim(),
-              confPasswordController.text.trim(),
-            );
-          }
-        },
-        bottom: 20.h,
-      ),
-    );
+    return Obx(() => Center(
+          child: controller.isLoading.value
+              ? MyButton(
+                  text: "Loading...",
+                  onTap: () {},
+                )
+              : MyButton(
+                  text: 'Sign Up',
+                  top: 10.h,
+                  onTap: () async {
+                    if (_formKey.currentState!.validate()) {
+                      var status = await controller.sendRegistrationRequest(
+                        nameController.text.trim(),
+                        emailController.text.trim(),
+                        passwordController.text.trim(),
+                        confPasswordController.text.trim(),
+                      );
+                      if (status) {
+                        nameController.clear();
+                        emailController.clear();
+                        passwordController.clear();
+                        confPasswordController.clear();
+                      } else {}
+                    }
+                  },
+                  bottom: 20.h,
+                ),
+        ));
   }
 }

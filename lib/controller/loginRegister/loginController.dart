@@ -19,6 +19,7 @@ class LoginController extends GetxController {
   final isLoading = false.obs;
   //
   final Rx<UserModel?>? user = Rx<UserModel?>(null);
+  RxBool IsLoggedIn = false.obs;
 //
   Future checkLoginStatus() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -51,6 +52,7 @@ class LoginController extends GetxController {
     preferences.setString('userEmail', '');
     preferences.setString('userPassword', '');
     preferences.setString('UserStatus', '');
+    IsLoggedIn.value = false;
     Get.offAll(() => SplashScreen());
   }
 
@@ -82,6 +84,10 @@ class LoginController extends GetxController {
         Get.offAll(() => HostelOwner(
               userData: data.data.user,
             ));
+      }
+      if (data.data.user.status == null) {
+        preferences.setString('UserStatus', 'Normal_User');
+        IsLoggedIn.value = true;
       }
       print('success');
     }
