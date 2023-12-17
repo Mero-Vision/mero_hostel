@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mero_hostel/controller/hostel/loginChecker.dart';
+import 'package:mero_hostel/SplashScreen.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 import 'package:mero_hostel/views/hostelOwner/Hostel_Owner.dart';
 import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../repo/login_Signin/loginRepo.dart';
+import '../../repo/login_Signin/loginRepo.dart';
 
 class LoginController extends GetxController {
   final LoginRepo repo = LoginRepo();

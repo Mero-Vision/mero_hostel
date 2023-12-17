@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mero_hostel/controller/forgotpasswordController.dart';
+import 'package:mero_hostel/controller/loginRegister/forgotpasswordController.dart';
 import 'package:mero_hostel/customWidgets/myTextFormField.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
 

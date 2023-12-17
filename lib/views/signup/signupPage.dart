@@ -1,169 +1,162 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:mero_hostel/utils/constant.dart';
+import 'package:mero_hostel/controller/loginRegister/registrationController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/myTextFormField.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
+import 'package:mero_hostel/utils/constant.dart';
 
-import '../../customWidgets/myDropMenu.dart';
+class SignupPage extends StatefulWidget {
+  SignupPage({Key? key}) : super(key: key);
 
-class SignupPage extends StatelessWidget {
-  SignupPage({super.key});
-  TextEditingController EmailController = TextEditingController();
-  TextEditingController PasswordController = TextEditingController();
-  TextEditingController ConfPasswordController = TextEditingController();
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  final TextEditingController nameController = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  final TextEditingController confPasswordController = TextEditingController();
+
+  final RegistrationController controller = RegistrationController();
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    double ScreenHeight = Get.height;
-    double ScreenWidth = Get.width;
     return Scaffold(
-      backgroundColor: Color(0xff698AFF),
+      appBar: AppBar(
+        backgroundColor: KBackgroundColor,
+        centerTitle: true,
+        title: MyText(text: 'Sign Up', color: KTextColor, size: 25.h),
+      ),
       body: SingleChildScrollView(
-        child: Container(
-          height: ScreenHeight,
+        physics: BouncingScrollPhysics(),
+        child: Form(
+          key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    top: ScreenHeight * 0.1,
-                    bottom: ScreenHeight * 0.01,
-                    left: ScreenWidth * 0.1,
-                    right: ScreenWidth * 0.1),
-                child: Container(
-                  height: ScreenHeight * 0.1,
-                  child: Image.asset(
-                    'assets/images/MainRectangleLogo.png',
-                    fit: BoxFit.fill,
-                  ),
-                ),
+              _buildLogoContainer(),
+              _buildFormField(
+                'Name',
+                nameController,
+                'Enter your name.',
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Name Must Not Be Empty !';
+                  }
+                  return null;
+                },
               ),
-              Expanded(
-                child: Hero(
-                  tag: 'Login_SignUp',
-                  child: Material(
-                    type: MaterialType.transparency,
-                    child: Container(
-                      width: ScreenWidth,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(50),
-                            topRight: Radius.circular(50)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppBar(
-                            elevation: 0,
-                            shadowColor: Color(0x00),
-                            leading: IconButton(
-                              padding: EdgeInsets.only(left: 20),
-                              onPressed: () {
-                                Get.back();
-                              },
-                              icon: Icon(Icons.arrow_back),
-                              color: KTextColor,
-                            ),
-                            centerTitle: true,
-                            title: MyText(
-                                text: 'Sign Up', color: KTextColor, size: 25),
-                            backgroundColor: Color(0x00),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              MyText(
-                                text: 'Name',
-                                color: KTextColor,
-                                size: 20,
-                                left: 30,
-                              ),
-                              MyTextFormField(
-                                controller: EmailController,
-                                top: 10,
-                                left: 20,
-                                right: 20,
-                                hintText: 'Enter your name.',
-                              ),
-                              MyText(
-                                text: 'Email',
-                                color: KTextColor,
-                                top: 20,
-                                size: 20,
-                                left: 30,
-                              ),
-                              MyTextFormField(
-                                controller: EmailController,
-                                top: 10,
-                                left: 20,
-                                right: 20,
-                                hintText: 'Enter your email.',
-                              ),
-                              MyText(
-                                text: 'Password',
-                                color: KTextColor,
-                                size: 20,
-                                top: 20,
-                                left: 30,
-                              ),
-                              MyTextFormField(
-                                controller: PasswordController,
-                                top: 10,
-                                left: 20,
-                                right: 20,
-                                hintText: 'Enter your password.',
-                                obscureText: true,
-                              ),
-                              MyText(
-                                text: 'Confirm Password',
-                                color: KTextColor,
-                                size: 20,
-                                top: 20,
-                                left: 30,
-                              ),
-                              MyTextFormField(
-                                controller: ConfPasswordController,
-                                top: 10,
-                                left: 20,
-                                right: 20,
-                                hintText: 'Enter your password again.',
-                                obscureText: true,
-                              ),
-                              MyText(
-                                text: 'Status',
-                                color: KTextColor,
-                                size: 20,
-                                top: 10,
-                                left: 30,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 10, left: 20, right: 20),
-                                child: MyDropMenu(),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Center(
-                                child: MyButton(
-                                  text: 'Sign Up',
-                                  top: 10,
-                                  onTap: () {},
-                                  bottom: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+              _buildFormField(
+                'Email',
+                emailController,
+                'Enter your email.',
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Email Must Not Be Empty !';
+                  }
+                  return null;
+                },
               ),
+              _buildFormField(
+                'Password',
+                passwordController,
+                'Enter your password.',
+                obscureText: true,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Password Must Not Be Empty !';
+                  }
+                  return null;
+                },
+              ),
+              _buildFormField(
+                'Confirm Password',
+                confPasswordController,
+                'Enter your password again.',
+                obscureText: true,
+                validator: (value) {
+                  if (value!.isEmpty ||
+                      passwordController.text.trim() !=
+                          confPasswordController.text.trim()) {
+                    return 'Did not matched to Password !';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 10.h),
+              _buildSignupButton(),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildLogoContainer() {
+    return Center(
+      child: Container(
+        height: 140.h,
+        child: Image.asset(
+          'assets/images/MainRectangleLogo.png',
+          fit: BoxFit.fill,
+        ),
+      ).marginOnly(top: 50.h, bottom: 50.h),
+    );
+  }
+
+  Widget _buildFormField(
+    String labelText,
+    TextEditingController controller,
+    String hintText, {
+    bool obscureText = false,
+    FormFieldValidator<String>? validator,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MyText(
+            text: labelText,
+            color: KTextColor,
+            size: 20.h,
+            top: 10.h,
+            left: 30.h),
+        MyTextFormField(
+          controller: controller,
+          top: 10.h,
+          left: 20.h,
+          right: 20.h,
+          hintText: hintText,
+          obscureText: obscureText,
+          validator: validator,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSignupButton() {
+    return Center(
+      child: MyButton(
+        text: 'Sign Up',
+        top: 10.h,
+        onTap: () {
+          if (_formKey.currentState!.validate()) {
+            controller.sendRegistrationRequest(
+              nameController.text.trim(),
+              emailController.text.trim(),
+              passwordController.text.trim(),
+              confPasswordController.text.trim(),
+            );
+          }
+        },
+        bottom: 20.h,
       ),
     );
   }
