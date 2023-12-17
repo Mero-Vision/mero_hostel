@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:mero_hostel/controller/hostel/loginChecker.dart';
+import 'package:mero_hostel/SplashScreen.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/hostelOwner/Hostel_Owner.dart';
 import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/hostel/hostelController.dart';
-import 'package:mero_hostel/controller/loginController.dart';
+import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/pages/homePageSkeleton.dart';
 

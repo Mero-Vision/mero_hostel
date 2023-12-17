@@ -46,7 +46,7 @@ class User {
     required this.name,
     required this.email,
     this.emailVerifiedAt,
-    required this.status,
+    this.status,
     this.deletedAt,
     required this.createdAt,
     required this.updatedAt,
@@ -55,7 +55,7 @@ class User {
   late final String name;
   late final String email;
   late final Null emailVerifiedAt;
-  late final String status;
+  late final String? status;
   late final Null deletedAt;
   late final String createdAt;
   late final String updatedAt;

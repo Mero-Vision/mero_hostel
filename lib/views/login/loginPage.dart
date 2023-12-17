@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:mero_hostel/controller/loginController.dart';
+import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/myRichText.dart';
 import 'package:mero_hostel/customWidgets/myTextFormField.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/forgot_password/forgotPassword.dart';
-import 'package:mero_hostel/views/login/widget/custom_note.dart';
 import 'package:mero_hostel/views/signup/signupPage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,8 +16,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController EmailController = TextEditingController();
-  TextEditingController PasswordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   LoginController controller = Get.put(LoginController());
 
   final _formKey = GlobalKey<FormState>();
@@ -27,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Page'),
+        backgroundColor: KBackgroundColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -35,113 +34,129 @@ class _LoginPageState extends State<LoginPage> {
           child: Form(
             key: _formKey,
             child: Center(
-              child: Container(
-                width: 500.h,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Center(
-                        child: const CustomNote(
-                                text:
-                                    'Note: \n  You must Login to view your profile! ')
-                            .marginOnly(top: 50.h)),
-                    MyText(
-                      text: 'Email',
-                      color: KTextColor,
-                      size: 20,
-                      left: 30,
-                    ),
-                    MyTextFormField(
-                      controller: EmailController,
-                      top: 10.h,
-                      left: 20.h,
-                      right: 20.h,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Email is required!';
-                        }
-                        return null;
-                      },
-                      hintText: 'Enter your email.',
-                    ),
-                    MyText(
-                      text: 'Password',
-                      color: KTextColor,
-                      size: 20.h,
-                      top: 20.h,
-                      left: 30.h,
-                    ),
-                    MyTextFormField(
-                      controller: PasswordController,
-                      top: 10.h,
-                      left: 20.h,
-                      right: 20.h,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Password is required!';
-                        }
-                        return null;
-                      },
-                      hintText: 'Enter your password.',
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: MyText(
-                        top: 10.h,
-                        right: 20.h,
-                        bottom: 20.h,
-                        text: 'Forgot Password?',
-                        ontap: () {
-                          Get.to(() => ForgotPassword());
-                        },
-                        color: Color(0xff0E6A28),
-                        size: 18,
-                      ),
-                    ),
-                    Obx(
-                      () => Center(
-                        child: controller.isLoading.value
-                            ? MyButton(
-                                text: "Loading...",
-                                onTap: () {},
-                              )
-                            : MyButton(
-                                text: 'Login',
-                                onTap: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    controller.login(
-                                      EmailController.text.toString(),
-                                      PasswordController.text.toString(),
-                                    );
-                                  }
-                                },
-                                bottom: 20.h,
-                              ),
-                      ),
-                    ),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, a, b) => SignupPage(),
-                            ),
-                          );
-                        },
-                        child: MyRichText(
-                          text1: 'Don\'t have an account?  ',
-                          text2: 'Sign up',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildLogoContainer(),
+                  _buildFormField('Email', emailController, 'Enter your email.',
+                      validator: _validateEmail),
+                  _buildFormField(
+                      'Password', passwordController, 'Enter your password.',
+                      validator: _validatePassword),
+                  _buildForgotPasswordText(),
+                  _buildLoginButton(),
+                  _buildSignupLink(),
+                ],
               ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildLogoContainer() {
+    return Center(
+      child: Container(
+        height: 140.h,
+        child: Image.asset(
+          'assets/images/MainRectangleLogo.png',
+          fit: BoxFit.fill,
+        ),
+      ).marginOnly(top: 130.h, bottom: 50.h),
+    );
+  }
+
+  Widget _buildFormField(
+      String labelText, TextEditingController controller, String hintText,
+      {FormFieldValidator<String>? validator}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MyText(text: labelText, color: KTextColor, size: 20, left: 30),
+        MyTextFormField(
+          controller: controller,
+          top: 10.h,
+          left: 20.h,
+          right: 20.h,
+          validator: validator,
+          hintText: hintText,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildForgotPasswordText() {
+    return Align(
+      alignment: Alignment.topRight,
+      child: MyText(
+        top: 10.h,
+        right: 20.h,
+        bottom: 20.h,
+        text: 'Forgot Password?',
+        ontap: () {
+          Get.to(() => ForgotPassword());
+        },
+        color: Color(0xff0E6A28),
+        size: 18,
+      ),
+    );
+  }
+
+  Widget _buildLoginButton() {
+    return Obx(
+      () => Center(
+        child: controller.isLoading.value
+            ? MyButton(
+                text: "Loading...",
+                onTap: () {},
+              )
+            : MyButton(
+                text: 'Login',
+                onTap: () {
+                  if (_formKey.currentState!.validate()) {
+                    controller.login(
+                      emailController.text.toString(),
+                      passwordController.text.toString(),
+                    );
+                  }
+                },
+                bottom: 20.h,
+              ),
+      ),
+    );
+  }
+
+  Widget _buildSignupLink() {
+    return Center(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, a, b) => SignupPage(),
+            ),
+          );
+        },
+        child: MyRichText(
+          text1: 'Don\'t have an account?  ',
+          text2: 'Sign up',
+        ),
+      ),
+    );
+  }
+
+  String? _validateEmail(String? value) {
+    if (value!.isEmpty) {
+      return 'Email is required!';
+    }
+    return null;
+  }
+
+  String? _validatePassword(String? value) {
+    if (value!.isEmpty) {
+      return 'Password is required!';
+    }
+    return null;
   }
 }
