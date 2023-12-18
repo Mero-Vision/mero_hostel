@@ -1,26 +1,40 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:animations/animations.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:animations/animations.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:mero_hostel/controller/bottomNavBarController.dart';
+import 'package:mero_hostel/controller/loginRegister/loginController.dart';
+import 'package:mero_hostel/models/LoginUserModel.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/pages/homepage.dart';
 import 'package:mero_hostel/views/normalUser/hostelTab/hostelPage.dart';
+import 'package:mero_hostel/views/normalUser/profileTab/profileScreen.dart';
 import 'package:mero_hostel/views/normalUser/searchTab/searchPage.dart';
 
 class BottomNavBar extends StatelessWidget {
-  final BottomNavBarController controller = Get.put(BottomNavBarController());
 
-  final List<Widget> tabItems = [
-    const HomePage(),
-    SearchPage(),
-    HostelPage(),
-    LoginPage(),
-  ];
+   BottomNavBar({
+    Key? key,
+    this.userValue,
+  }) : super(key: key);
+
+final User? userValue;
+  final BottomNavBarController controller = Get.put(BottomNavBarController());
+  final LoginController _loginController=Get.find();
+  
 
   @override
   Widget build(BuildContext context) {
+      final List<Widget> tabItems = [
+    const HomePage(),
+    SearchPage(),
+    HostelPage(),
+   (_loginController.IsLoggedIn.value? ProfileScreen(userData:userValue ,):LoginPage())
+  ];
+
     return Scaffold(
       body: Obx(
         () => PageTransitionSwitcher(

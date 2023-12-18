@@ -39,6 +39,15 @@ class LoginController extends GetxController {
       // Get.offAll(() => HostelOwner(
       //       userData: data!.data.user,
       //     ));
+    } else if (user_status != '' && user_status == 'Normal_User') {
+      var email = preferences.getString('userEmail');
+      var password = preferences.getString('userPassword');
+      final data = await repo.userLogin(email!, password!);
+      IsLoggedIn.value = true;
+
+      Get.offAll(() => BottomNavBar(
+            userValue: data?.data.user,
+          ));
     } else {
       await Future.delayed(
         Duration(milliseconds: 1500),
@@ -81,13 +90,15 @@ class LoginController extends GetxController {
 
       if (data.data.user.status == 'Hostel_Owner') {
         preferences.setString('UserStatus', 'Hostel_Owner');
+        IsLoggedIn.value = true;
         Get.offAll(() => HostelOwner(
               userData: data.data.user,
             ));
       }
+
       if (data.data.user.status == null) {
         preferences.setString('UserStatus', 'Normal_User');
-        IsLoggedIn.value = true;
+        checkLoginStatus();
       }
       print('success');
     }

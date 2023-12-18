@@ -7,6 +7,17 @@ class HostelController extends GetxController {
   final RxList<Datum> boysHostels = <Datum>[].obs;
   final RxList<Datum> girlsHostels = <Datum>[].obs;
   final RxBool isloading = false.obs;
+  final RxList<Datum> catagories = <Datum>[].obs;
+  final RxBool isEmpty = true.obs;
+
+  Future<RxList<Datum>> filterHostel(int index) async {
+    var hostelCatagories = [hostels, boysHostels, girlsHostels];
+    catagories.value = hostelCatagories[index];
+    isEmpty.value = false;
+    var data = isEmpty.value ? hostels : catagories;
+    return data;
+    //
+  }
 
   void getAllHostel() async {
     HostelModel? data = await HostelRepo().getAllHostel();

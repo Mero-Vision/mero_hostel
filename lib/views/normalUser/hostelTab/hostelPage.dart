@@ -13,10 +13,13 @@ class HostelPage extends StatelessWidget {
   HostelPage({super.key});
   HostelController controller = Get.put(HostelController());
   LoginController _loginController = Get.find();
+  //    HostelController hostelcontroller = Get.put(HostelController());
+
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Hostels'),
@@ -44,14 +47,8 @@ class HostelPage extends StatelessWidget {
       body: Container(
         height: screenHeight,
         width: screenWidth,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            FilterTabs(),
-            ListOfHostel(
-              data: controller.hostels,
-            ),
-          ],
+        child: FilterTabs(
+          controller: controller,
         ),
       ),
     );

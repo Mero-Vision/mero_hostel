@@ -147,14 +147,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   String? _validateEmail(String? value) {
-    if (value!.isEmpty) {
+    if (value == null || value.trim().isEmpty) {
       return 'Email is required!';
     }
     return null;
   }
 
   String? _validatePassword(String? value) {
-    if (value!.isEmpty) {
+    if (value == null || value.trim().isEmpty) {
       return 'Password is required!';
     }
     return null;

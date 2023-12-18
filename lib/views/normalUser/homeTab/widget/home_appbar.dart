@@ -2,18 +2,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mero_hostel/controller/bottomNavBarController.dart';
 
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
+import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';
+import 'package:mero_hostel/views/normalUser/profileTab/profileScreen.dart';
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({
+  HomeAppBar({
     Key? key,
     this.username,
     this.userImageURL,
   }) : super(key: key);
   final String? username;
   final String? userImageURL;
+  BottomNavBarController _barController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,8 @@ class HomeAppBar extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Get.to(LoginPage());
+              _barController.selectedIndex.value = 3;
+              //      Get.to(ProfileScreen());
             },
             child: Container(
               // margin: EdgeInsets.only(right: 16.0),
