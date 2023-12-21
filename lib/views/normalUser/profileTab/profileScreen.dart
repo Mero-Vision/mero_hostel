@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 
+
 import 'package:mero_hostel/views/normalUser/profileTab/widgets/topsection.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -18,8 +19,9 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey.shade200,
+        backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
+          backgroundColor: Colors.white,
           actions: [
             IconButton(
                 onPressed: () {
@@ -31,10 +33,49 @@ class ProfileScreen extends StatelessWidget {
                 ).marginOnly(right: 10.h))
           ],
         ),
-        body: ProfileTopSection(
-          profileImage: userData?.name ?? 'hello',
-          userName: userData?.name ?? 'No name',
-          userEmail: userData?.email ?? 'email not found',
+        body: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height - 100.h,
+            child: Column(
+              children: [
+                ProfileTopSection(
+                  profileImage: userData?.name ?? 'hello',
+                  userName: userData?.name ?? 'No name',
+                  userEmail: userData?.email ?? 'email not found',
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text('Notification'),
+                    leading: Icon(
+                      Icons.notifications_active_rounded,
+                      color: Colors.green.shade700,
+                    ),
+                    onTap: () {},
+                  ).marginAll(10.h),
+                ).marginAll(10.h),
+                Card(
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.theater_comedy,
+                      color: Colors.orange.shade700,
+                    ),
+                    title: Text(
+                      'Theme',
+                    ),
+                    onTap: () {},
+                  ),
+                ).marginAll(10.h),
+                Card(
+                  child: ListTile(
+                    leading: Icon(Icons.info),
+                    title: Text('About'),
+                    onTap: () {},
+                  ),
+                ).marginAll(10.h)
+              ],
+            ),
+          ),
         ));
   }
 }

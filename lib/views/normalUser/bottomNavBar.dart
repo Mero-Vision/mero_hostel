@@ -15,25 +15,27 @@ import 'package:mero_hostel/views/normalUser/profileTab/profileScreen.dart';
 import 'package:mero_hostel/views/normalUser/searchTab/searchPage.dart';
 
 class BottomNavBar extends StatelessWidget {
-
-   BottomNavBar({
+  BottomNavBar({
     Key? key,
     this.userValue,
   }) : super(key: key);
 
-final User? userValue;
-  final BottomNavBarController controller = Get.put(BottomNavBarController());
-  final LoginController _loginController=Get.find();
-  
+  final User? userValue;
+  final BottomNavBarController controller = Get.find<BottomNavBarController>();
+  final LoginController _loginController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-      final List<Widget> tabItems = [
-    const HomePage(),
-    SearchPage(),
-    HostelPage(),
-   (_loginController.IsLoggedIn.value? ProfileScreen(userData:userValue ,):LoginPage())
-  ];
+    final List<Widget> tabItems = [
+      HomePage(),
+      SearchPage(),
+      HostelPage(),
+      (_loginController.IsLoggedIn.value
+          ? ProfileScreen(
+              userData: userValue,
+            )
+          : LoginPage())
+    ];
 
     return Scaffold(
       body: Obx(

@@ -2,10 +2,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mero_hostel/MyControllerBinding.dart';
 import 'package:mero_hostel/SplashScreen.dart';
 import 'package:mero_hostel/utils/constant.dart';
-import 'package:mero_hostel/views/hostelOwner/Hostel_Owner.dart';
-import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
@@ -22,6 +21,7 @@ class MyApp extends StatelessWidget {
       designSize: Size(430, 957),
       builder: (_, child) {
         return GetMaterialApp(
+           initialBinding: MyControllerBinding(),
             scrollBehavior: MaterialScrollBehavior().copyWith(dragDevices: {
               PointerDeviceKind.mouse,
               PointerDeviceKind.unknown,

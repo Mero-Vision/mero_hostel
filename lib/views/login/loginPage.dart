@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  LoginController controller = Get.put(LoginController());
+  var controller = Get.find<LoginController>();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -113,9 +113,9 @@ class _LoginPageState extends State<LoginPage> {
               )
             : MyButton(
                 text: 'Login',
-                onTap: () {
+                onTap: () async {
                   if (_formKey.currentState!.validate()) {
-                    controller.login(
+                    var access = await controller.login(
                       emailController.text.toString(),
                       passwordController.text.toString(),
                     );

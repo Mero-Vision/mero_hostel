@@ -13,8 +13,8 @@ class ViewHostel extends StatelessWidget {
   final Datum data;
   @override
   Widget build(BuildContext context) {
-    double screenHeight = Get.height;
-    double ScreenWidth = Get.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double ScreenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomNavigationBar: Container(
         height: 100.h,

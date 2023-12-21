@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/SplashScreen.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
+import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/hostelOwner/Hostel_Owner.dart';
 import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,7 +25,7 @@ class LoginController extends GetxController {
   Future checkLoginStatus() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var user_status = preferences.getString('UserStatus');
-
+   
     if (user_status != '' && user_status == 'Hostel_Owner') {
       var email = preferences.getString('userEmail');
       var password = preferences.getString('userPassword');
@@ -101,6 +102,7 @@ class LoginController extends GetxController {
         checkLoginStatus();
       }
       print('success');
+      preferences.setString('AccessToken', data.data.token.toString());
     }
   }
 }

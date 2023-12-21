@@ -23,7 +23,7 @@ class _SignupPageState extends State<SignupPage> {
 
   final TextEditingController confPasswordController = TextEditingController();
 
-  final RegistrationController controller = RegistrationController();
+  final RegistrationController controller = Get.find<RegistrationController>();
 
   final _formKey = GlobalKey<FormState>();
 

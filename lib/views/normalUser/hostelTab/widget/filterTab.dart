@@ -16,8 +16,6 @@ class FilterTabs extends StatelessWidget {
   final HostelController controller;
   @override
   Widget build(BuildContext context) {
-    var boysHostel = controller.getBoysHostel();
-    controller.getGirlsHostel();
     var catagories = ['All', 'Boys', 'Girls'];
 
     var hostelCatagories = [

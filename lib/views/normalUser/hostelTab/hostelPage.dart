@@ -5,13 +5,12 @@ import 'package:mero_hostel/controller/hostel/hostelController.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/utils/constant.dart';
-import 'package:mero_hostel/views/normalUser/homeTab/widget/hostelTile.dart';
+import 'package:mero_hostel/views/normalUser/hostelTab/widget/createHostel.dart';
 import 'package:mero_hostel/views/normalUser/hostelTab/widget/filterTab.dart';
-import 'package:mero_hostel/views/normalUser/hostelTab/widget/listofHostel.dart';
 
 class HostelPage extends StatelessWidget {
   HostelPage({super.key});
-  HostelController controller = Get.put(HostelController());
+  var controller = Get.find<HostelController>();
   LoginController _loginController = Get.find();
   //    HostelController hostelcontroller = Get.put(HostelController());
 
@@ -39,7 +38,10 @@ class HostelPage extends StatelessWidget {
                     text: 'Create Hostel',
                     size: 20.h,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => CreateHostelPage(
+                        screenHeight: screenHeight, screenWidth: screenWidth));
+                  },
                 )
               : SizedBox(),
         ),

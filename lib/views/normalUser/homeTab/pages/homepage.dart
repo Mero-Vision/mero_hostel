@@ -10,30 +10,17 @@ import 'package:mero_hostel/views/normalUser/homeTab/widget/heading.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/hostelTile.dart';
 
-class SecondScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Search'),
-      ),
-      body: const Center(
-        child: Text('Search Screen Content'),
-      ),
-    );
-  }
-}
-
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  LoginController controller = Get.find<LoginController>();
+
+  HostelController hostelcontroller = Get.find<HostelController>();
 
   @override
   Widget build(BuildContext context) {
     double ScreenHeight = Get.height;
     double ScreenWidth = Get.width;
-    LoginController controller = Get.put(LoginController());
     User? userData = controller.user?.value?.data.user;
-    HostelController hostelcontroller = Get.put(HostelController());
 
     hostelcontroller.getBoysHostel();
     hostelcontroller.getGirlsHostel();

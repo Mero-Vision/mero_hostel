@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
-
-import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/hostelOwner/widgets/GridHostelOwnerData.dart';
@@ -41,7 +39,8 @@ class HostelOwner extends StatelessWidget {
                     ],
                   )))),
       appBar: AppBar(
-        title: HomeAppBar(username: userData.name,
+        title: HomeAppBar(
+          username: userData.name,
           userImageURL: null,
         ),
       ),

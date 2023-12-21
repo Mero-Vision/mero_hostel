@@ -22,7 +22,7 @@ class ProfileTopSection extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 470.h,
+          height: 470.h - 50,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.h), color: KButtonColor),
           child: Container(
@@ -30,17 +30,20 @@ class ProfileTopSection extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                iconbuttons(CupertinoIcons.heart_circle, 'Favorite'),
-                iconbuttons(CupertinoIcons.bookmark, 'Bookmark'),
-                iconbuttons(CupertinoIcons.settings, 'Setting'),
+                iconbuttons(CupertinoIcons.heart_circle, 'Favorite', () {}),
+                iconbuttons(Icons.edit_sharp, 'Edit Profile', () {}),
+                iconbuttons(CupertinoIcons.settings, 'Setting', () {}),
               ],
             ),
           ),
         ),
         Container(
-          height: 375.h,
+          height: 375.h - 50,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.h), color: Colors.white),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20.h),
+                  bottomRight: Radius.circular(20.h)),
+              color: Colors.white),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -88,23 +91,23 @@ class ProfileTopSection extends StatelessWidget {
   }
 }
 
-Widget iconbuttons(IconData icon, text) {
+Widget iconbuttons(IconData icon, text, VoidCallback onTap) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.end,
     children: [
       IconButton(
-        onPressed: () {},
+        onPressed: onTap,
         icon: Icon(
           icon,
           color: Colors.white,
         ),
-        iconSize: 40.h,
+        iconSize: 35.h,
       ),
       MyText(
         text: text,
-        size: 18,
+        size: 16,
         color: Colors.white,
-        bottom: 7.h,
+        bottom: 10.h,
       )
     ],
   );

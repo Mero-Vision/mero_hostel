@@ -5,18 +5,17 @@ import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});
+  LoginController controller = Get.put(LoginController(),permanent: true);
 
   @override
   Widget build(BuildContext context) {
-    LoginController controller = Get.put(LoginController());
     controller.checkLoginStatus();
     return Scaffold(
-      body: Container(
-          child: Center(
-              child: SizedBox(
-                  height: 150.h,
-                  width: 250.h,
-                  child: Image.asset('assets/images/MainRectangleLogo.png')))),
+      body: Center(
+          child: SizedBox(
+              height: 150.h,
+              width: 250.h,
+              child: Image.asset('assets/images/MainRectangleLogo.png'))),
     );
   }
 }
