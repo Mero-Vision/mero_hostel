@@ -10,33 +10,34 @@ import 'package:mero_hostel/views/normalUser/homeTab/widget/heading.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/hostelTile.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   LoginController controller = Get.find<LoginController>();
 
-  HostelController hostelcontroller = Get.find<HostelController>();
+  HostelController hostelController = Get.find<HostelController>();
 
   @override
   Widget build(BuildContext context) {
-    double ScreenHeight = Get.height;
-    double ScreenWidth = Get.width;
+    double screenHeight = Get.height;
+    double screenWidth = Get.width;
     User? userData = controller.user?.value?.data.user;
 
-    hostelcontroller.getBoysHostel();
-    hostelcontroller.getGirlsHostel();
+    hostelController.getBoysHostel();
+    hostelController.getGirlsHostel();
     Future.delayed(const Duration(seconds: 1), () {
-      hostelcontroller.getAllHostel();
+      hostelController.getAllHostel();
     });
     //
     return Scaffold(
         backgroundColor: const Color(0xfff4f5f6),
         body: Obx(
-          () => (hostelcontroller.isloading.value == false)
-              ? HomePageSkeleton()
+          () => (hostelController.isLoading.value == false)
+              ? const HomePageSkeleton()
               : SafeArea(
                   child: SizedBox(
-                    height: ScreenHeight,
-                    width: ScreenWidth,
+                    height: screenHeight,
+                    width: screenWidth,
                     child: Column(
                       children: [
                         HomeAppBar(
@@ -48,30 +49,32 @@ class HomePage extends StatelessWidget {
                             child: Column(
                               //mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                HeadingTitle(
+                                const HeadingTitle(
                                   text: 'Recently added',
                                 ).paddingOnly(
                                     right: 10.w,
                                     left: 15.h,
                                     top: 5.h,
                                     bottom: 5.h),
-                                HomeTile(data: hostelcontroller.hostels),
-                                HeadingTitle(
+                                HomeTile(
+                                  data: hostelController.hostels,
+                                ),
+                                const HeadingTitle(
                                   text: 'Boys Hostel',
                                 ).paddingOnly(
                                     right: 10.w,
                                     left: 15.h,
                                     top: 5.h,
                                     bottom: 5.h),
-                                HomeTile(data: hostelcontroller.boysHostels),
-                                HeadingTitle(
+                                HomeTile(data: hostelController.boysHostels),
+                                const HeadingTitle(
                                   text: 'Girls Hostel',
                                 ).paddingOnly(
                                     right: 10.w,
                                     left: 15.h,
                                     top: 5.h,
                                     bottom: 5.h),
-                                HomeTile(data: hostelcontroller.girlsHostels)
+                                HomeTile(data: hostelController.girlsHostels)
                               ],
                             ),
                           ),

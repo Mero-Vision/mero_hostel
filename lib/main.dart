@@ -7,7 +7,7 @@ import 'package:mero_hostel/SplashScreen.dart';
 import 'package:mero_hostel/utils/constant.dart';
 
 void main(List<String> args) {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,18 +18,18 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       minTextAdapt: false,
       splitScreenMode: true,
-      designSize: Size(430, 957),
+      designSize: const Size(430, 957),
       builder: (_, child) {
         return GetMaterialApp(
-           initialBinding: MyControllerBinding(),
-            scrollBehavior: MaterialScrollBehavior().copyWith(dragDevices: {
+            initialBinding: MyControllerBinding(),
+            scrollBehavior: const MaterialScrollBehavior().copyWith(dragDevices: {
               PointerDeviceKind.mouse,
               PointerDeviceKind.unknown,
               PointerDeviceKind.stylus,
               PointerDeviceKind.touch
             }),
             theme: ThemeData(
-              scaffoldBackgroundColor: KBackgroundColor,
+              scaffoldBackgroundColor: AppColor.KBackgroundColor,
             ),
             home: SplashScreen(),
             debugShowCheckedModeBanner: false);

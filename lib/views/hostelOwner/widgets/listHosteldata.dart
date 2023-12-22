@@ -7,11 +7,11 @@ class ListHostelData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 190.h,
       child: Card(
         color: Colors.green.shade400,
-        child: Center(child: Text('data')),
+        child: const Center(child: Text('data')),
       ),
     ).paddingOnly(left: 10.w, right: 10.w);
   }

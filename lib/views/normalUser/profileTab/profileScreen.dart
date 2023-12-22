@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 
-
 import 'package:mero_hostel/views/normalUser/profileTab/widgets/topsection.dart';
 
+// ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({
     Key? key,
@@ -23,18 +23,20 @@ class ProfileScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.white,
           actions: [
-            IconButton(
-                onPressed: () {
-                  controller.Logout();
-                },
-                icon: Icon(
-                  Icons.login_outlined,
-                  size: 35.h,
-                ).marginOnly(right: 10.h))
+            userData?.status == 'Hostel_Owner'
+                ? Container()
+                : IconButton(
+                    onPressed: () {
+                      controller.logout();
+                    },
+                    icon: Icon(
+                      Icons.login_outlined,
+                      size: 35.h,
+                    ).marginOnly(right: 10.h))
           ],
         ),
         body: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           child: SizedBox(
             height: MediaQuery.of(context).size.height - 100.h,
             child: Column(
@@ -46,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 Card(
                   child: ListTile(
-                    title: Text('Notification'),
+                    title: const Text('Notification'),
                     leading: Icon(
                       Icons.notifications_active_rounded,
                       color: Colors.green.shade700,
@@ -60,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
                       Icons.theater_comedy,
                       color: Colors.orange.shade700,
                     ),
-                    title: Text(
+                    title: const Text(
                       'Theme',
                     ),
                     onTap: () {},
@@ -68,8 +70,8 @@ class ProfileScreen extends StatelessWidget {
                 ).marginAll(10.h),
                 Card(
                   child: ListTile(
-                    leading: Icon(Icons.info),
-                    title: Text('About'),
+                    leading: const Icon(Icons.info),
+                    title: const Text('About'),
                     onTap: () {},
                   ),
                 ).marginAll(10.h)

@@ -8,7 +8,7 @@ import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/utils/constant.dart';
 
 class ProfileTopSection extends StatelessWidget {
-  ProfileTopSection({
+  const ProfileTopSection({
     Key? key,
     required this.profileImage,
     required this.userName,
@@ -24,15 +24,16 @@ class ProfileTopSection extends StatelessWidget {
         Container(
           height: 470.h - 50,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.h), color: KButtonColor),
+              borderRadius: BorderRadius.circular(20.h),
+              color: AppColor.KButtonColor),
           child: Container(
             alignment: Alignment.bottomCenter,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                iconbuttons(CupertinoIcons.heart_circle, 'Favorite', () {}),
-                iconbuttons(Icons.edit_sharp, 'Edit Profile', () {}),
-                iconbuttons(CupertinoIcons.settings, 'Setting', () {}),
+                iconButtons(CupertinoIcons.heart_circle, 'Favorite', () {}),
+                iconButtons(Icons.edit_sharp, 'Edit Profile', () {}),
+                iconButtons(CupertinoIcons.settings, 'Setting', () {}),
               ],
             ),
           ),
@@ -69,12 +70,12 @@ class ProfileTopSection extends StatelessWidget {
                 top: 10.h,
                 text: userName,
                 size: 22.h,
-                fontweight: FontWeight.w700,
+                fontWeight: FontWeight.w700,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.email),
+                  const Icon(Icons.email),
                   MyText(
                     left: 5.h,
                     text: userEmail,
@@ -91,7 +92,7 @@ class ProfileTopSection extends StatelessWidget {
   }
 }
 
-Widget iconbuttons(IconData icon, text, VoidCallback onTap) {
+Widget iconButtons(IconData icon, text, VoidCallback onTap) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.end,
     children: [

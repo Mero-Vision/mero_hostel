@@ -49,6 +49,8 @@ dependencies:
   permission_handler: ^11.1.0
   image_cropper: ^5.0.1
   flutter_svg: ^2.0.9
+  url_launcher: ^6.2.2
+  cached_network_image: ^3.3.0
 
 dev_dependencies:
   flutter_test:

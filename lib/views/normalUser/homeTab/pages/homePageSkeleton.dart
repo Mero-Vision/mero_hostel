@@ -1,10 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/customWidgets/skeleton.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/heading.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
-import 'package:mero_hostel/views/normalUser/homeTab/widget/hostelTile.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/hostelTileSkeleton.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -13,13 +14,13 @@ class HomePageSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double ScreenHeight = Get.height;
-    double ScreenWidth = Get.width;
+    double screenHeight = Get.height;
+    double screenWidth = Get.width;
 
     return SafeArea(
       child: SizedBox(
-        height: ScreenHeight,
-        width: ScreenWidth,
+        height: screenHeight,
+        width: screenWidth,
         child: Column(
           children: [
             Shimmer.fromColors(
@@ -31,19 +32,19 @@ class HomePageSkeleton extends StatelessWidget {
                 child: Column(
                   //mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    HeadingTitle(
+                    const HeadingTitle(
                       text: 'Recently added',
                     ).paddingAll(15.h).marginOnly(top: 20.h),
                     const Skeleton(
                       widget: HomeTileSkeleton(),
                     ),
-                    HeadingTitle(
+                    const HeadingTitle(
                       text: 'Boys Hostel',
                     ).paddingAll(15.sp),
                     const Skeleton(
                       widget: HomeTileSkeleton(),
                     ),
-                    HeadingTitle(
+                    const HeadingTitle(
                       text: 'Girls Hostel',
                     ).paddingAll(15.sp),
                     const Skeleton(

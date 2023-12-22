@@ -1,16 +1,17 @@
+// ignore: file_names
 import 'package:mero_hostel/models/hostelModel.dart';
 import 'package:mero_hostel/repo/apis/api.dart';
 
 class HostelRepo {
-  Api _api = Api();
+  final Api _api = Api();
 
   Future<HostelModel> getAllHostel() async {
     try {
       final response = await _api.sendRequest.get('/hostels');
       if (response.statusCode == 200) {
-        HostelModel datas = HostelModel.fromJson(response.data);
+        HostelModel data = HostelModel.fromJson(response.data);
 
-        return datas;
+        return data;
       } else {
         throw Exception('Something went wrong re');
       }

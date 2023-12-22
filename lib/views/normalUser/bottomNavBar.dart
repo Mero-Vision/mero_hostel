@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, file_names
 import 'package:animations/animations.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,13 +28,13 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> tabItems = [
       HomePage(),
-      SearchPage(),
+      const SearchPage(),
       HostelPage(),
-      (_loginController.IsLoggedIn.value
+      (_loginController.isLoggedIn.value
           ? ProfileScreen(
               userData: userValue,
             )
-          : LoginPage())
+          : const LoginPage())
     ];
 
     return Scaffold(

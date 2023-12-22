@@ -4,7 +4,6 @@ import 'package:mero_hostel/controller/hostel/ImageController.dart';
 import 'package:mero_hostel/controller/hostel/hostelController.dart';
 import 'package:mero_hostel/controller/hostel/postHostelController.dart';
 import 'package:mero_hostel/controller/loginRegister/forgotpasswordController.dart';
-import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/controller/loginRegister/registrationController.dart';
 
 class MyControllerBinding extends Bindings {

@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,7 +10,7 @@ import 'package:mero_hostel/views/hostelOwner/widgets/listHosteldata.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
 
 class HostelOwner extends StatelessWidget {
-  HostelOwner({
+  const HostelOwner({
     Key? key,
     required this.userData,
   }) : super(key: key);
@@ -20,43 +20,57 @@ class HostelOwner extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     LoginController controller = Get.find();
+
     return Scaffold(
       drawer: SafeArea(
           child: Drawer(
-              shape: Border(),
-              backgroundColor: KBackgroundColor,
-              child: Container(
+              shape: const Border(),
+              backgroundColor: AppColor.KBackgroundColor,
+              child: SizedBox(
                   width: 200,
                   child: Column(
                     children: [
                       ListTile(
                         onTap: () {
-                          controller.Logout();
+                          controller.logout();
                         },
                         tileColor: Colors.white,
-                        title: Text('LogOut'),
-                      )
+                        title: const Text('LogOut'),
+                      ),
                     ],
                   )))),
       appBar: AppBar(
         title: HomeAppBar(
           username: userData.name,
           userImageURL: null,
+          userData: userData,
         ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Container(
+          physics: const BouncingScrollPhysics(),
+          child: SizedBox(
             height: screenHeight - 60.h,
             width: screenWidth,
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const GridHostelOwnerData()
-                    .marginOnly(left: 10.w, right: 10.w, bottom: 10.h),
-                const GridHostelOwnerData()
-                    .marginOnly(left: 10.w, right: 10.w, bottom: 10.h),
+                Row(
+                  children: [
+                    const GridHostelOwnerData().marginOnly(
+                      right: 10.w,
+                    ),
+                    const GridHostelOwnerData()
+                  ],
+                ).marginOnly(top: 10.h, left: 10.w, right: 10.w, bottom: 10.h),
+                Row(
+                  children: [
+                    const GridHostelOwnerData().marginOnly(
+                      right: 10.w,
+                    ),
+                    const GridHostelOwnerData()
+                  ],
+                ).marginOnly(left: 10.w, bottom: 10.h),
                 const ListHostelData(),
                 const ListHostelData(),
               ],

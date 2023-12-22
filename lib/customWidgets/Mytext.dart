@@ -1,3 +1,4 @@
+// ignore: file_names
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,8 +15,8 @@ class MyText extends StatelessWidget {
     this.bottom,
     this.left,
     this.right,
-    this.ontap,
-    this.fontweight,
+    this.onTap,
+    this.fontWeight,
     this.fontStyle,
     this.textDecoration,
   }) : super(key: key);
@@ -27,14 +28,14 @@ class MyText extends StatelessWidget {
   final double? bottom;
   final double? left;
   final double? right;
-  final void Function()? ontap;
-  final FontWeight? fontweight;
+  final void Function()? onTap;
+  final FontWeight? fontWeight;
   final FontStyle? fontStyle;
   final TextDecoration? textDecoration;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ontap,
+      onTap: onTap,
       child: Container(
         padding: EdgeInsets.only(
             top: top ?? 0,
@@ -45,12 +46,12 @@ class MyText extends StatelessWidget {
           text,
           maxLines: 5,
           style: TextStyle(
-              color: color ?? KTextColor,
+              color: color ?? AppColor.KTextColor,
               fontSize: size.h,
               fontStyle: fontStyle,
               decoration: textDecoration,
               decorationColor: Colors.blue,
-              fontWeight: fontweight),
+              fontWeight: fontWeight),
         ),
       ),
     );

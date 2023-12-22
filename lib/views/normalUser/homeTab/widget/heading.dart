@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 
 class HeadingTitle extends StatelessWidget {
-  HeadingTitle({
+  const HeadingTitle({
     Key? key,
     required this.text,
     this.onTap,
@@ -19,7 +19,7 @@ class HeadingTitle extends StatelessWidget {
         MyText(
           text: text,
           size: 20.h,
-          fontweight: FontWeight.w500,
+          fontWeight: FontWeight.w500,
           color: Colors.black54,
         ),
         GestureDetector(

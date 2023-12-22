@@ -1,9 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyTextFormField extends StatelessWidget {
-  MyTextFormField({
+  const MyTextFormField({
     Key? key,
     this.top,
     this.bottom,
@@ -39,9 +37,9 @@ class MyTextFormField extends StatelessWidget {
         validator: validator,
         decoration: InputDecoration(
             prefixIcon: prefix,
-            contentPadding: EdgeInsets.all(10),
+            contentPadding: const EdgeInsets.all(10),
             hintText: hintText,
-            helperStyle: TextStyle(fontSize: 20),
+            helperStyle: const TextStyle(fontSize: 20),
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(14))),
       ),

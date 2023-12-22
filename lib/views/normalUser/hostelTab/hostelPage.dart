@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,11 +10,12 @@ import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/normalUser/hostelTab/widget/createHostel.dart';
 import 'package:mero_hostel/views/normalUser/hostelTab/widget/filterTab.dart';
 
+// ignore: must_be_immutable
 class HostelPage extends StatelessWidget {
   HostelPage({super.key});
   var controller = Get.find<HostelController>();
-  LoginController _loginController = Get.find();
-  //    HostelController hostelcontroller = Get.put(HostelController());
+  final LoginController _loginController = Get.find();
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +24,16 @@ class HostelPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hostels'),
-        backgroundColor: KBackgroundColor,
+        title: const Text('Hostels'),
+        backgroundColor: AppColor.KBackgroundColor,
       ),
       floatingActionButton: Obx(
         () => SizedBox(
           height: 60.h,
           width: 200.h,
-          child: _loginController.IsLoggedIn.value
+          child: _loginController.isLoggedIn.value
               ? FloatingActionButton(
-                  backgroundColor: KButtonColor,
+                  backgroundColor: AppColor.KButtonColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   child: MyText(
@@ -43,10 +46,10 @@ class HostelPage extends StatelessWidget {
                         screenHeight: screenHeight, screenWidth: screenWidth));
                   },
                 )
-              : SizedBox(),
+              : const SizedBox(),
         ),
       ),
-      body: Container(
+      body: SizedBox(
         height: screenHeight,
         width: screenWidth,
         child: FilterTabs(

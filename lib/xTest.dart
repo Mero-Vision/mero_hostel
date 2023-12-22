@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/hostel/hostelController.dart';
@@ -22,7 +24,7 @@ class XTest extends StatelessWidget {
                 HostelRepo().getAllHostel();
               }),
           Obx(
-            () => Container(
+            () => SizedBox(
               height: 200,
               child: ListView.builder(
                 itemCount: controller.hostels.length,

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginRegister/forgotpasswordController.dart';
@@ -10,14 +12,14 @@ class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
-    double ScreenHeight = MediaQuery.of(context).size.height;
-    double ScreenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color(0xff698AFF),
+      backgroundColor: const Color(0xff698AFF),
       body: SingleChildScrollView(
-        child: Container(
-          height: ScreenHeight,
-          width: ScreenWidth,
+        child: SizedBox(
+          height: screenHeight,
+          width: screenWidth,
           child: Column(
             children: [
               Image.asset(
@@ -28,7 +30,7 @@ class ForgotPassword extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(50),
@@ -37,22 +39,22 @@ class ForgotPassword extends StatelessWidget {
                   child: Column(
                     children: [
                       AppBar(
-                        title: Text(
+                        title: const Text(
                           "Forgot Password",
                           style: TextStyle(color: Colors.black, fontSize: 25),
                         ),
                         elevation: 0,
-                        shadowColor: Color(0x00),
-                        backgroundColor: Color(0x00),
+                        shadowColor: const Color(0x00000000),
+                        backgroundColor: const Color(0x00000000),
                         leading: IconButton(
                           onPressed: () {
                             Get.back();
                           },
-                          icon: Icon(Icons.arrow_back),
+                          icon: const Icon(Icons.arrow_back),
                           color: Colors.black,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       MyTextFormField(
@@ -62,7 +64,7 @@ class ForgotPassword extends StatelessWidget {
                         hintText: 'Enter your emil',
                         controller: emailController,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       MyButton(
@@ -71,15 +73,15 @@ class ForgotPassword extends StatelessWidget {
                             ForgotPasswordController()
                                 .sendEmail(emailController.text.toString());
                           }),
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
                     const  Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: EdgeInsets.all(12.0),
                         child: Card(
                           shadowColor: Colors.grey,
                           child: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding:  EdgeInsets.all(10.0),
                             child: Text(
                                 "Note: Please enter your email address. A password reset link will be sent to your email for your convenience."),
                           ),

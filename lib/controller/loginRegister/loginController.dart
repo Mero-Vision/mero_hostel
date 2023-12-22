@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/SplashScreen.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
-import 'package:mero_hostel/utils/constant.dart';
+import 'package:mero_hostel/repo/apis/AuthApi.dart';
 import 'package:mero_hostel/views/hostelOwner/Hostel_Owner.dart';
 import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,56 +13,73 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     checkLoginStatus();
-    // TODO: implement onInit
     super.onInit();
   }
 
   final isLoading = false.obs;
   //
   final Rx<UserModel?>? user = Rx<UserModel?>(null);
-  RxBool IsLoggedIn = false.obs;
+  RxBool isLoggedIn = false.obs;
 //
   Future checkLoginStatus() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var user_status = preferences.getString('UserStatus');
-   
+
     if (user_status != '' && user_status == 'Hostel_Owner') {
       var email = preferences.getString('userEmail');
       var password = preferences.getString('userPassword');
       final data = await repo.userLogin(email!, password!);
-      Get.offAll(() => HostelOwner(
-            userData: data!.data.user,
-          ));
+      await preferences.setString('AccessToken', data!.data.token);
+      var accessToken = preferences.getString('AccessToken');
+      AuthApi(accessToken: accessToken);
+
+      Get.offAll(() {
+        HostelOwner(
+          userData: data.data.user,
+        );
+        isLoading.value = true;
+      });
     } else if (user_status != '' && user_status == 'Hostel_User') {
       var email = preferences.getString('userEmail');
       var password = preferences.getString('userPassword');
       final data = await repo.userLogin(email!, password!);
-      // Get.offAll(() => HostelOwner(
+      await preferences.setString('AccessToken', data!.data.token);
+      var accessToken = preferences.getString('AccessToken');
+      AuthApi(accessToken: accessToken);
+
+      // Get.offAll(() { HostelOwner(
       //       userData: data!.data.user,
-      //     ));
+      //     );
+      // isLoading.value = true;});
     } else if (user_status != '' && user_status == 'Normal_User') {
       var email = preferences.getString('userEmail');
       var password = preferences.getString('userPassword');
       final data = await repo.userLogin(email!, password!);
-      IsLoggedIn.value = true;
+      preferences.setString('AccessToken', data!.data.token);
+      var accessToken = preferences.getString('AccessToken');
+      AuthApi(accessToken: accessToken);
 
-      Get.offAll(() => BottomNavBar(
-            userValue: data?.data.user,
-          ));
+      Get.offAll(() {
+        isLoading.value = true;
+        BottomNavBar(
+          userValue: data.data.user,
+        );
+      });
     } else {
       await Future.delayed(
-        Duration(milliseconds: 1500),
+        const Duration(milliseconds: 1500),
       );
       Get.offAll(() => BottomNavBar());
     }
   }
 
-  void Logout() async {
+  void logout() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString('userEmail', '');
     preferences.setString('userPassword', '');
     preferences.setString('UserStatus', '');
-    IsLoggedIn.value = false;
+    preferences.setString('AccessToken', '');
+    isLoggedIn.value = false;
     Get.offAll(() => SplashScreen());
   }
 
@@ -89,20 +106,25 @@ class LoginController extends GetxController {
       isLoading(false);
       user?.value = data;
 
+      preferences.setString('AccessToken', data.data.token);
+      String? accessToken = preferences.getString('AccessToken');
+
+      AuthApi(accessToken: accessToken);
+
       if (data.data.user.status == 'Hostel_Owner') {
         preferences.setString('UserStatus', 'Hostel_Owner');
-        IsLoggedIn.value = true;
+        isLoggedIn.value = true;
         Get.offAll(() => HostelOwner(
               userData: data.data.user,
             ));
       }
 
       if (data.data.user.status == null) {
-        preferences.setString('UserStatus', 'Normal_User');
+        await preferences.setString('UserStatus', 'Normal_User');
         checkLoginStatus();
       }
       print('success');
-      preferences.setString('AccessToken', data.data.token.toString());
+      print(isLoggedIn.value.toString());
     }
   }
 }

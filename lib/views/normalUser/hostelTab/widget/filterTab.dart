@@ -9,7 +9,7 @@ import 'package:mero_hostel/customWidgets/mybutton.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/pages/viewHostel.dart';
 
 class FilterTabs extends StatelessWidget {
-  FilterTabs({
+  const FilterTabs({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -25,7 +25,7 @@ class FilterTabs extends StatelessWidget {
     ];
 
     return Obx(() {
-      var hosteldata =
+      var hostelData =
           controller.isEmpty.value ? controller.hostels : controller.catagories;
       return Column(
         children: [
@@ -39,7 +39,6 @@ class FilterTabs extends StatelessWidget {
                 return MyButton(
                   text: catagories[index],
                   onTap: () {
-                    print(index);
                     controller.isEmpty.value = false;
                     controller.catagories.value = hostelCatagories[index];
                   },
@@ -54,7 +53,7 @@ class FilterTabs extends StatelessWidget {
           Expanded(
             // height: 500.h,
             child: ListView.builder(
-              itemCount: hosteldata.length,
+              itemCount: hostelData.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
@@ -64,7 +63,7 @@ class FilterTabs extends StatelessWidget {
                             builder: (_) => ViewHostel(
                                 data: controller.isEmpty.value
                                     ? controller.hostels[index]
-                                    : hosteldata[index])));
+                                    : hostelData[index])));
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -75,7 +74,7 @@ class FilterTabs extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 1,
                           blurRadius: 1,
-                          offset: Offset(2, 2),
+                          offset: const Offset(2, 2),
                         ),
                       ],
                     ),
@@ -85,7 +84,7 @@ class FilterTabs extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(15.h),
                           child: Image.network(
-                            hosteldata[index].hostelImages ??
+                            hostelData[index].hostelImages ??
                                 'https://i.pinimg.com/236x/06/fd/9d/06fd9dde192fe02644663c4bda0cf6ca.jpg',
                             fit: BoxFit.cover,
                             height: 130.h,
@@ -95,10 +94,10 @@ class FilterTabs extends StatelessWidget {
                         Column(
                           children: [
                             MyText(
-                              text: hosteldata[index].hostelName ??
+                              text: hostelData[index].hostelName ??
                                   'Not Available',
                               size: 20.h,
-                              fontweight: FontWeight.w600,
+                              fontWeight: FontWeight.w600,
                               color: Colors.grey.shade700,
                             )
                           ],

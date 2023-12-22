@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:mero_hostel/customWidgets/Mytext.dart';
+import 'package:mero_hostel/customWidgets/myImageNetwork.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
 import 'package:mero_hostel/models/hostelModel.dart';
 import 'package:mero_hostel/utils/constant.dart';
@@ -29,9 +30,9 @@ class HomeTile extends StatelessWidget {
                 if (index < data!.length - 1 && index < 6) {
                   //transition animations-----------------------------------------
                   return OpenContainer(
-                    transitionDuration: Duration(milliseconds: 500),
+                    transitionDuration: const Duration(milliseconds: 500),
                     transitionType: ContainerTransitionType.fade,
-                    closedColor: KBackgroundColor,
+                    closedColor: AppColor.KBackgroundColor,
                     closedElevation: 0,
                     closedBuilder: (context, openContainer) {
                       return Container(
@@ -44,25 +45,23 @@ class HomeTile extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(14),
-                                  topRight: Radius.circular(14)),
-                              child: Image.network(
-                                hostelData.hostelImages ??
-                                    'https://i.pinimg.com/236x/06/fd/9d/06fd9dde192fe02644663c4bda0cf6ca.jpg',
-                                fit: BoxFit.cover,
-                                height: 190.h,
-                                width: 300.h,
-                              ),
-                            ),
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(14),
+                                    topRight: Radius.circular(14)),
+                                child: MyImageNetwork(
+                                  imageUrl: hostelData.hostelImages ??
+                                      'https://i.pinimg.com/236x/06/fd/9d/06fd9dde192fe02644663c4bda0cf6ca.jpg',
+                                  boxFit: BoxFit.cover,
+                                  height: 190.h,
+                                  width: 300.h,
+                                )),
                             MyText(
                               text: (hostelData.hostelName!.characters.length <=
                                       18)
                                   ? hostelData.hostelName!
-                                  : hostelData.hostelName!.substring(0, 15) +
-                                      '...',
+                                  : '${hostelData.hostelName!.substring(0, 15)}...',
                               size: 18.h,
-                              fontweight: FontWeight.w600,
+                              fontWeight: FontWeight.w600,
                             ).marginAll(10.h),
                             MyText(
                                     text: hostelData.address ?? 'unknown',
@@ -108,7 +107,7 @@ class HomeTile extends StatelessWidget {
                             text: 'View All',
                             size: 20.h,
                             color: Colors.black54,
-                            fontweight: FontWeight.bold,
+                            fontWeight: FontWeight.bold,
                           ),
                           Icon(
                             Icons.arrow_circle_right,

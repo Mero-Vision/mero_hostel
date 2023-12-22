@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -11,7 +13,10 @@ import 'package:mero_hostel/views/forgot_password/forgotPassword.dart';
 import 'package:mero_hostel/views/signup/signupPage.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -26,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: KBackgroundColor,
+        backgroundColor: AppColor.KBackgroundColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -45,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                       validator: _validatePassword),
                   _buildForgotPasswordText(),
                   _buildLoginButton(),
-                  _buildSignupLink(),
+                  _buildSignUpLink(),
                 ],
               ),
             ),
@@ -57,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildLogoContainer() {
     return Center(
-      child: Container(
+      child: SizedBox(
         height: 140.h,
         child: Image.asset(
           'assets/images/MainRectangleLogo.png',
@@ -73,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        MyText(text: labelText, color: KTextColor, size: 20, left: 30),
+        MyText(text: labelText, color: AppColor.KTextColor, size: 20, left: 30),
         MyTextFormField(
           controller: controller,
           top: 10.h,
@@ -94,10 +99,10 @@ class _LoginPageState extends State<LoginPage> {
         right: 20.h,
         bottom: 20.h,
         text: 'Forgot Password?',
-        ontap: () {
-          Get.to(() => ForgotPassword());
+        onTap: () {
+          Get.to(() => const ForgotPassword());
         },
-        color: Color(0xff0E6A28),
+        color: AppColor.KGreenColor,
         size: 18,
       ),
     );
@@ -115,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                 text: 'Login',
                 onTap: () async {
                   if (_formKey.currentState!.validate()) {
-                    var access = await controller.login(
+                    await controller.login(
                       emailController.text.toString(),
                       passwordController.text.toString(),
                     );
@@ -127,18 +132,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildSignupLink() {
+  Widget _buildSignUpLink() {
     return Center(
       child: GestureDetector(
         onTap: () {
           Navigator.push(
             context,
             PageRouteBuilder(
-              pageBuilder: (context, a, b) => SignupPage(),
+              pageBuilder: (context, a, b) => const SignUpPage(),
             ),
           );
         },
-        child: MyRichText(
+        child: const MyRichText(
           text1: 'Don\'t have an account?  ',
           text2: 'Sign up',
         ),

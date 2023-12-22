@@ -1,6 +1,13 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
-Color KTextColor = Colors.black;
-Color KButtonColor = const Color(0xff6173F3);
-Color KButtonSubColor = const Color(0xffEE6E33);
-Color KBackgroundColor = const Color(0xfff4f5f6);
+abstract class AppColor {
+  static Color KTextColor = Colors.black;
+  static Color KButtonColor = const Color(0xff6173F3);
+  static Color KButtonSubColor = const Color(0xffEE6E33);
+
+  static Color KBackgroundColor = const Color(0xfff4f5f6);
+  static Color KGreenColor = const Color(0xff0E6A28);
+  static Color KAppBarSubTitleColor = const Color(0xffA84343);
+}

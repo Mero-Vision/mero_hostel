@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
 
-
 class HomeTileSkeleton extends StatelessWidget {
   const HomeTileSkeleton({
     Key? key,
@@ -43,7 +42,7 @@ class HomeTileSkeleton extends StatelessWidget {
                     MyText(
                       text: '        ',
                       size: 18.h,
-                      fontweight: FontWeight.w600,
+                      fontWeight: FontWeight.w600,
                     ).marginAll(10.h),
                     MyText(text: 'unknown', size: 16.h).marginOnly(left: 10.h),
                     Row(
@@ -80,7 +79,7 @@ class HomeTileSkeleton extends StatelessWidget {
                         text: 'View All',
                         size: 20.h,
                         color: Colors.black54,
-                        fontweight: FontWeight.bold,
+                        fontWeight: FontWeight.bold,
                       ),
                       Icon(
                         Icons.arrow_circle_right,

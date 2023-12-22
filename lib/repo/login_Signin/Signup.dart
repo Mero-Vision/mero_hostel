@@ -1,8 +1,9 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/repo/apis/api.dart';
 
-class SignupUser {
+class SignUpUser {
   Api api = Api();
   Future<bool> postRegistration(String name, String email, String password,
       String confirmPassword) async {

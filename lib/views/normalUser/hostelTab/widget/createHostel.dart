@@ -8,6 +8,7 @@ import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/myTextFormField.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
 
+// ignore: must_be_immutable
 class CreateHostelPage extends StatelessWidget {
   CreateHostelPage({
     Key? key,
@@ -98,7 +99,7 @@ class CreateHostelPage extends StatelessWidget {
                                       hostelEmailController.text.trim(),
                                       hostelWebsiteController.text.trim(),
                                       hostelTypeController.text.trim(),
-                                      imageController.ImageData.toString());
+                                      imageController.imageData.toString());
                                 }).marginOnly(top: 10)
                           ],
                         ),

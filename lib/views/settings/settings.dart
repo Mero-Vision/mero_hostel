@@ -8,7 +8,7 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: MyText(text: 'Settings page', size: 20),
+        title: const MyText(text: 'Settings page', size: 20),
       ),
     );
   }

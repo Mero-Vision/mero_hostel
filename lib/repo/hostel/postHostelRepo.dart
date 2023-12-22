@@ -1,18 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:dio/dio.dart';
 import 'package:mero_hostel/models/hostelModel.dart';
-import 'package:mero_hostel/repo/apis/api.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mero_hostel/repo/apis/AuthApi.dart';
 
 class PostHostelApi {
-  Api _api;
-
-  PostHostelApi() : _api = Api();
-
-  Future<String?> getAccessToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('AccessToken');
-  }
-
+  final AuthApi _api = AuthApi();
   Future<HostelModel> postHostel(
       String hostelNameController,
       String hostelAddressController,
@@ -20,12 +13,18 @@ class PostHostelApi {
       String hostelEmailController,
       String hostelWebsiteController,
       String hostelTypeController,
-      String hostelImageData) async {
+      String hostelImageData,
+      String accessToken) async {
     try {
-      String? accessToken = await getAccessToken();
-
       var response = await _api.sendRequest.post(
         '/admin/hostels',
+        options: Options(
+          headers: {
+            'Content-Type':
+                'application/json', // Set your content type as needed
+            'Authorization': 'Bearer $accessToken', // Add your API key here
+          },
+        ),
         data: {
           "hostel_name": hostelNameController,
           "address": hostelAddressController,
@@ -35,21 +34,11 @@ class PostHostelApi {
           "hostel_type": hostelTypeController,
           "hostel_images": hostelImageData,
         },
-        options: Options(
-          // Add the access token to the Authorization header
-          headers: {'Authorization': 'Bearer $accessToken'},
-          validateStatus: (status) {
-            // Return true if you want to resolve the Future with the response even for 404 status code
-            return status == null ||
-                status >= 200 && status < 300 ||
-                status == 404;
-          },
-        ),
       );
 
-      if (response.statusCode == 201) {
-        HostelModel datas = HostelModel.fromJson(response.data);
-        return datas;
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        HostelModel data = HostelModel.fromJson(response.data);
+        return data;
       } else {
         throw Exception(
             'Received unexpected status code: ${response.statusCode}');

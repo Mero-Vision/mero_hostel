@@ -2,22 +2,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:mero_hostel/controller/bottomNavBarController.dart';
 
+import 'package:mero_hostel/controller/bottomNavBarController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
-import 'package:mero_hostel/views/login/loginPage.dart';
-import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';
+import 'package:mero_hostel/models/LoginUserModel.dart';
+import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/normalUser/profileTab/profileScreen.dart';
 
+// ignore: must_be_immutable
 class HomeAppBar extends StatelessWidget {
   HomeAppBar({
     Key? key,
     this.username,
     this.userImageURL,
+    this.userData,
   }) : super(key: key);
   final String? username;
   final String? userImageURL;
-  BottomNavBarController _barController = Get.find();
+  final User? userData;
+  final BottomNavBarController _barController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +35,22 @@ class HomeAppBar extends StatelessWidget {
                 text: username ?? 'Hi, User',
                 size: 16.h,
                 color: Colors.black,
-                fontweight: FontWeight.w600,
+                fontWeight: FontWeight.w600,
               ),
               MyText(
                 text: 'Find best Hostel nearby.',
                 size: 22.h,
-                color: Color(0xffA84343),
-                fontweight: FontWeight.w600,
+                color: AppColor.KAppBarSubTitleColor,
+                fontWeight: FontWeight.w600,
               ),
             ],
           ),
           GestureDetector(
             onTap: () {
               _barController.selectedIndex.value = 3;
-              //      Get.to(ProfileScreen());
+              if (userData != null && userData?.status == 'Hostel_Owner') {
+                Get.to(() => ProfileScreen(userData: userData));
+              }
             },
             child: Container(
               // margin: EdgeInsets.only(right: 16.0),

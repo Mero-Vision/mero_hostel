@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,14 +9,14 @@ import 'package:mero_hostel/customWidgets/myTextFormField.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
 import 'package:mero_hostel/utils/constant.dart';
 
-class SignupPage extends StatefulWidget {
-  SignupPage({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController emailController = TextEditingController();
@@ -31,12 +33,12 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: KBackgroundColor,
+        backgroundColor: AppColor.KBackgroundColor,
         centerTitle: true,
-        title: MyText(text: 'Sign Up', color: KTextColor, size: 25.h),
+        title: MyText(text: 'Sign Up', color: AppColor.KTextColor, size: 25.h),
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Form(
           key: _formKey,
           child: Column(
@@ -95,7 +97,7 @@ class _SignupPageState extends State<SignupPage> {
                 },
               ),
               SizedBox(height: 10.h),
-              _buildSignupButton(),
+              _buildSignUpButton(),
             ],
           ),
         ),
@@ -105,7 +107,7 @@ class _SignupPageState extends State<SignupPage> {
 
   Widget _buildLogoContainer() {
     return Center(
-      child: Container(
+      child: SizedBox(
         height: 140.h,
         child: Image.asset(
           'assets/images/MainRectangleLogo.png',
@@ -127,7 +129,7 @@ class _SignupPageState extends State<SignupPage> {
       children: [
         MyText(
             text: labelText,
-            color: KTextColor,
+            color: AppColor.KTextColor,
             size: 20.h,
             top: 10.h,
             left: 30.h),
@@ -144,7 +146,7 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  Widget _buildSignupButton() {
+  Widget _buildSignUpButton() {
     return Obx(() => Center(
           child: controller.isLoading.value
               ? MyButton(

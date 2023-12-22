@@ -6,10 +6,10 @@ import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 
 import 'package:mero_hostel/utils/constant.dart';
 
-var logincontroller = Get.find<LoginController>();
+var loginController = Get.find<LoginController>();
 
 class MyButton extends GetView<LoginController> {
-  MyButton({
+  const MyButton({
     Key? key,
     required this.text,
     required this.onTap,
@@ -51,7 +51,8 @@ class MyButton extends GetView<LoginController> {
                   borderRadius: BorderRadius.circular(radius ?? 14.r))),
               fixedSize: MaterialStatePropertyAll(
                   Size(width ?? 350.h, height ?? 55.h)),
-              backgroundColor: MaterialStatePropertyAll(color ?? KButtonColor)),
+              backgroundColor:
+                  MaterialStatePropertyAll(color ?? AppColor.KButtonColor)),
           child: Text(
             text,
             style: TextStyle(

@@ -1,33 +1,56 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mero_hostel/controller/loginRegister/loginController.dart';
+import 'package:mero_hostel/views/login/loginPage.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
 import 'package:mero_hostel/models/hostelModel.dart';
 
+// ignore: must_be_immutable
 class ViewHostel extends StatelessWidget {
-  const ViewHostel({
+  ViewHostel({
     Key? key,
     required this.data,
   }) : super(key: key);
   final Datum data;
+  final LoginController _controller = Get.find();
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double ScreenWidth = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomNavigationBar: Container(
         height: 100.h,
         width: double.infinity,
         color: Colors.white,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            MyText(text: 'Total:RS 10000', size: 24),
+            MyButton(
+                text: 'Call ',
+                width: 180.h,
+                right: 10.h,
+                onTap: () async {
+                  final Uri uri = Uri(path: data.phoneNumber, scheme: 'tel');
+                  if (await canLaunchUrl(uri)) {
+                    await launchUrl(uri);
+                  } else {
+                    Get.defaultDialog(
+                        title: 'Something Went Wrong!',
+                        content: const Text("Couldn't open Dialer "));
+                  }
+                }),
             MyButton(
               text: 'Book Now',
-              onTap: () {},
-              width: 200.h,
+              onTap: () {
+                _controller.isLoading.value
+                    ? null
+                    : Get.to(() => const LoginPage());
+              },
+              width: 180.h,
               right: 10.h,
             )
           ],
@@ -78,21 +101,21 @@ class ViewHostel extends StatelessWidget {
                                   MyText(
                                     text: 'Description',
                                     size: 20,
-                                    fontweight: FontWeight.w600,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                   MyText(
                                       text:
-                                          'This is the hostel where we have free food and free ac for each and every room sinc its located at kathmandu the students health are highly prioritized where we have free food and free ac for each and every room sinc its located at kathmandu the students health are highly priori ',
+                                          'This is the hostel where we have free food and free ac for each and every room  its located at kathmandu the students health are highly prioritized where we have free food and free ac for each and every room sinc its located at kathmandu the students health are highly priori ',
                                       size: 16),
                                 ],
                               ).marginAll(10.h),
                             )),
                         Expanded(
                             child: SizedBox(
-                          width: ScreenWidth,
+                          width: screenWidth,
                           child: Card(
                             color: Colors.grey.shade200,
-                            child: Column(
+                            child: const Column(
                               children: [
                                 Text('hello'),
                               ],
@@ -111,7 +134,7 @@ class ViewHostel extends StatelessWidget {
                                 const MyText(
                                     text: 'Contact:',
                                     size: 20,
-                                    fontweight: FontWeight.w600),
+                                    fontWeight: FontWeight.w600),
                                 MyText(
                                     text: 'Address: ${data.address}', size: 16),
                                 MyText(text: 'Email: ${data.email}', size: 16),

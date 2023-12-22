@@ -1,13 +1,12 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:mero_hostel/repo/apis/api.dart';
 import 'package:mero_hostel/models/forgotPasswordModel.dart';
 
 class ForgotPasswordApi {
-  Api _api = Api();
+  final Api _api = Api();
 
-  Future<ForgotPasswordModel?> sendforgotpassword(String email) async {
+  Future<ForgotPasswordModel?> sendForgotPassword(String email) async {
     try {
       final response = await _api.sendRequest
           .post("/send-forgot-password-mail", data: {'email': email});
@@ -18,11 +17,10 @@ class ForgotPasswordApi {
 
         return resultData;
       } else {
-        print('Failed with status code: ${response.statusCode}');
+        throw Exception(response.statusCode);
       }
     } catch (e) {
-      print('Error: $e');
+      throw Exception(e);
     }
-    return null;
   }
 }
