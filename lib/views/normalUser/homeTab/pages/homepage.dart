@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
 
     hostelController.getBoysHostel();
     hostelController.getGirlsHostel();
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(milliseconds: 1), () {
       hostelController.getAllHostel();
     });
     //

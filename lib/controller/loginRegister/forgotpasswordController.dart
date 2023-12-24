@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mero_hostel/models/forgotPasswordModel.dart';
+import 'package:mero_hostel/models/auth/forgotPasswordModel.dart';
 
 import '../../repo/login_Signin/forgotpasswordapi.dart';
 

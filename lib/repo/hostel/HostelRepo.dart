@@ -35,4 +35,6 @@ class HostelRepo {
       throw Exception('Failed to load hostels');
     }
   }
+
+
 }

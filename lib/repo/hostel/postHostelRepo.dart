@@ -54,4 +54,29 @@ class PostHostelApi {
       throw Exception('Failed to load hostels: $e');
     }
   }
+
+  Future sendBookingReq(int hostelId, String accessToken) async {
+    try {
+      final response = await _api.sendRequest.post('/admin/hostel-booking',
+          data: {
+            'hostel_id': hostelId,
+          },
+          options: Options(
+            headers: {
+              'Content-Type':
+                  'application/json', // Set your content type as needed
+              'Authorization': 'Bearer $accessToken', // Add your API key here
+            },
+          ));
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        print(response.data);
+      } else {
+        throw Exception(
+            'Received unexpected status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to load hostels: $e');
+    }
+  }
 }

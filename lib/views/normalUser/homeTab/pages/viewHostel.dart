@@ -3,16 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mero_hostel/controller/hostel/postHostelController.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
-import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
-import 'package:mero_hostel/views/normalUser/profileTab/widgets/topsection.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
 import 'package:mero_hostel/models/hostelModel.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 // ignore: must_be_immutable
 class ViewHostel extends StatelessWidget {
@@ -22,6 +19,8 @@ class ViewHostel extends StatelessWidget {
   }) : super(key: key);
   final Datum data;
   final LoginController _controller = Get.find();
+  final PostHostelController postHostelController =
+      Get.put(PostHostelController());
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -60,8 +59,8 @@ class ViewHostel extends StatelessWidget {
             MyButton(
               text: 'Book Now',
               onTap: () {
-                _controller.isLoading.value
-                    ? null
+                _controller.isLoggedIn.value
+                    ? postHostelController.sendBookingReq(data.id!)
                     : Get.to(() => const LoginPage());
               },
               width: 180.h,

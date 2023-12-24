@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mero_hostel/repo/apis/api.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 
@@ -21,11 +23,19 @@ class LoginRepo {
         return userModel;
       } else {
         // Handle non-200 status codes
-        throw Exception('Failed to login. Status code: ${response.statusCode}');
+        Get.snackbar("Oops!", "Invalid Credentials ",
+            icon: const Icon(Icons.person, color: Colors.white),
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red.shade300,
+            borderRadius: 20,
+            margin: const EdgeInsets.all(15),
+            colorText: Colors.white,
+            forwardAnimationCurve: Curves.easeIn,
+            reverseAnimationCurve: Curves.easeIn,
+            duration: const Duration(seconds: 3));
       }
     } catch (error) {
       // Handle Dio errors
-      throw Exception('Error during login: $error');
     }
   }
 }

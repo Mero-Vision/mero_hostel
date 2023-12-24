@@ -30,8 +30,7 @@ class HomeTile extends StatelessWidget {
                 if (index < data!.length - 1 && index < 6) {
                   //transition animations-----------------------------------------
                   return OpenContainer(
-                    transitionDuration: const Duration(milliseconds: 500),
-                    transitionType: ContainerTransitionType.fade,
+                    transitionDuration: const Duration(milliseconds: 300),
                     closedColor: AppColor.KBackgroundColor,
                     closedElevation: 0,
                     closedBuilder: (context, openContainer) {

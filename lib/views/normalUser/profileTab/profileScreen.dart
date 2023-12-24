@@ -71,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
                 Card(
                   child: ListTile(
                     leading: const Icon(Icons.info),
-                    title: const Text('About'),
+                    title: const Text('Delete Hostel'),
                     onTap: () {},
                   ),
                 ).marginAll(10.h)

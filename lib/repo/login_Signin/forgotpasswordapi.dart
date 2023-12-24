@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:mero_hostel/repo/apis/api.dart';
-import 'package:mero_hostel/models/forgotPasswordModel.dart';
+import 'package:mero_hostel/models/auth/forgotPasswordModel.dart';
 
 class ForgotPasswordApi {
   final Api _api = Api();
