@@ -4,9 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/hostel/ImageController.dart';
 import 'package:mero_hostel/controller/hostel/postHostelController.dart';
+import 'package:mero_hostel/controller/loginRegister/loginController.dart';
+import 'package:mero_hostel/controller/userController.dart/userController.dart';
+import 'package:mero_hostel/controller/utilController/OptionController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/myTextFormField.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class CreateHostelPage extends StatelessWidget {
@@ -20,6 +24,10 @@ class CreateHostelPage extends StatelessWidget {
 
   var controller = Get.put<PostHostelController>(PostHostelController());
   var imageController = Get.put<ImageController>(ImageController());
+  UserController userController = Get.put(UserController());
+  LoginController loginController = Get.find();
+  OptionController optionController = Get.put(OptionController());
+
   @override
   Widget build(BuildContext context) {
     TextEditingController hostelNameController = TextEditingController();
@@ -76,6 +84,7 @@ class CreateHostelPage extends StatelessWidget {
                     child: Card(
                       child: Form(
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             _buildTextFields(
@@ -87,19 +96,70 @@ class CreateHostelPage extends StatelessWidget {
                             _buildTextFields('Email', hostelEmailController),
                             _buildTextFields(
                                 'Website', hostelWebsiteController),
-                            _buildTextFields(
-                                'Hostel Type', hostelTypeController),
+                            MyText(text: 'Hostel Type', size: 18)
+                                .marginOnly(bottom: 10.h),
+                            Obx(
+                              () => Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                      borderRadius: BorderRadius.circular(15)),
+                                  width: 400.h,
+                                  child: DropdownButton<String>(
+                                    padding: EdgeInsets.only(
+                                        left: 10.h, right: 10.h),
+                                    value:
+                                        optionController.selectedOption.value,
+                                    underline: Container(),
+                                    borderRadius: BorderRadius.circular(15),
+                                    onChanged: (String? newValue) {
+                                      optionController.selectedOption.value =
+                                          newValue!;
+                                    },
+                                    isExpanded: true,
+                                    items: <String>[
+                                      'Boys hostel',
+                                      'Girls hostel',
+                                    ].map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                  )),
+                            ),
                             MyButton(
                                 text: 'Create',
                                 onTap: () {
-                                  controller.createHostel(
-                                      hostelNameController.text.trim(),
-                                      hostelAddressController.text.trim(),
-                                      hostelPhoneController.text.trim(),
-                                      hostelEmailController.text.trim(),
-                                      hostelWebsiteController.text.trim(),
-                                      hostelTypeController.text.trim(),
-                                      imageController.imageData.toString());
+                                  controller
+                                      .createHostel(
+                                          hostelNameController.text.trim(),
+                                          hostelAddressController.text.trim(),
+                                          hostelPhoneController.text.trim(),
+                                          hostelEmailController.text.trim(),
+                                          hostelWebsiteController.text.trim(),
+                                          optionController.selectedOption.value,
+                                          // hostelTypeController.text.trim(),
+                                          imageController.file!)
+                                      .then((value) async {
+                                    SharedPreferences preferences =
+                                        await SharedPreferences.getInstance();
+                                    String? email =
+                                        preferences.getString('userEmail');
+                                    String? pass =
+                                        preferences.getString('userPassword');
+                                    await preferences.setString(
+                                        'UserStatus', 'Hostel_Owner');
+                                    var token = await preferences
+                                        .getString('AccessToken');
+
+                                    var response =
+                                        await userController.changeUserStatus(
+                                            email!, 'Hostel_Owner', token!);
+                                    if (response) {
+                                      loginController.login(email, pass!);
+                                    }
+                                  });
                                 }).marginOnly(top: 10)
                           ],
                         ),

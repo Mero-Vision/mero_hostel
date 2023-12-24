@@ -1,8 +1,9 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/SplashScreen.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
-import 'package:mero_hostel/repo/apis/AuthApi.dart';
 import 'package:mero_hostel/views/hostelOwner/Hostel_Owner.dart';
 import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,21 +32,23 @@ class LoginController extends GetxController {
       final data = await repo.userLogin(email!, password!);
       await preferences.setString('AccessToken', data!.data.token);
       var accessToken = preferences.getString('AccessToken');
-      AuthApi(accessToken: accessToken);
-
-      Get.offAll(() {
-        HostelOwner(
-          userData: data.data.user,
-        );
-        isLoading.value = true;
-      });
+      //   AuthApi(accessToken: accessToken);
+      if (data.data.user.status == 'Hostel_Owner') {
+        isLoggedIn.value = true;
+        Get.offAll(() => HostelOwner(
+              userData: data.data.user,
+            ));
+      } else {
+        await preferences.setString('UserStatus', '');
+        checkLoginStatus();
+      }
     } else if (user_status != '' && user_status == 'Hostel_User') {
       var email = preferences.getString('userEmail');
       var password = preferences.getString('userPassword');
       final data = await repo.userLogin(email!, password!);
       await preferences.setString('AccessToken', data!.data.token);
       var accessToken = preferences.getString('AccessToken');
-      AuthApi(accessToken: accessToken);
+      //  AuthApi(accessToken: accessToken);
 
       // Get.offAll(() { HostelOwner(
       //       userData: data!.data.user,
@@ -56,15 +59,12 @@ class LoginController extends GetxController {
       var password = preferences.getString('userPassword');
       final data = await repo.userLogin(email!, password!);
       preferences.setString('AccessToken', data!.data.token);
-      var accessToken = preferences.getString('AccessToken');
-      AuthApi(accessToken: accessToken);
-
-      Get.offAll(() {
-        isLoading.value = true;
-        BottomNavBar(
-          userValue: data.data.user,
-        );
-      });
+      //    var accessToken = preferences.getString('AccessToken');
+      //  AuthApi(accessToken: accessToken);
+      isLoggedIn.value = true;
+      Get.offAll(() => BottomNavBar(
+            userValue: data.data.user,
+          ));
     } else {
       await Future.delayed(
         const Duration(milliseconds: 1500),
@@ -107,9 +107,9 @@ class LoginController extends GetxController {
       user?.value = data;
 
       preferences.setString('AccessToken', data.data.token);
-      String? accessToken = preferences.getString('AccessToken');
+      // String? accessToken = preferences.getString('AccessToken');
 
-      AuthApi(accessToken: accessToken);
+      // AuthApi(accessToken: accessToken);
 
       if (data.data.user.status == 'Hostel_Owner') {
         preferences.setString('UserStatus', 'Hostel_Owner');

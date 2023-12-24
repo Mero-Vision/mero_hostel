@@ -5,24 +5,16 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 class AuthApi {
   final Dio _dio = Dio();
 
-  AuthApi({String? accessToken}) {
-    _dio.options.baseUrl = 'https://merohostel.hancie-phago.com.np/api';
+  AuthApi() {
+    _dio.options.baseUrl = 'https://merohostel.hancie-phago.com.np';
 
     _dio.interceptors.add(PrettyDioLogger(
       requestBody: true,
+      request: true,
     ));
 
-    // Add access token to all requests if provided
-    print('ok xa ta ');
-    print(accessToken);
-    if (accessToken != null) {
-      _dio.interceptors.add(InterceptorsWrapper(
-        onRequest: (options, handler) {
-          options.headers["Authorization"] = "Bearer $accessToken";
-          return handler.next(options);
-        },
-      ));
-    }
+    // _dio.options.headers["Authorization"] = "Bearer $accessToken";
+    // _dio.options.headers["Content-Type"] = "multipart/form-data";
   }
 
   Dio get sendRequest => _dio;

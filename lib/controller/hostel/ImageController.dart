@@ -11,8 +11,7 @@ class ImageController extends GetxController {
   File? file;
   String? imageData;
   Future getImage() async {
-    var pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    var pickedImage = await ImagePicker().pickImage(source: ImageSource.camera);
     if (pickedImage != null) {
       var croppedImage = await ImageCropper().cropImage(
           sourcePath: pickedImage.path,

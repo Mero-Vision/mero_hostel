@@ -1,14 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
+import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
+import 'package:mero_hostel/views/normalUser/profileTab/widgets/topsection.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
 import 'package:mero_hostel/models/hostelModel.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 // ignore: must_be_immutable
 class ViewHostel extends StatelessWidget {
@@ -29,20 +33,30 @@ class ViewHostel extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            MyButton(
-                text: 'Call ',
-                width: 180.h,
-                right: 10.h,
-                onTap: () async {
-                  final Uri uri = Uri(path: data.phoneNumber, scheme: 'tel');
-                  if (await canLaunchUrl(uri)) {
-                    await launchUrl(uri);
-                  } else {
-                    Get.defaultDialog(
-                        title: 'Something Went Wrong!',
-                        content: const Text("Couldn't open Dialer "));
-                  }
-                }),
+            InkWell(
+              onTap: () async {
+                final Uri uri = Uri(path: data.phoneNumber, scheme: 'tel');
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri);
+                } else {
+                  Get.defaultDialog(
+                      title: 'Something Went Wrong!',
+                      content: const Text("Couldn't open Dialer "));
+                }
+              },
+              child: Container(
+                  height: 55.h,
+                  width: 150.h,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.green),
+                  child: Icon(
+                    CupertinoIcons.phone_circle_fill,
+                    size: 50.h,
+                    color: Colors.white,
+                  )),
+            ),
             MyButton(
               text: 'Book Now',
               onTap: () {

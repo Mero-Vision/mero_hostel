@@ -1,11 +1,11 @@
-// ignore_for_file: file_names
+import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:mero_hostel/repo/hostel/postHostelRepo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PostHostelController extends GetxController {
-  final PostHostelApi _postHostelApi = PostHostelApi();
+  PostHostelApi _postHostelApi = PostHostelApi();
   Future createHostel(
       String hostelNameController,
       String hostelAddressController,
@@ -13,10 +13,11 @@ class PostHostelController extends GetxController {
       String hostelEmailController,
       String hostelWebsiteController,
       String hostelTypeController,
-      String hostelImageData) async {
+      File hostelImageData) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var token = preferences.getString('AccessToken');
-    return await _postHostelApi.postHostel(
+
+    var data = await _postHostelApi.postHostel(
         hostelNameController,
         hostelAddressController,
         hostelPhoneController,
@@ -25,5 +26,7 @@ class PostHostelController extends GetxController {
         hostelTypeController,
         hostelImageData,
         token!);
+    print('HostelCreated');
+    return data;
   }
 }

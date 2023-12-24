@@ -7,7 +7,9 @@ import 'package:mero_hostel/models/LoginUserModel.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/hostelOwner/widgets/GridHostelOwnerData.dart';
 import 'package:mero_hostel/views/hostelOwner/widgets/listHosteldata.dart';
+import 'package:mero_hostel/views/normalUser/homeTab/pages/homepage.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
+import 'package:mero_hostel/views/normalUser/hostelTab/hostelPage.dart';
 
 class HostelOwner extends StatelessWidget {
   const HostelOwner({
@@ -30,6 +32,13 @@ class HostelOwner extends StatelessWidget {
                   width: 200,
                   child: Column(
                     children: [
+                      ListTile(
+                        onTap: () {
+                          Get.to(() => HostelPage());
+                        },
+                        tileColor: Colors.white,
+                        title: const Text('All Hostels'),
+                      ),
                       ListTile(
                         onTap: () {
                           controller.logout();

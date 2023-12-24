@@ -22,7 +22,7 @@ class MyImageNetwork extends StatelessWidget {
       height: height,
       width: width,
       placeholder: (context, url) =>
-          const CircularProgressIndicator(), // Placeholder widget while the image is loading
+          const SizedBox(), // Placeholder widget while the image is loading
       errorWidget: (context, url, error) =>
           const Icon(Icons.error), // Widget to display in case of an error
     );

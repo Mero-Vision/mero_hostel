@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:mero_hostel/controller/bottomNavBarController.dart';
+import 'package:mero_hostel/controller/utilController/bottomNavBarController.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';

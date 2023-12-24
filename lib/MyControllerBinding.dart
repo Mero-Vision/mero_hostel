@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:mero_hostel/controller/bottomNavBarController.dart';
+import 'package:mero_hostel/controller/utilController/bottomNavBarController.dart';
 import 'package:mero_hostel/controller/hostel/ImageController.dart';
 import 'package:mero_hostel/controller/hostel/hostelController.dart';
 import 'package:mero_hostel/controller/hostel/postHostelController.dart';
