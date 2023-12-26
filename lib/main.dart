@@ -18,11 +18,13 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       minTextAdapt: false,
       splitScreenMode: true,
-      designSize: const Size(430, 957),
+      //430, 957
+      designSize: Size(AppSize.KScreenWidth, AppSize.KScreenHeight),
       builder: (_, child) {
         return GetMaterialApp(
             initialBinding: MyControllerBinding(),
-            scrollBehavior: const MaterialScrollBehavior().copyWith(dragDevices: {
+            scrollBehavior:
+                const MaterialScrollBehavior().copyWith(dragDevices: {
               PointerDeviceKind.mouse,
               PointerDeviceKind.unknown,
               PointerDeviceKind.stylus,

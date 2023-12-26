@@ -115,6 +115,9 @@ class LoginController extends GetxController {
 
       if (data.data.user.status == 'Hostel_Owner') {
         preferences.setString('UserStatus', 'Hostel_Owner');
+        var user_status = preferences.getString('UserStatus');
+        userStatus.value = user_status;
+
         isLoggedIn.value = true;
         Get.offAll(() => HostelOwner(
               userData: data.data.user,

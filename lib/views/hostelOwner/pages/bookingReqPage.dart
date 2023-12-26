@@ -30,7 +30,7 @@ class BookingReqPage extends StatelessWidget {
             child: ListView.builder(
               itemCount: snapshot?.length ?? 0,
               itemBuilder: (BuildContext context, int index) {
-                return _userSection(snapshot, index).marginOnly(bottom: 20.h);
+                return _userSection(snapshot, index).marginOnly(top: 20.h);
               },
             ).marginOnly(left: 20.h, right: 20.h),
           ));

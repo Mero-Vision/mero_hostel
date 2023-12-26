@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginRegister/forgotpasswordController.dart';
 import 'package:mero_hostel/customWidgets/myTextFormField.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
+import 'package:mero_hostel/utils/constant.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({super.key});
@@ -12,8 +13,8 @@ class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = AppSize.KScreenHeight;
+    double screenWidth = AppSize.KScreenWidth;
     return Scaffold(
       backgroundColor: const Color(0xff698AFF),
       body: SingleChildScrollView(

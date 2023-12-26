@@ -1,41 +1,39 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import 'package:mero_hostel/controller/hostel/ImageController.dart';
-import 'package:mero_hostel/controller/hostel/postHostelController.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
-import 'package:mero_hostel/controller/userController.dart/userController.dart';
+import 'package:mero_hostel/controller/owner/room/RoomController.dart';
 import 'package:mero_hostel/controller/utilController/OptionController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/myTextFormField.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mero_hostel/utils/constant.dart';
 
 // ignore: must_be_immutable
-class CreateHostelPage extends StatelessWidget {
-  CreateHostelPage({
+class CreateRoomPage extends StatelessWidget {
+  CreateRoomPage({
     Key? key,
-    required this.screenHeight,
-    required this.screenWidth,
+    required this.hostelId,
   }) : super(key: key);
-  final double screenHeight;
-  final double screenWidth;
-
-  var controller = Get.put<PostHostelController>(PostHostelController());
+  final String hostelId;
+  var roomController = Get.put<RoomController>(RoomController());
   var imageController = Get.put<ImageController>(ImageController());
-  UserController userController = Get.put(UserController());
-  LoginController loginController = Get.find();
   OptionController optionController = Get.put(OptionController());
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController hostelNameController = TextEditingController();
-    var hostelAddressController = TextEditingController();
-    var hostelPhoneController = TextEditingController();
-    var hostelEmailController = TextEditingController();
-    var hostelWebsiteController = TextEditingController();
-    var hostelTypeController = TextEditingController();
+    double screenHeight = AppSize.KScreenHeight.h;
+    double screenWidth = AppSize.KScreenWidth.w;
+    var roomNumberController = TextEditingController();
+//    var roomTypeController = TextEditingController();
+    var capacityController = TextEditingController();
+    var availabilityController = TextEditingController();
+    var priceController = TextEditingController();
+    var featuresController = TextEditingController();
     return Scaffold(
         body: SingleChildScrollView(
       child: Stack(
@@ -88,15 +86,15 @@ class CreateHostelPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             _buildTextFields(
-                                'Hostel Name', hostelNameController),
+                                'Room number', roomNumberController),
                             _buildTextFields(
-                                'Address', hostelAddressController),
+                                'Room capacity ', capacityController),
                             _buildTextFields(
-                                'Phone number ', hostelPhoneController),
-                            _buildTextFields('Email', hostelEmailController),
+                                'Is room available ?', availabilityController),
+                            _buildTextFields('Room price', priceController),
                             _buildTextFields(
-                                'Website', hostelWebsiteController),
-                            MyText(text: 'Hostel Type', size: 18)
+                                'Room features', featuresController),
+                            MyText(text: 'Room Type', size: 18)
                                 .marginOnly(bottom: 10.h),
                             Obx(
                               () => Container(
@@ -107,17 +105,17 @@ class CreateHostelPage extends StatelessWidget {
                                   child: DropdownButton<String>(
                                     padding: EdgeInsets.only(
                                         left: 10.h, right: 10.h),
-                                    value: optionController.hostelOption.value,
+                                    value: optionController.roomOptions.value,
                                     underline: Container(),
                                     borderRadius: BorderRadius.circular(15),
                                     onChanged: (String? newValue) {
-                                      optionController.hostelOption.value =
+                                      optionController.roomOptions.value =
                                           newValue!;
                                     },
                                     isExpanded: true,
                                     items: <String>[
-                                      'Boys hostel',
-                                      'Girls hostel',
+                                      'Single Bed',
+                                      'Double Bed',
                                     ].map<DropdownMenuItem<String>>(
                                         (String value) {
                                       return DropdownMenuItem<String>(
@@ -130,35 +128,15 @@ class CreateHostelPage extends StatelessWidget {
                             MyButton(
                                 text: 'Create',
                                 onTap: () {
-                                  controller
-                                      .createHostel(
-                                          hostelNameController.text.trim(),
-                                          hostelAddressController.text.trim(),
-                                          hostelPhoneController.text.trim(),
-                                          hostelEmailController.text.trim(),
-                                          hostelWebsiteController.text.trim(),
-                                          optionController.hostelOption.value,
-                                          // hostelTypeController.text.trim(),
-                                          imageController.file!)
-                                      .then((value) async {
-                                    SharedPreferences preferences =
-                                        await SharedPreferences.getInstance();
-                                    String? email =
-                                        preferences.getString('userEmail');
-                                    String? pass =
-                                        preferences.getString('userPassword');
-                                    await preferences.setString(
-                                        'UserStatus', 'Hostel_Owner');
-                                    var token = await preferences
-                                        .getString('AccessToken');
-
-                                    var response =
-                                        await userController.changeUserStatus(
-                                            email!, 'Hostel_Owner', token!);
-                                    if (response) {
-                                      loginController.login(email, pass!);
-                                    }
-                                  });
+                                  roomController.createSingleRoom(
+                                      roomNumberController.text.trim(),
+                                      optionController.roomOptions.value,
+                                      capacityController.text.trim(),
+                                      availabilityController.text.trim(),
+                                      priceController.text.trim(),
+                                      featuresController.text.trim(),
+                                      hostelId,
+                                      imageController.file);
                                 }).marginOnly(top: 10)
                           ],
                         ),

@@ -117,38 +117,42 @@ class ViewHostel extends StatelessWidget {
                                     height: 100.h,
                                     width: 100.h),
                               ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  MyText(
-                                      text: data.hostelName ?? '',
-                                      size: 25,
-                                      fontWeight: FontWeight.w500),
-                                  MyText(
-                                      text: 'Address: ${data.address}',
-                                      size: 16),
-                                  MyText(
-                                      text: 'Email: ${data.email}', size: 16),
-                                  MyText(
-                                      text: 'Type: ${data.hostelType}',
-                                      size: 16),
-                                  Row(
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {},
-                                          color: Colors.blue,
-                                          iconSize: 40.h,
-                                          icon: Icon(Icons.facebook)),
-                                      IconButton(
-                                          onPressed: () {},
-                                          iconSize: 40.h,
-                                          icon: Icon(
-                                              Icons.south_america_outlined)),
-                                    ],
-                                  )
-                                ],
-                              ).marginOnly(left: 10.h),
+                              SizedBox(
+                                //  color: Colors.amberAccent,
+                                width: 272.w,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    MyText(
+                                        text: data.hostelName ?? '',
+                                        size: 24,
+                                        fontWeight: FontWeight.w500),
+                                    MyText(
+                                        text: 'Address: ${data.address}',
+                                        size: 16),
+                                    MyText(
+                                        text: 'Email: ${data.email}', size: 16),
+                                    MyText(
+                                        text: 'Type: ${data.hostelType}',
+                                        size: 16),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                            onPressed: () {},
+                                            color: Colors.blue,
+                                            iconSize: 40.h,
+                                            icon: Icon(Icons.facebook)),
+                                        IconButton(
+                                            onPressed: () {},
+                                            iconSize: 40.h,
+                                            icon: Icon(
+                                                Icons.south_america_outlined)),
+                                      ],
+                                    )
+                                  ],
+                                ).marginOnly(left: 10.h),
+                              ),
                             ],
                           ).marginAll(10.h),
                         ),

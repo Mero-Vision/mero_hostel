@@ -11,3 +11,8 @@ abstract class AppColor {
   static Color KGreenColor = const Color(0xff0E6A28);
   static Color KAppBarSubTitleColor = const Color(0xffA84343);
 }
+
+abstract class AppSize {
+  static double KScreenWidth = 430;
+  static double KScreenHeight = 957;
+}

@@ -49,6 +49,7 @@ class MyText extends StatelessWidget {
               color: color ?? AppColor.KTextColor,
               fontSize: size.h,
               fontStyle: fontStyle,
+              
               decoration: textDecoration,
               decorationColor: Colors.blue,
               fontWeight: fontWeight),

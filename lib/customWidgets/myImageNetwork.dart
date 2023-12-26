@@ -21,11 +21,11 @@ class MyImageNetwork extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: imageUrl,
+      imageUrl: imageUrl, //const Color.fromRGBO(0, 0, 0, 0.2),
       fit: boxFit,
       height: height,
       width: width,
-      color: color ,// Adjust the last value (opacity) as needed
+      color: color, // Adjust the last value (opacity) as needed
       colorBlendMode: blendMode,
 
       placeholder: (context, url) =>
