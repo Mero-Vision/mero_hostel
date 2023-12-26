@@ -11,7 +11,7 @@ class ListHostelData extends StatelessWidget {
       height: 190.h,
       child: Card(
         color: Colors.green.shade400,
-        child: const Center(child: Text('data')),
+        child: const Center(child: Text('Coming Soon..')),
       ),
     ).paddingOnly(left: 10.w, right: 10.w);
   }

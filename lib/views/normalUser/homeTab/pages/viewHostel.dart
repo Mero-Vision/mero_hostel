@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:mero_hostel/controller/hostel/postHostelController.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/customWidgets/myImageNetwork.dart';
-import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
@@ -119,7 +118,7 @@ class ViewHostel extends StatelessWidget {
                               ),
                               SizedBox(
                                 //  color: Colors.amberAccent,
-                                width: 272.w,
+
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,11 +189,11 @@ class ViewHostel extends StatelessWidget {
                           width: double.infinity,
                           child: Card(
                             color: Colors.grey.shade100,
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const MyText(
+                                MyText(
                                     text: 'Contact:',
                                     size: 20,
                                     fontWeight: FontWeight.w600),

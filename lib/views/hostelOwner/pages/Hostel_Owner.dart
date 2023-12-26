@@ -12,7 +12,6 @@ import 'package:mero_hostel/models/LoginUserModel.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/hostelOwner/pages/bookingReqPage.dart';
 import 'package:mero_hostel/views/hostelOwner/pages/rooms/hostelRoom.dart';
-
 import 'package:mero_hostel/views/hostelOwner/widgets/listHosteldata.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
 import 'package:mero_hostel/views/normalUser/hostelTab/hostelPage.dart';
@@ -58,19 +57,19 @@ class HostelOwner extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       MyButton(
                         height: 200.h,
-                        width: 200.h,
-                        text: 'data',
+                        width: 200.w,
+                        text: 'Coming Soon..',
                         onTap: () {},
                       ).marginOnly(
                         right: 10.w,
                       ),
                       Container(
                           height: 200.h,
-                          width: 200.h,
+                          width: 200.w,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(15.h)),
@@ -88,9 +87,17 @@ class HostelOwner extends StatelessWidget {
                                       iconSize: 50.h,
                                       icon: Icon(Icons.search)),
                                   IconButton(
-                                      onPressed: () async {},
-                                      iconSize: 50.h,
-                                      icon: Icon(Icons.account_box)),
+                                    onPressed: () async {
+                                      //
+                                      Get.to(() => BookingReqPage(
+                                            ownerController: value,
+                                            userId: userData.id,
+                                          ));
+                                    },
+                                    iconSize: 50.h,
+                                    icon: Icon(Icons.account_box),
+                                    color: Color.fromARGB(255, 21, 168, 236),
+                                  ),
                                 ],
                               ),
                               Column(
@@ -99,13 +106,7 @@ class HostelOwner extends StatelessWidget {
                                 children: [
                                   IconButton(
                                       color: AppColor.KButtonSubColor,
-                                      onPressed: () async {
-                                        //
-                                        Get.to(() => BookingReqPage(
-                                              ownerController: value,
-                                              userId: userData.id,
-                                            ));
-                                      },
+                                      onPressed: () async {},
                                       iconSize: 50.h,
                                       icon: Icon(Icons.notifications)),
                                   IconButton(
@@ -124,8 +125,8 @@ class HostelOwner extends StatelessWidget {
                     children: [
                       MyButton(
                         height: 200.h,
-                        width: 200.h,
-                        text: 'data',
+                        width: 200.w,
+                        text: 'Coming Soon..',
                         onTap: () {},
                       ).marginOnly(
                         right: 10.w,
@@ -191,7 +192,7 @@ class HostelOwner extends StatelessWidget {
         ),
         colorFilter: const ColorFilter.mode(Colors.black45, BlendMode.darken),
         fit: BoxFit.cover,
-        width: 200.h,
+        width: 200.w,
         height: 200.h,
         child: InkWell(
           onTap: () {
@@ -202,20 +203,20 @@ class HostelOwner extends StatelessWidget {
           },
           borderRadius: BorderRadius.circular(15.h),
           child: Container(
-            width: 200.h,
+            width: 200.w,
             height: 200.h,
             alignment: Alignment.center,
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   CupertinoIcons.home,
                   color: Colors.white,
                 ),
                 Text(
                   "  Room's",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),

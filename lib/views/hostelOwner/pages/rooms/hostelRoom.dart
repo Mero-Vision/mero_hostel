@@ -72,7 +72,7 @@ class HostelRoomPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15.h),
                             child: MyImageNetwork(
                                 imageUrl: roomData?.roomImage == ''
-                                    ? 'https://www.budget101.com/images/image-not-available.png?13663'
+                                    ? 'https://clipart-library.com/img1/1671008.jpg'
                                     : roomData!.roomImage!,
                                 boxFit: BoxFit.cover,
                                 height: 100.h,
