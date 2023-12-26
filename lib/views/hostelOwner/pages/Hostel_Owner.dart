@@ -13,6 +13,7 @@ import 'package:mero_hostel/views/hostelOwner/widgets/listHosteldata.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
 import 'package:mero_hostel/views/normalUser/hostelTab/hostelPage.dart';
 
+// ignore: must_be_immutable
 class HostelOwner extends StatelessWidget {
   HostelOwner({
     Key? key,
@@ -76,6 +77,7 @@ class HostelOwner extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       MyButton(
                         height: 200.h,
@@ -85,19 +87,70 @@ class HostelOwner extends StatelessWidget {
                       ).marginOnly(
                         right: 10.w,
                       ),
-                      MyButton(
-                        text: 'booking req',
-                        height: 200.h,
-                        width: 200.h,
-                        color: AppColor.KButtonSubColor,
-                        onTap: () async {
-                          //
-                          Get.to(() => BookingReqPage(
-                                ownerController: value,
-                                userId: userData.id,
-                              ));
-                        },
-                      )
+                      Container(
+                          height: 200.h,
+                          width: 200.h,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15.h)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  IconButton(
+                                      onPressed: () async {
+                                        //
+                                        Get.to(() => BookingReqPage(
+                                              ownerController: value,
+                                              userId: userData.id,
+                                            ));
+                                      },
+                                      iconSize: 50.h,
+                                      icon: Icon(Icons.home)),
+                                  IconButton(
+                                      onPressed: () async {
+                                        //
+                                        Get.to(() => BookingReqPage(
+                                              ownerController: value,
+                                              userId: userData.id,
+                                            ));
+                                      },
+                                      iconSize: 50.h,
+                                      icon: Icon(Icons.account_box)),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  IconButton(
+                                      color: AppColor.KButtonSubColor,
+                                      onPressed: () async {
+                                        //
+                                        Get.to(() => BookingReqPage(
+                                              ownerController: value,
+                                              userId: userData.id,
+                                            ));
+                                      },
+                                      iconSize: 50.h,
+                                      icon: Icon(Icons.notifications)),
+                                  IconButton(
+                                      onPressed: () async {
+                                        //
+                                        Get.to(() => BookingReqPage(
+                                              ownerController: value,
+                                              userId: userData.id,
+                                            ));
+                                      },
+                                      iconSize: 50.h,
+                                      icon: Icon(Icons.search)),
+                                ],
+                              ),
+                            ],
+                          ))
                     ],
                   ).marginOnly(
                       top: 10.h, left: 10.w, right: 10.w, bottom: 10.h),

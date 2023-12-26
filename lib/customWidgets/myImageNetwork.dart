@@ -9,18 +9,25 @@ class MyImageNetwork extends StatelessWidget {
     required this.boxFit,
     required this.height,
     required this.width,
+    this.color,
+    this.blendMode,
   }) : super(key: key);
   final String imageUrl;
   final BoxFit boxFit;
   final double height;
   final double width;
+  final Color? color;
+  final BlendMode? blendMode;
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      fit:boxFit ,
+      fit: boxFit,
       height: height,
       width: width,
+      color: color ,// Adjust the last value (opacity) as needed
+      colorBlendMode: blendMode,
+
       placeholder: (context, url) =>
           const SizedBox(), // Placeholder widget while the image is loading
       errorWidget: (context, url, error) =>

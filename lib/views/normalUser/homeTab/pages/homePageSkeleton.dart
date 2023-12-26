@@ -26,7 +26,9 @@ class HomePageSkeleton extends StatelessWidget {
             Shimmer.fromColors(
                 baseColor: Colors.grey.shade400,
                 highlightColor: Colors.grey.shade300,
-                child: HomeAppBar().paddingOnly(top: 20.h)),
+                child: Container(
+                  height: 50.h,
+                ).paddingOnly(top: 20.h)),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(

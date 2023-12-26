@@ -1,5 +1,4 @@
 // ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/SplashScreen.dart';
@@ -18,6 +17,7 @@ class LoginController extends GetxController {
   }
 
   final isLoading = false.obs;
+  Rx<String?> userStatus = ''.obs;
   //
   final Rx<UserModel?>? user = Rx<UserModel?>(null);
   RxBool isLoggedIn = false.obs;
@@ -25,7 +25,9 @@ class LoginController extends GetxController {
   Future checkLoginStatus() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var user_status = preferences.getString('UserStatus');
-
+    if (user_status != null) {
+      userStatus.value = user_status;
+    }
     if (user_status != '' && user_status == 'Hostel_Owner') {
       var email = preferences.getString('userEmail');
       var password = preferences.getString('userPassword');

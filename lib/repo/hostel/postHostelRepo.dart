@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mero_hostel/models/hostelModel.dart';
+import 'package:mero_hostel/models/owner/RequestBookingModel.dart';
 import 'package:mero_hostel/repo/apis/AuthApi.dart';
 
 class PostHostelApi {
@@ -55,7 +56,8 @@ class PostHostelApi {
     }
   }
 
-  Future sendBookingReq(int hostelId, String accessToken) async {
+  Future<RequestBookingModel?> sendBookingReq(
+      int hostelId, String accessToken) async {
     try {
       final response = await _api.sendRequest.post('/admin/hostel-booking',
           data: {
@@ -70,11 +72,10 @@ class PostHostelApi {
           ));
 
       if (response.statusCode == 201 || response.statusCode == 200) {
-        print(response.data);
-      } else {
-        throw Exception(
-            'Received unexpected status code: ${response.statusCode}');
+        var data = RequestBookingModel.fromJson(response.data);
+        return data;
       }
+      //
     } catch (e) {
       throw Exception('Failed to load hostels: $e');
     }

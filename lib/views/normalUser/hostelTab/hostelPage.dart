@@ -16,7 +16,6 @@ class HostelPage extends StatelessWidget {
   var controller = Get.find<HostelController>();
   final LoginController _loginController = Get.find();
 
-
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -29,30 +28,33 @@ class HostelPage extends StatelessWidget {
       ),
       floatingActionButton: Obx(
         () => SizedBox(
-          height: 60.h,
-          width: 200.h,
-          child: _loginController.isLoggedIn.value
-              ? FloatingActionButton(
-                  backgroundColor: AppColor.KButtonColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  child: MyText(
-                    color: Colors.white,
-                    text: 'Create Hostel',
-                    size: 20.h,
-                  ),
-                  onPressed: () {
-                    Get.to(() => CreateHostelPage(
-                        screenHeight: screenHeight, screenWidth: screenWidth));
-                  },
-                )
-              : const SizedBox(),
-        ),
+            height: 60.h,
+            width: 200.h,
+            child: _loginController.userStatus.value != 'Hostel_Owner'
+                ? _loginController.isLoggedIn.value
+                    ? FloatingActionButton(
+                        backgroundColor: AppColor.KButtonColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: MyText(
+                          color: Colors.white,
+                          text: 'Create Hostel',
+                          size: 20.h,
+                        ),
+                        onPressed: () {
+                          Get.to(() => CreateHostelPage(
+                              screenHeight: screenHeight,
+                              screenWidth: screenWidth));
+                        },
+                      )
+                    : const SizedBox()
+                : SizedBox()),
       ),
       body: SizedBox(
         height: screenHeight,
         width: screenWidth,
         child: FilterTabs(
+          loginController: _loginController,
           controller: controller,
         ),
       ),

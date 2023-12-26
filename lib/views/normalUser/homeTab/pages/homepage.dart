@@ -30,59 +30,51 @@ class HomePage extends StatelessWidget {
     });
     //
     return Scaffold(
-        backgroundColor: const Color(0xfff4f5f6),
+
+        // backgroundColor: const Color(0xfff4f5f6),
         body: Obx(
-          () => (hostelController.isLoading.value == false)
-              ? const HomePageSkeleton()
-              : SafeArea(
-                  child: SizedBox(
-                    height: screenHeight,
-                    width: screenWidth,
-                    child: Column(
-                      children: [
-                        HomeAppBar(
-                          username: userData?.name,
-                        ).paddingOnly(
-                            right: 10.w, left: 15.h, top: 20.h, bottom: 10.h),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              //mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                const HeadingTitle(
-                                  text: 'Recently added',
-                                ).paddingOnly(
-                                    right: 10.w,
-                                    left: 15.h,
-                                    top: 5.h,
-                                    bottom: 5.h),
-                                HomeTile(
-                                  data: hostelController.hostels,
-                                ),
-                                const HeadingTitle(
-                                  text: 'Boys Hostel',
-                                ).paddingOnly(
-                                    right: 10.w,
-                                    left: 15.h,
-                                    top: 5.h,
-                                    bottom: 5.h),
-                                HomeTile(data: hostelController.boysHostels),
-                                const HeadingTitle(
-                                  text: 'Girls Hostel',
-                                ).paddingOnly(
-                                    right: 10.w,
-                                    left: 15.h,
-                                    top: 5.h,
-                                    bottom: 5.h),
-                                HomeTile(data: hostelController.girlsHostels)
-                              ],
+      () => (hostelController.isLoading.value == false)
+          ? const HomePageSkeleton()
+          : SafeArea(
+              child: SizedBox(
+                height: screenHeight,
+                width: screenWidth,
+                child: Column(
+                  children: [
+                    HomeAppBar(
+                      username: userData?.name,
+                    ).paddingOnly(
+                        right: 10.w, left: 15.h, top: 20.h, bottom: 10.h),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          //mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const HeadingTitle(
+                              text: 'Recently added',
+                            ).paddingOnly(
+                                right: 10.w, left: 15.h, top: 5.h, bottom: 5.h),
+                            HomeTile(
+                              data: hostelController.hostels,
                             ),
-                          ),
+                            const HeadingTitle(
+                              text: 'Boys Hostel',
+                            ).paddingOnly(
+                                right: 10.w, left: 15.h, top: 5.h, bottom: 5.h),
+                            HomeTile(data: hostelController.boysHostels),
+                            const HeadingTitle(
+                              text: 'Girls Hostel',
+                            ).paddingOnly(
+                                right: 10.w, left: 15.h, top: 5.h, bottom: 5.h),
+                            HomeTile(data: hostelController.girlsHostels)
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-        ));
+              ),
+            ),
+    ));
   }
 }

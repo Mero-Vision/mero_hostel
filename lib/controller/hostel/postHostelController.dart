@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/repo/hostel/postHostelRepo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,15 +36,21 @@ class PostHostelController extends GetxController {
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var token = preferences.getString('AccessToken');
-    await postHostelApi.sendBookingReq(hostelId, token!);
+    var data = await postHostelApi.sendBookingReq(hostelId, token!);
+    if (data?.message == "You have requested the hostel successfully!") {
+      Get.defaultDialog(
+          title: 'Success!', content: Text("Booking Requested !!"));
+    }
+    if (data?.message == 'You have already requested this hostel') {
+      Get.defaultDialog(title: 'Success!', content: Text("Already requested"));
+    }
   }
 
   Future deleteHostel() async {
+      ////
+     ////
     ////
-
-    ////
-    ////
-    ///
-    ///
+   ////
+  ////
   }
 }

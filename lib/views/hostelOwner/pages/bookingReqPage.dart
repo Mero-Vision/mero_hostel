@@ -17,7 +17,7 @@ class BookingReqPage extends StatelessWidget {
   final int userId;
   @override
   Widget build(BuildContext context) {
-   ownerController.getBookingReq(userId);
+    ownerController.getBookingReq(userId);
     /////
     return GetBuilder<OwnerController>(builder: (value) {
       List<Datum>? snapshot = value.bookingRequestModel?.data;
@@ -30,7 +30,7 @@ class BookingReqPage extends StatelessWidget {
             child: ListView.builder(
               itemCount: snapshot?.length ?? 0,
               itemBuilder: (BuildContext context, int index) {
-                return _userSection(snapshot, index);
+                return _userSection(snapshot, index).marginOnly(bottom: 20.h);
               },
             ).marginOnly(left: 20.h, right: 20.h),
           ));

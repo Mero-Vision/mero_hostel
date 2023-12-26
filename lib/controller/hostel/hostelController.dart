@@ -18,6 +18,7 @@ class HostelController extends GetxController {
     return data;
     //
   }
+  
 
   void getAllHostel() async {
     HostelModel? data = await HostelRepo().getAllHostel();

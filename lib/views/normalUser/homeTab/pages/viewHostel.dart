@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/hostel/postHostelController.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
+import 'package:mero_hostel/customWidgets/myImageNetwork.dart';
+import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
@@ -81,18 +83,13 @@ class ViewHostel extends StatelessWidget {
               pinned: true,
               floating: false,
               flexibleSpace: FlexibleSpaceBar(
-                title: Text(
-                  data.hostelName.toString(),
-                  style: TextStyle(fontSize: 20.h),
-                ),
-                background: Image.network(
-                  data.hostelImages.toString(),
-                  color: const Color.fromRGBO(0, 0, 0,
-                      0.2), // Adjust the last value (opacity) as needed
-                  colorBlendMode: BlendMode.darken,
-                  fit: BoxFit.fill,
-                ),
-              ),
+                  background: MyImageNetwork(
+                      imageUrl: data.hostelImages.toString(),
+                      boxFit: BoxFit.fill,
+                      color: const Color.fromRGBO(0, 0, 0, 0.2),
+                      height: double.infinity,
+                      blendMode: BlendMode.darken,
+                      width: double.infinity)),
             ),
 
             SliverList(
@@ -103,23 +100,72 @@ class ViewHostel extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Container(
+                          //   height: 300.h,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(15.h),
+                                child: MyImageNetwork(
+                                    imageUrl: data.hostelImages ?? '',
+                                    boxFit: BoxFit.cover,
+                                    height: 100.h,
+                                    width: 100.h),
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  MyText(
+                                      text: data.hostelName ?? '',
+                                      size: 25,
+                                      fontWeight: FontWeight.w500),
+                                  MyText(
+                                      text: 'Address: ${data.address}',
+                                      size: 16),
+                                  MyText(
+                                      text: 'Email: ${data.email}', size: 16),
+                                  MyText(
+                                      text: 'Type: ${data.hostelType}',
+                                      size: 16),
+                                  Row(
+                                    children: [
+                                      IconButton(
+                                          onPressed: () {},
+                                          color: Colors.blue,
+                                          iconSize: 40.h,
+                                          icon: Icon(Icons.facebook)),
+                                      IconButton(
+                                          onPressed: () {},
+                                          iconSize: 40.h,
+                                          icon: Icon(
+                                              Icons.south_america_outlined)),
+                                    ],
+                                  )
+                                ],
+                              ).marginOnly(left: 10.h),
+                            ],
+                          ).marginAll(10.h),
+                        ),
                         SizedBox(
                             width: double.infinity,
                             child: Card(
-                              color: Colors.grey.shade200,
+                              color: Colors.white,
                               child: const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   MyText(
-                                    text: 'Description',
+                                    text: 'Features',
                                     size: 20,
                                     fontWeight: FontWeight.w600,
                                   ),
-                                  MyText(
-                                      text:
-                                          'This is the hostel where we have free food and free ac for each and every room  its located at kathmandu the students health are highly prioritized where we have free food and free ac for each and every room sinc its located at kathmandu the students health are highly priori ',
-                                      size: 16),
+                                  MyText(text: '', size: 16),
                                 ],
                               ).marginAll(10.h),
                             )),
@@ -148,14 +194,6 @@ class ViewHostel extends StatelessWidget {
                                     text: 'Contact:',
                                     size: 20,
                                     fontWeight: FontWeight.w600),
-                                MyText(
-                                    text: 'Address: ${data.address}', size: 16),
-                                MyText(text: 'Email: ${data.email}', size: 16),
-                                MyText(
-                                    text: 'Type: ${data.hostelType}', size: 16),
-                                MyText(
-                                    text: 'Phone Number: ${data.phoneNumber}',
-                                    size: 18),
                               ],
                             ).marginOnly(left: 10.h, bottom: 10.h),
                           ),
