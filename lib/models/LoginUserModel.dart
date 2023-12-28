@@ -1,12 +1,12 @@
-class UserModel {
-  UserModel({
+class LoginUserModel {
+  LoginUserModel({
     required this.data,
     required this.message,
   });
   late final Data data;
   late final String message;
 
-  UserModel.fromJson(Map<String, dynamic> json) {
+  LoginUserModel.fromJson(Map<String, dynamic> json) {
     data = Data.fromJson(json['data']);
     message = json['message'];
   }

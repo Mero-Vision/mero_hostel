@@ -57,7 +57,9 @@ class RoomController extends GetxController {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? accessToken = preferences.getString('AccessToken');
     try {
-      var response = await _roomGetApi.getRoomRequest(accessToken);
+      var response = await _roomGetApi.getRoomRequest(
+        accessToken,
+      );
       roomsModel = response;
       update();
     } catch (e) {

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/SplashScreen.dart';
+import 'package:mero_hostel/controller/userController.dart/userController.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 import 'package:mero_hostel/views/hostelOwner/pages/Hostel_Owner.dart';
 import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';
@@ -19,7 +20,7 @@ class LoginController extends GetxController {
   final isLoading = false.obs;
   Rx<String?> userStatus = ''.obs;
   //
-  final Rx<UserModel?>? user = Rx<UserModel?>(null);
+  final Rx<LoginUserModel?>? user = Rx<LoginUserModel?>(null);
   RxBool isLoggedIn = false.obs;
 //
   Future checkLoginStatus() async {
@@ -34,11 +35,14 @@ class LoginController extends GetxController {
       final data = await repo.userLogin(email!, password!);
       await preferences.setString('AccessToken', data!.data.token);
       var accessToken = preferences.getString('AccessToken');
+
       //   AuthApi(accessToken: accessToken);
       if (data.data.user.status == 'Hostel_Owner') {
+        var userData = await UserController()
+            .getUserInfo(accessToken: accessToken!, userId: data.data.user.id);
         isLoggedIn.value = true;
         Get.offAll(() => HostelOwner(
-              userData: data.data.user,
+              userDataModel: userData,
             ));
       } else {
         await preferences.setString('UserStatus', '');
@@ -50,6 +54,8 @@ class LoginController extends GetxController {
       final data = await repo.userLogin(email!, password!);
       await preferences.setString('AccessToken', data!.data.token);
       var accessToken = preferences.getString('AccessToken');
+      UserController()
+          .getUserInfo(accessToken: accessToken!, userId: data.data.user.id);
       //  AuthApi(accessToken: accessToken);
 
       // Get.offAll(() { HostelOwner(
@@ -61,11 +67,13 @@ class LoginController extends GetxController {
       var password = preferences.getString('userPassword');
       final data = await repo.userLogin(email!, password!);
       preferences.setString('AccessToken', data!.data.token);
-      //    var accessToken = preferences.getString('AccessToken');
+      var accessToken = preferences.getString('AccessToken');
       //  AuthApi(accessToken: accessToken);
+      var userData = await UserController()
+          .getUserInfo(accessToken: accessToken!, userId: data.data.user.id);
       isLoggedIn.value = true;
       Get.offAll(() => BottomNavBar(
-            userValue: data.data.user,
+            userValue: userData.data,
           ));
     } else {
       await Future.delayed(
@@ -109,8 +117,9 @@ class LoginController extends GetxController {
       user?.value = data;
 
       preferences.setString('AccessToken', data.data.token);
-      // String? accessToken = preferences.getString('AccessToken');
-
+      String? accessToken = preferences.getString('AccessToken');
+      var userdata = await UserController()
+          .getUserInfo(accessToken: accessToken!, userId: data.data.user.id);
       // AuthApi(accessToken: accessToken);
 
       if (data.data.user.status == 'Hostel_Owner') {
@@ -119,8 +128,9 @@ class LoginController extends GetxController {
         userStatus.value = user_status;
 
         isLoggedIn.value = true;
+
         Get.offAll(() => HostelOwner(
-              userData: data.data.user,
+              userDataModel: userdata,
             ));
       }
 

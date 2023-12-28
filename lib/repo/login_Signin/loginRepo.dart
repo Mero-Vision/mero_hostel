@@ -7,7 +7,7 @@ import 'package:mero_hostel/models/LoginUserModel.dart';
 
 class LoginRepo {
   final Api _api = Api();
-  Future<UserModel?> userLogin(String email, String password) async {
+  Future<LoginUserModel?> userLogin(String email, String password) async {
     try {
       final response = await _api.sendRequest.post(
         '/login',
@@ -18,7 +18,7 @@ class LoginRepo {
       );
       if (response.statusCode == 200) {
         final resultData = jsonDecode(response.toString());
-        final userModel = UserModel.fromJson(resultData);
+        final userModel = LoginUserModel.fromJson(resultData);
 
         return userModel;
       } else {

@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
-import 'package:mero_hostel/models/LoginUserModel.dart';
+
+import 'package:mero_hostel/models/user/user_model.dart';
 
 import 'package:mero_hostel/views/normalUser/profileTab/widgets/topsection.dart';
 
@@ -14,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
     Key? key,
     required this.userData,
   }) : super(key: key);
-  final User? userData;
+  final Data? userData;
   LoginController controller = Get.find();
   @override
   Widget build(BuildContext context) {

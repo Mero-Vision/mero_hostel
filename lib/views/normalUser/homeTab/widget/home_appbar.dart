@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 
 import 'package:mero_hostel/controller/utilController/bottomNavBarController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
-import 'package:mero_hostel/models/LoginUserModel.dart';
+
+import 'package:mero_hostel/models/user/user_model.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/normalUser/profileTab/profileScreen.dart';
 
@@ -19,7 +20,7 @@ class HomeAppBar extends StatelessWidget {
   }) : super(key: key);
   final String? username;
   final String? userImageURL;
-  final User? userData;
+  final Data? userData;
   final BottomNavBarController _barController = Get.find();
 
   @override

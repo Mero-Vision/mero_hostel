@@ -8,7 +8,8 @@ import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/controller/owner/ownerController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
-import 'package:mero_hostel/models/LoginUserModel.dart';
+
+import 'package:mero_hostel/models/user/user_model.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/hostelOwner/pages/bookingReqPage.dart';
 import 'package:mero_hostel/views/hostelOwner/pages/rooms/hostelRoom.dart';
@@ -20,16 +21,17 @@ import 'package:mero_hostel/views/normalUser/hostelTab/hostelPage.dart';
 class HostelOwner extends StatelessWidget {
   HostelOwner({
     Key? key,
-    required this.userData,
+    required this.userDataModel,
   }) : super(key: key);
-  final User userData;
+  final UserDataModel userDataModel;
   LoginController controller = Get.find();
   OwnerController ownerController = Get.put(OwnerController());
   @override
   Widget build(BuildContext context) {
     double screenHeight = AppSize.KScreenHeight.h;
     double screenWidth = AppSize.KScreenWidth.w;
-    ownerController.getOwnerHostel(userData.id);
+    var userData = userDataModel.data;
+    ownerController.getOwnerHostel(userData!.id!);
 
     return Scaffold(
       drawer: SafeArea(child: _OwnerDrawer()),
@@ -91,7 +93,7 @@ class HostelOwner extends StatelessWidget {
                                       //
                                       Get.to(() => BookingReqPage(
                                             ownerController: value,
-                                            userId: userData.id,
+                                            userId: userData.id!,
                                           ));
                                     },
                                     iconSize: 50.h,
@@ -153,17 +155,16 @@ class HostelOwner extends StatelessWidget {
             width: 200.h,
             child: Column(
               children: [
-                Obx(() => Container(
-                      height: 200.h,
-                      child: Column(
-                        children: [
-                          MyText(
-                              text:
-                                  controller.user?.value?.data.user.name ?? '5',
-                              size: 18.h)
-                        ],
-                      ),
-                    )),
+                Container(
+                  height: 200.h,
+                  child: Column(
+                    children: [
+                      MyText(
+                          text: userDataModel.data?.name ?? 'NoName',
+                          size: 18.h)
+                    ],
+                  ),
+                ),
                 ListTile(
                   onTap: () {
                     Get.to(() => HostelPage());

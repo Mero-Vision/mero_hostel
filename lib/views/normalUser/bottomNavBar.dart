@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import 'package:mero_hostel/controller/utilController/bottomNavBarController.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
-import 'package:mero_hostel/models/LoginUserModel.dart';
+import 'package:mero_hostel/models/user/user_model.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/pages/homepage.dart';
 import 'package:mero_hostel/views/normalUser/hostelTab/hostelPage.dart';
@@ -20,7 +20,7 @@ class BottomNavBar extends StatelessWidget {
     this.userValue,
   }) : super(key: key);
 
-  final User? userValue;
+  final Data? userValue;
   final BottomNavBarController controller = Get.find<BottomNavBarController>();
   final LoginController _loginController = Get.find();
 
