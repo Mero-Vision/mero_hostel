@@ -27,7 +27,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Widget> tabItems = [
-      HomePage(),
+      HomePage(userData: userValue),
       const SearchPage(),
       HostelPage(),
       (_loginController.isLoggedIn.value

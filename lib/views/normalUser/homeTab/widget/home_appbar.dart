@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'package:mero_hostel/controller/utilController/bottomNavBarController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
+import 'package:mero_hostel/customWidgets/myImageNetwork.dart';
 
 import 'package:mero_hostel/models/user/user_model.dart';
 import 'package:mero_hostel/utils/constant.dart';
@@ -33,7 +34,7 @@ class HomeAppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MyText(
-                text: username ?? 'Hi, User',
+                text: 'Hi, ${username ?? 'User'}',
                 size: 16.h,
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
@@ -64,11 +65,13 @@ class HomeAppBar extends StatelessWidget {
 
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(14.r),
-                  child: Image.network(
-                    userImageURL ??
-                        'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg',
-                    fit: BoxFit.cover,
-                  )),
+                  child: MyImageNetwork(
+                      imageUrl: userImageURL == '' && userImageURL != null
+                          ? 'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg'
+                          : userImageURL!,
+                      boxFit: BoxFit.cover,
+                      height: 54.h,
+                      width: 54.h)),
             ),
           ),
         ],
@@ -76,3 +79,8 @@ class HomeAppBar extends StatelessWidget {
     );
   }
 }
+//  Image.network(
+//                     userImageURL ??
+//                         'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg',
+//                     fit: BoxFit.cover,
+//                   )

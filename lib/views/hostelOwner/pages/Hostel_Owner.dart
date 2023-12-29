@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/controller/owner/ownerController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
+import 'package:mero_hostel/customWidgets/myImageNetwork.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
 
 import 'package:mero_hostel/models/user/user_model.dart';
@@ -34,17 +35,16 @@ class HostelOwner extends StatelessWidget {
     ownerController.getOwnerHostel(userData!.id!);
 
     return Scaffold(
-      drawer: SafeArea(child: _OwnerDrawer()),
+      drawer: GetBuilder<OwnerController>(builder: (context) {
+        return SafeArea(
+            child: _OwnerDrawer(ownerController.hostelData?.data?[0]));
+      }),
       appBar: AppBar(
-        title: GetBuilder<OwnerController>(
-            //  init: ownerController,
-            builder: (value) {
-          return HomeAppBar(
-            username: value.hostelData?.data?[0].hostelName,
-            userImageURL: null,
-            userData: userData,
-          );
-        }),
+        title: HomeAppBar(
+          username: 'Welcome ${userData.name}',
+          userImageURL: userData.profileImage,
+          userData: userData,
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -87,7 +87,7 @@ class HostelOwner extends StatelessWidget {
                                         //
                                       },
                                       iconSize: 50.h,
-                                      icon: Icon(Icons.search)),
+                                      icon: const Icon(Icons.search)),
                                   IconButton(
                                     onPressed: () async {
                                       //
@@ -97,8 +97,9 @@ class HostelOwner extends StatelessWidget {
                                           ));
                                     },
                                     iconSize: 50.h,
-                                    icon: Icon(Icons.account_box),
-                                    color: Color.fromARGB(255, 21, 168, 236),
+                                    icon: const Icon(Icons.account_box),
+                                    color:
+                                        const Color.fromARGB(255, 21, 168, 236),
                                   ),
                                 ],
                               ),
@@ -110,12 +111,12 @@ class HostelOwner extends StatelessWidget {
                                       color: AppColor.KButtonSubColor,
                                       onPressed: () async {},
                                       iconSize: 50.h,
-                                      icon: Icon(Icons.notifications)),
+                                      icon: const Icon(Icons.notifications)),
                                   IconButton(
                                       onPressed: () async {},
                                       iconSize: 50.h,
-                                      icon:
-                                          Icon(CupertinoIcons.settings_solid)),
+                                      icon: const Icon(
+                                          CupertinoIcons.settings_solid)),
                                 ],
                               ),
                             ],
@@ -147,23 +148,43 @@ class HostelOwner extends StatelessWidget {
     );
   }
 
-  Widget _OwnerDrawer() {
+  Widget _OwnerDrawer(hostelData) {
     return Drawer(
         shape: const Border(),
         backgroundColor: AppColor.KBackgroundColor,
         child: SizedBox(
             width: 200.h,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  height: 200.h,
+                  color: Colors.white,
+                  width: AppSize.KScreenWidth,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(14.h),
+                        child: MyImageNetwork(
+                            imageUrl: hostelData?.hostelImages ??
+                                'https://i.pinimg.com/564x/04/dd/5b/04dd5bf46aeb55c60918da9efd2bd3d7.jpg',
+                            boxFit: BoxFit.cover,
+                            height: 140.h,
+                            width: 140.h),
+                      ),
                       MyText(
-                          text: userDataModel.data?.name ?? 'NoName',
-                          size: 18.h)
+                        text: hostelData?.hostelName ?? 'NoName',
+                        size: 20.h,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      MyText(
+                        text: hostelData?.email ?? 'NoEmail',
+                        size: 16.h,
+                        fontWeight: FontWeight.w500,
+                      )
                     ],
-                  ),
+                  ).paddingOnly(
+                      right: 10.h, left: 10.h, top: 20.h, bottom: 20.h),
                 ),
                 ListTile(
                   onTap: () {
@@ -171,14 +192,14 @@ class HostelOwner extends StatelessWidget {
                   },
                   tileColor: Colors.white,
                   title: const Text('All Hostels'),
-                ),
+                ).paddingOnly(top: 10.h),
                 ListTile(
                   onTap: () {
                     controller.logout();
                   },
                   tileColor: Colors.white,
                   title: const Text('LogOut'),
-                ),
+                ).paddingOnly(top: 10.h),
               ],
             )));
   }

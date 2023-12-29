@@ -7,7 +7,7 @@ class GetUserData {
   AuthApi _api = AuthApi();
 
   Future<UserDataModel> getUserInfo(
-      {required String accessToken, required int userId}) async {
+      {required String accessToken, required String userId}) async {
     try {
       var response = await _api.sendRequest.get(
         '/admin/user/${userId}',

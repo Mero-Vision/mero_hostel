@@ -10,12 +10,14 @@ import 'package:image_picker/image_picker.dart';
 class ImageController extends GetxController {
   File? file;
   String? imageData;
-  Future getImage() async {
-    var pickedImage = await ImagePicker().pickImage(source: ImageSource.camera);
+
+  Future getImage({double? x, double? y}) async {
+    var pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       var croppedImage = await ImageCropper().cropImage(
           sourcePath: pickedImage.path,
-          aspectRatio: const CropAspectRatio(ratioX: 3, ratioY: 2));
+          aspectRatio: CropAspectRatio(ratioX: x ?? 3, ratioY: y ?? 2));
       if (croppedImage != null) {
         file = File(croppedImage.path);
 

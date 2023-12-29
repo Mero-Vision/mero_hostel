@@ -77,5 +77,6 @@ class PostHostelApi {
     } catch (e) {
       throw Exception('Failed to load hostels: $e');
     }
+    return null;
   }
 }

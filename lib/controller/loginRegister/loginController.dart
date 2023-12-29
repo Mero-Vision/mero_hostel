@@ -38,8 +38,8 @@ class LoginController extends GetxController {
 
       //   AuthApi(accessToken: accessToken);
       if (data.data.user.status == 'Hostel_Owner') {
-        var userData = await UserController()
-            .getUserInfo(accessToken: accessToken!, userId: data.data.user.id);
+        var userData = await UserController().getUserInfo(
+            accessToken: accessToken!, userId: data.data.user.id.toString());
         isLoggedIn.value = true;
         Get.offAll(() => HostelOwner(
               userDataModel: userData,
@@ -54,8 +54,8 @@ class LoginController extends GetxController {
       final data = await repo.userLogin(email!, password!);
       await preferences.setString('AccessToken', data!.data.token);
       var accessToken = preferences.getString('AccessToken');
-      UserController()
-          .getUserInfo(accessToken: accessToken!, userId: data.data.user.id);
+      UserController().getUserInfo(
+          accessToken: accessToken!, userId: data.data.user.id.toString());
       //  AuthApi(accessToken: accessToken);
 
       // Get.offAll(() { HostelOwner(
@@ -69,8 +69,8 @@ class LoginController extends GetxController {
       preferences.setString('AccessToken', data!.data.token);
       var accessToken = preferences.getString('AccessToken');
       //  AuthApi(accessToken: accessToken);
-      var userData = await UserController()
-          .getUserInfo(accessToken: accessToken!, userId: data.data.user.id);
+      var userData = await UserController().getUserInfo(
+          accessToken: accessToken!, userId: data.data.user.id.toString());
       isLoggedIn.value = true;
       Get.offAll(() => BottomNavBar(
             userValue: userData.data,
@@ -118,8 +118,8 @@ class LoginController extends GetxController {
 
       preferences.setString('AccessToken', data.data.token);
       String? accessToken = preferences.getString('AccessToken');
-      var userdata = await UserController()
-          .getUserInfo(accessToken: accessToken!, userId: data.data.user.id);
+      var userdata = await UserController().getUserInfo(
+          accessToken: accessToken!, userId: data.data.user.id.toString());
       // AuthApi(accessToken: accessToken);
 
       if (data.data.user.status == 'Hostel_Owner') {

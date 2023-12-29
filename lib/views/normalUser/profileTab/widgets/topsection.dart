@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:mero_hostel/customWidgets/Mytext.dart';
+import 'package:mero_hostel/customWidgets/myImageNetwork.dart';
 import 'package:mero_hostel/utils/constant.dart';
+import 'package:mero_hostel/views/normalUser/profileTab/editProfilePage.dart';
 
 class ProfileTopSection extends StatelessWidget {
   const ProfileTopSection({
@@ -13,10 +15,12 @@ class ProfileTopSection extends StatelessWidget {
     required this.profileImage,
     required this.userName,
     required this.userEmail,
+    this.userId,
   }) : super(key: key);
-  final String profileImage;
+  final String? profileImage;
   final String userName;
   final String userEmail;
+  final String? userId;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -32,7 +36,13 @@ class ProfileTopSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 iconButtons(CupertinoIcons.heart_circle, 'Favorite', () {}),
-                iconButtons(Icons.edit_sharp, 'Edit Profile', () {}),
+                iconButtons(Icons.edit_sharp, 'Edit Profile', () {
+                  Get.to(() => EditProfilePage(
+                      userImage: profileImage,
+                      userId: userId!,
+                      screenHeight: MediaQuery.of(context).size.height,
+                      screenWidth: MediaQuery.of(context).size.width));
+                }),
                 iconButtons(CupertinoIcons.settings, 'Setting', () {}),
               ],
             ),
@@ -57,13 +67,20 @@ class ProfileTopSection extends StatelessWidget {
                   height: 140.h,
                   width: 140.h,
                   child: ClipRRect(
-                      borderRadius: BorderRadius.circular(300),
-                      child: Image.network(
-                        'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg',
-                        height: 140.h,
-                        width: 140.h,
-                        fit: BoxFit.cover,
-                      )).paddingAll(10.h),
+                          borderRadius: BorderRadius.circular(300),
+                          child: profileImage != null && profileImage != ''
+                              ? MyImageNetwork(
+                                  imageUrl: profileImage!,
+                                  boxFit: BoxFit.contain,
+                                  height: 140.h,
+                                  width: 140.h)
+                              : MyImageNetwork(
+                                  imageUrl:
+                                      'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg',
+                                  boxFit: BoxFit.cover,
+                                  height: 140.h,
+                                  width: 140.h))
+                      .paddingAll(10.h),
                 ),
               ),
               MyText(

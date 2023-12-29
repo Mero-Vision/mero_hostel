@@ -43,7 +43,9 @@ class ProfileScreen extends StatelessWidget {
             child: Column(
               children: [
                 ProfileTopSection(
-                  profileImage: userData?.name ?? 'hello',
+                  userId: userData?.id.toString(),
+                  profileImage: userData?.profileImage
+                     ,
                   userName: userData?.name ?? 'No name',
                   userEmail: userData?.email ?? 'email not found',
                 ),

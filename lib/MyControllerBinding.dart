@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mero_hostel/controller/owner/ownerController.dart';
 import 'package:mero_hostel/controller/utilController/bottomNavBarController.dart';
 import 'package:mero_hostel/controller/hostel/ImageController.dart';
 import 'package:mero_hostel/controller/hostel/hostelController.dart';
@@ -21,6 +22,9 @@ class MyControllerBinding extends Bindings {
       () => RegistrationController(),
     );
     Get.put(BottomNavBarController(), permanent: true);
+    Get.put(
+      OwnerController(),
+    );
 
     //Get.lazyPut(() => BottomNavBarController(),);
 
