@@ -136,6 +136,7 @@ class LoginController extends GetxController {
 
       if (data.data.user.status == null) {
         await preferences.setString('UserStatus', 'Normal_User');
+        
         checkLoginStatus();
       }
       print('success');

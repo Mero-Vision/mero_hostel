@@ -37,5 +37,6 @@ class LoginRepo {
     } catch (error) {
       // Handle Dio errors
     }
+    return null;
   }
 }

@@ -4,17 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/owner/ownerController.dart';
+import 'package:mero_hostel/controller/owner/room/RoomController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/models/owner/BookingRequestModel.dart';
+import 'package:mero_hostel/views/hostelOwner/pages/rooms/userAssignRoom.dart';
 
 class BookingReqPage extends StatelessWidget {
-  const BookingReqPage({
+  BookingReqPage({
     Key? key,
     required this.ownerController,
     required this.userId,
   }) : super(key: key);
   final OwnerController ownerController;
   final int userId;
+  final RoomController _roomController = Get.put(RoomController());
   @override
   Widget build(BuildContext context) {
     ownerController.getBookingReq(userId);
@@ -69,7 +72,17 @@ class BookingReqPage extends StatelessWidget {
         Row(
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                var check =
+                    await _roomController.approveUser(snapshot?[index].id ?? 0);
+
+                if (check) {
+                  Get.to(() => UserAssignRoom(
+                        userId: userId,
+                        hostelId: ownerController.hostelData?.data?[0].id ?? 0,
+                      ));
+                }
+              },
               icon: Icon(Icons.done),
               color: Colors.white,
               iconSize: 40.h,

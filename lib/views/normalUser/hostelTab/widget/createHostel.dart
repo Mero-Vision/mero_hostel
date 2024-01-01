@@ -35,7 +35,6 @@ class CreateHostelPage extends StatelessWidget {
     var hostelPhoneController = TextEditingController();
     var hostelEmailController = TextEditingController();
     var hostelWebsiteController = TextEditingController();
-    var hostelTypeController = TextEditingController();
     return Scaffold(
         body: SingleChildScrollView(
       child: Stack(
@@ -96,7 +95,7 @@ class CreateHostelPage extends StatelessWidget {
                             _buildTextFields('Email', hostelEmailController),
                             _buildTextFields(
                                 'Website', hostelWebsiteController),
-                            MyText(text: 'Hostel Type', size: 18)
+                            const MyText(text: 'Hostel Type', size: 18)
                                 .marginOnly(bottom: 10.h),
                             Obx(
                               () => Container(
@@ -149,7 +148,7 @@ class CreateHostelPage extends StatelessWidget {
                                         preferences.getString('userPassword');
                                     await preferences.setString(
                                         'UserStatus', 'Hostel_Owner');
-                                    var token = await preferences
+                                    var token = preferences
                                         .getString('AccessToken');
 
                                     var response =

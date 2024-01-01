@@ -1,10 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:mero_hostel/controller/hostel/ImageController.dart';
 import 'package:mero_hostel/controller/userController.dart/userController.dart';
 import 'package:mero_hostel/controller/utilController/OptionController.dart';
@@ -125,7 +122,7 @@ class EditProfilePage extends StatelessWidget {
                                                     .trim()
                                                     .toString()
                                                     .toLowerCase(),
-                                        newProfile: imageController.file!);
+                                        newProfile: imageController.file);
                                   }).marginOnly(top: 10)
                             ],
                           );

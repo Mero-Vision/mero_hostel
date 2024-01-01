@@ -44,8 +44,8 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 ProfileTopSection(
                   userId: userData?.id.toString(),
-                  profileImage: userData?.profileImage
-                     ,
+                  profileImage: userData?.profileImage,
+                  emailVerification: (userData?.emailVerifiedAt != null),
                   userName: userData?.name ?? 'No name',
                   userEmail: userData?.email ?? 'email not found',
                 ),

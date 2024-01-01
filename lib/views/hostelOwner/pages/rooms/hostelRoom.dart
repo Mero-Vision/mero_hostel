@@ -38,7 +38,7 @@ class HostelRoomPage extends StatelessWidget {
         height: 70.h,
       ),
       body: GetBuilder<RoomController>(
-          init: RoomController()..getAllRooms(),
+          init: RoomController()..getSingleRoom(hostelId),
           builder: (value) {
             return SizedBox(
               height: AppSize.KScreenHeight,

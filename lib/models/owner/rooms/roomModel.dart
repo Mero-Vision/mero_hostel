@@ -64,7 +64,7 @@ class Datum {
         availability: json["availability"],
         price: json["price"],
         features: json["features"],
-        hostelId: json["hostel_id"],
+        hostelId: json["hostel_id"].toString(),
         roomImage: json["room_image"],
         createdAt: json["created_at"] == null
             ? null

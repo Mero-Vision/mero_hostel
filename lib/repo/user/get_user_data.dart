@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:mero_hostel/models/LoginUserModel.dart';
 import 'package:mero_hostel/models/user/user_model.dart';
 import 'package:mero_hostel/repo/apis/AuthApi.dart';
 
@@ -10,7 +9,7 @@ class GetUserData {
       {required String accessToken, required String userId}) async {
     try {
       var response = await _api.sendRequest.get(
-        '/admin/user/${userId}',
+        '/admin/user/$userId',
         options: Options(
           headers: {
             'Content-Type':

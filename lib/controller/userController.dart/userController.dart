@@ -34,7 +34,7 @@ class UserController extends GetxController {
   Future<UserDataModel> editUserProfile({
     required String newName,
     required String newEmail,
-    required File newProfile,
+    required File? newProfile,
     required String userId,
   }) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();

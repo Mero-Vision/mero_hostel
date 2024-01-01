@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,6 @@ class PostHostelController extends GetxController {
         hostelTypeController,
         hostelImageData,
         token!);
-    print('HostelCreated');
     return data;
   }
 
@@ -39,18 +39,19 @@ class PostHostelController extends GetxController {
     var data = await postHostelApi.sendBookingReq(hostelId, token!);
     if (data?.message == "You have requested the hostel successfully!") {
       Get.defaultDialog(
-          title: 'Success!', content: Text("Booking Requested !!"));
+          title: 'Success!', content: const Text("Booking Requested !!"));
     }
     if (data?.message == 'You have already requested this hostel') {
-      Get.defaultDialog(title: 'Success!', content: Text("Already requested"));
+      Get.defaultDialog(
+          title: 'Success!', content: const Text("Already requested"));
     }
   }
 
   Future deleteHostel() async {
-      ////
-     ////
     ////
-   ////
-  ////
+    ////
+    ////
+    ////
+    ////
   }
 }

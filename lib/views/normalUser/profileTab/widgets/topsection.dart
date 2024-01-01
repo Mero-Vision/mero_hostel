@@ -15,11 +15,13 @@ class ProfileTopSection extends StatelessWidget {
     required this.profileImage,
     required this.userName,
     required this.userEmail,
+    required this.emailVerification,
     this.userId,
   }) : super(key: key);
   final String? profileImage;
   final String userName;
   final String userEmail;
+  final bool emailVerification;
   final String? userId;
   @override
   Widget build(BuildContext context) {
@@ -83,16 +85,50 @@ class ProfileTopSection extends StatelessWidget {
                       .paddingAll(10.h),
                 ),
               ),
-              MyText(
-                top: 10.h,
-                text: userName,
-                size: 22.h,
-                fontWeight: FontWeight.w700,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MyText(
+                    text: emailVerification ? 'Verified' : 'Unverified',
+                    size: 18,
+                    fontWeight: FontWeight.w600,
+                    color: emailVerification ? Colors.green : Colors.redAccent,
+                  ),
+                  emailVerification
+                      ? Icon(
+                          Icons.verified,
+                          color: Colors.green,
+                        )
+                      : Icon(
+                          CupertinoIcons.multiply_circle_fill,
+                          color: Colors.redAccent,
+                        )
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.person,
+                    color: const Color.fromARGB(255, 20, 20, 20),
+                  ),
+                  MyText(
+                    top: 10.h,
+                    text: userName,
+                    size: 22.h,
+                    color: Color.fromARGB(255, 35, 35, 35),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.email),
+                  Icon(
+                    Icons.email,
+                    color: Colors.grey.shade700,
+                  ),
                   MyText(
                     left: 5.h,
                     text: userEmail,

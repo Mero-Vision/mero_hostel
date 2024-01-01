@@ -10,19 +10,27 @@ class EditProfileRepo {
   Future<UserDataModel?> editProfileRequest(
       {required String newName,
       required String newEmail,
-      required File newProfile,
+      required File? newProfile,
       required String userId,
       required String token}) async {
-    FormData data = FormData.fromMap({
-      'profile_image': await MultipartFile.fromFile(
-        newProfile.path,
-        filename: newProfile.path,
-      ),
-      'name': newName,
-      'email': newEmail,
-      '_method': 'put'
-    });
-
+    FormData data;
+    if (newProfile == null) {
+      data = FormData.fromMap({
+        'name': newName,
+        'email': newEmail,
+        '_method': 'put'
+      });
+    } else {
+      data = FormData.fromMap({
+        'profile_image': await MultipartFile.fromFile(
+          newProfile.path,
+          filename: newProfile.path,
+        ),
+        'name': newName,
+        'email': newEmail,
+        '_method': 'put'
+      });
+    }
     try {
       var response = await _api.sendRequest.post(
         '/admin/user/$userId', // Replace with your actual endpoint

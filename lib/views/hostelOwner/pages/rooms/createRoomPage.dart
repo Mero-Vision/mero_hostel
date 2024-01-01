@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'package:mero_hostel/controller/hostel/ImageController.dart';
-import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/controller/owner/room/RoomController.dart';
 import 'package:mero_hostel/controller/utilController/OptionController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
@@ -94,7 +93,7 @@ class CreateRoomPage extends StatelessWidget {
                             _buildTextFields('Room price', priceController),
                             _buildTextFields(
                                 'Room features', featuresController),
-                            MyText(text: 'Room Type', size: 18)
+                            const MyText(text: 'Room Type', size: 18)
                                 .marginOnly(bottom: 10.h),
                             Obx(
                               () => Container(
