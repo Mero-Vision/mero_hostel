@@ -5,6 +5,7 @@ import 'package:mero_hostel/SplashScreen.dart';
 import 'package:mero_hostel/controller/userController.dart/userController.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
 import 'package:mero_hostel/views/hostelOwner/pages/Hostel_Owner.dart';
+import 'package:mero_hostel/views/hostel_user/hostel_user_home.dart';
 import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../repo/login_Signin/loginRepo.dart';
@@ -57,11 +58,15 @@ class LoginController extends GetxController {
       UserController().getUserInfo(
           accessToken: accessToken!, userId: data.data.user.id.toString());
       //  AuthApi(accessToken: accessToken);
+      var userData = await UserController().getUserInfo(
+          accessToken: accessToken, userId: data.data.user.id.toString());
+      isLoggedIn.value = true;
 
-      // Get.offAll(() { HostelOwner(
-      //       userData: data!.data.user,
-      //     );
-      // isLoading.value = true;});
+      // Get.offAll(() {
+      //   HostelUserHomePage(
+      //     userDataModel: userData,
+      //   );
+      // });
     } else if (user_status != '' && user_status == 'Normal_User') {
       var email = preferences.getString('userEmail');
       var password = preferences.getString('userPassword');
@@ -134,9 +139,20 @@ class LoginController extends GetxController {
             ));
       }
 
+      if (data.data.user.status == 'Hostel_User') {
+        preferences.setString('UserStatus', 'Hostel_Owner');
+        var user_status = preferences.getString('UserStatus');
+        userStatus.value = user_status;
+
+        isLoggedIn.value = true;
+
+        Get.offAll(() => HostelUserHomePage(
+            //  userDataModel: userdata,
+            ));
+      }
       if (data.data.user.status == null) {
         await preferences.setString('UserStatus', 'Normal_User');
-        
+
         checkLoginStatus();
       }
       print('success');

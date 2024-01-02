@@ -5,7 +5,8 @@ import 'package:mero_hostel/repo/owner/ownerHostel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OwnerController extends GetxController {
-  bool isDataLoading = false;
+  bool isDataLoaded = false;
+  //RxBool isLoadedRX = false.obs;
   HostelModel? hostelData;
   BookingRequestModel? bookingRequestModel;
   Future<HostelModel?> getOwnerHostel(int userId) async {
@@ -13,19 +14,19 @@ class OwnerController extends GetxController {
     var token = preferences.getString('AccessToken');
     print(token);
     var response = await OwnerHostelApi().getOwnerHostel(userId, token!);
-    isDataLoading = true;
+    isDataLoaded = true;
     hostelData = response;
     update();
     return response;
   }
 
   Future<BookingRequestModel?> getBookingReq(int userId) async {
-    isDataLoading = false;
+    isDataLoaded = false;
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var token = preferences.getString('AccessToken');
     var response = await OwnerHostelApi().getBookingReq(userId, token!);
     bookingRequestModel = response;
-    isDataLoading = true;
+    isDataLoaded = true;
     update();
     return response;
   }

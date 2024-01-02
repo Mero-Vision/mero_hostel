@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/owner/ownerController.dart';
 import 'package:mero_hostel/controller/utilController/bottomNavBarController.dart';

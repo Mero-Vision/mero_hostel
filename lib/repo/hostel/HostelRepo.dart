@@ -1,4 +1,5 @@
-// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:mero_hostel/models/hostelModel.dart';
 import 'package:mero_hostel/repo/apis/api.dart';
 

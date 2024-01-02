@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:mero_hostel/controller/owner/ownerController.dart';
 import 'package:mero_hostel/controller/owner/room/RoomController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
+import 'package:mero_hostel/customWidgets/skeleton.dart';
 import 'package:mero_hostel/models/owner/BookingRequestModel.dart';
 import 'package:mero_hostel/views/hostelOwner/pages/rooms/userAssignRoom.dart';
 
@@ -28,15 +29,30 @@ class BookingReqPage extends StatelessWidget {
           appBar: AppBar(
             title: Text('Booking Request'),
           ),
-          body: Container(
-            height: MediaQuery.of(context).size.height,
-            child: ListView.builder(
-              itemCount: snapshot?.length ?? 0,
-              itemBuilder: (BuildContext context, int index) {
-                return _userSection(snapshot, index).marginOnly(top: 20.h);
-              },
-            ).marginOnly(left: 20.h, right: 20.h),
-          ));
+          body: value.isDataLoaded
+              ? SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: ListView.builder(
+                    itemCount: snapshot?.length ?? 0,
+                    itemBuilder: (BuildContext context, int index) {
+                      return _userSection(snapshot, index)
+                          .marginOnly(top: 20.h);
+                    },
+                  ).marginOnly(left: 20.h, right: 20.h),
+                )
+              : Skeleton(
+                  widget: ListView.builder(
+                    itemCount: 7,
+                    itemBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: 100,
+                        child: Card(
+                          child: Container(),
+                        ),
+                      ).marginOnly(top: 10.h, left: 10.h, right: 10.h);
+                    },
+                  ),
+                ));
     });
   }
 
@@ -73,8 +89,9 @@ class BookingReqPage extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () async {
-                var check =
-                    await _roomController.approveUser(snapshot?[index].id ?? 0);
+                var check = await _roomController.approveUser(
+                    bookingId: snapshot?[index].id ?? 0,
+                    );
 
                 if (check) {
                   Get.to(() => UserAssignRoom(

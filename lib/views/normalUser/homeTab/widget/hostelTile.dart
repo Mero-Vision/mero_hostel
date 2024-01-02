@@ -88,7 +88,7 @@ class HomeTile extends StatelessWidget {
                     },
                     openBuilder: (BuildContext context,
                             void Function({Object? returnValue}) action) =>
-                        ViewHostel(data: data![index]),
+                        ViewHostel(hostelData: data![index]),
                   );
                 }
                 if (index == data!.length - 1 || index == 6) {
