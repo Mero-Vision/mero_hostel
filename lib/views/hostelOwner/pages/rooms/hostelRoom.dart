@@ -18,7 +18,7 @@ class HostelRoomPage extends StatelessWidget {
     required this.hostelId,
   }) : super(key: key);
   final String hostelId;
-  final RoomController roomController = Get.put(RoomController());
+  final RoomController roomController = Get.find<RoomController>();
   @override
   Widget build(BuildContext context) {
     roomController.getSingleRoom(hostelId);

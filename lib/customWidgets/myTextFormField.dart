@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class MyTextFormField extends StatelessWidget {
@@ -12,6 +13,7 @@ class MyTextFormField extends StatelessWidget {
     required this.controller,
     this.obscureText,
     this.prefix,
+    this.onChanged,
   }) : super(key: key);
   final double? top;
   final double? bottom;
@@ -22,6 +24,7 @@ class MyTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final bool? obscureText;
   final Icon? prefix;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,7 @@ class MyTextFormField extends StatelessWidget {
           left: left ?? 0,
           right: right ?? 0),
       child: TextFormField(
+        onChanged: onChanged,
         obscureText: obscureText ?? false,
         controller: controller,
         validator: validator,

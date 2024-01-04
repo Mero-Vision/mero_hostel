@@ -11,10 +11,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class RoomController extends GetxController {
   RxBool isLoaded = false.obs;
-
+  int numOfRooms = 0;
+  RxBool isSelected = false.obs;
+  RxInt currentIndex = 1922.obs;
   //
   CreateRoomsModel? createRoomsModel;
   RoomsModel? roomsModel;
+
   GetAssignRoomModel? getAssignRoomModel;
   //
   final RoomPostApi _roomPostApi = RoomPostApi();
@@ -78,7 +81,9 @@ class RoomController extends GetxController {
     isLoaded.value = false;
     var data = await _roomGetApi.getSingleRoomData(hostelId);
     roomsModel = data;
+    numOfRooms = data.data?.length ?? 0;
     isLoaded.value = true;
+    update();
   }
 
   Future<bool> approveUser({required int bookingId}) async {
@@ -107,6 +112,22 @@ class RoomController extends GetxController {
       getAssignRoomModel = response;
       update();
       isLoaded.value = true;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future roomToAssign({
+    required int roomId,
+    required int userId,
+  }) async {
+    isLoaded.value = false;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? accessToken = preferences.getString('AccessToken');
+    try {
+      var response =
+          await _roomPostApi.roomToAssign(roomId, userId, accessToken);
+      print('userSuccessfully Assigned');
     } catch (e) {
       print(e);
     }

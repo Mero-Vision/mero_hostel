@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mero_hostel/controller/hostel/postHostelController.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/controller/owner/room/RoomController.dart';
@@ -63,7 +64,7 @@ class ViewHostel extends StatelessWidget {
                 iconTheme: const IconThemeData(color: Colors.white),
                 backgroundColor: Colors.black,
                 centerTitle: false,
-                expandedHeight: 270.0.h,
+                expandedHeight: 200.0.h,
                 pinned: true,
                 floating: false,
                 flexibleSpace: FlexibleSpaceBar(
@@ -80,7 +81,7 @@ class ViewHostel extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   (_, int index) {
                     return SizedBox(
-                      height: 500.h,
+                      height: 650.h,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -149,7 +150,7 @@ class ViewHostel extends StatelessWidget {
                               children: [
                                 _infoSection(),
                                 _roomSection(),
-                                Center(child: Text('Content for Tab 3')),
+                                _contactSection()
                               ],
                             ),
                           ),
@@ -169,7 +170,7 @@ class ViewHostel extends StatelessWidget {
 
   Widget _infoSection() {
     return Container(
-      height: 200,
+      height: 300.h,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -189,7 +190,51 @@ class ViewHostel extends StatelessWidget {
     );
   }
 
-  Widget _roomSection({roomData}) {
+  Widget _contactSection() {
+    return Container(
+      height: 300.h,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MyText(
+            text: 'Contact',
+            size: 24.h,
+            fontWeight: FontWeight.w600,
+          ),
+          MyText(
+            text: 'Name : ${hostelData.hostelName}',
+            size: 20.h,
+            fontWeight: FontWeight.w400,
+          ).marginOnly(
+            top: 10.h,
+          ),
+          MyText(
+            text: 'Email : ${hostelData.email}',
+            size: 20.h,
+            fontWeight: FontWeight.w400,
+          ).marginOnly(
+            top: 10.h,
+          ),
+          MyText(
+            text: 'Phone Number : ${hostelData.phoneNumber}',
+            size: 20.h,
+            fontWeight: FontWeight.w400,
+          ).marginOnly(
+            top: 10.h,
+          ),
+          MyText(
+            text: 'Type : ${hostelData.hostelType}',
+            size: 20.h,
+            fontWeight: FontWeight.w400,
+          ).marginOnly(
+            top: 10.h,
+          )
+        ],
+      ).marginSymmetric(vertical: 20.h, horizontal: 25.h),
+    );
+  }
+
+  Widget _roomSection() {
     return Obx(() => roomController.isLoaded.value
         ? ListView.builder(
             itemCount: (roomController.roomsModel!.data!.isEmpty)
@@ -197,13 +242,18 @@ class ViewHostel extends StatelessWidget {
                 : roomController.roomsModel?.data?.length,
             itemBuilder: (BuildContext context, int index) {
               if (roomController.roomsModel!.data!.isEmpty) {
-                return Container(
-                  height: 10,
-                  color: Colors.black26,
+                return Column(
+                  children: [
+                    Lottie.network(
+                        height: 200.h,
+                        width: 200.h,
+                        'https://lottie.host/c0772147-04fe-437a-a1b9-6ca2aa57681f/gPqOeSW8tD.json'),
+                    MyText(text: 'No Room Found', size: 18.h)
+                  ],
                 );
               }
               var roomData = roomController.roomsModel?.data?[index];
-              Container(
+              return Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(15.h),
@@ -235,7 +285,6 @@ class ViewHostel extends StatelessWidget {
                     Container(
                       height: 100.h,
                       width: 270.w,
-                      //  color: Colors.green,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -254,15 +303,24 @@ class ViewHostel extends StatelessWidget {
                     ).marginOnly(left: 10.h)
                   ],
                 ).marginAll(10.h),
-              ).marginSymmetric(horizontal: 10.h);
+              ).marginOnly(right: 10.h, left: 10.h, bottom: 10.h);
             },
           )
         : Skeleton(
-            widget: Container(
-            decoration: BoxDecoration(
-                color: Colors.grey, borderRadius: BorderRadius.circular(15.h)),
-            child: SizedBox(),
-          ).paddingAll(20.h)));
+            widget: ListView.builder(
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 100.h,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(15.h)),
+                  child: Text("Loading.."),
+                ).paddingOnly(bottom: 20.h, right: 20.h, left: 20.h);
+              },
+            ),
+          ));
   }
 
   Widget _iconButton({required IconData? icon, required Callback onTap}) {
@@ -274,7 +332,7 @@ class ViewHostel extends StatelessWidget {
             onPressed: onTap,
             icon: Icon(
               icon,
-              size: 35.h,
+              size: 25.h,
             )),
       ),
     );

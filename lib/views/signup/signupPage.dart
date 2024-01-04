@@ -32,8 +32,11 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: AppColor.KBackgroundColor,
+        // backgroundColor: AppColor.KBackgroundColor,
+        backgroundColor: Colors.white,
+
         centerTitle: true,
         title: MyText(text: 'Sign Up', color: AppColor.KTextColor, size: 25.h),
       ),

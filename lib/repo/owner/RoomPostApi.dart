@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mero_hostel/models/owner/rooms/createRoomModel.dart';
+import 'package:mero_hostel/models/owner/rooms/userAssignedMSGModel.dart';
 import 'package:mero_hostel/repo/apis/AuthApi.dart';
 
 class RoomPostApi {
@@ -53,6 +54,29 @@ class RoomPostApi {
       }
     } catch (e) {
       throw Exception('Failed to load hostels: $e');
+    }
+  }
+
+  Future<UserAssignedMsgModel> roomToAssign(
+      int roomId, int userId, String? accessToken) async {
+    //  var headers = {'Accept': 'application/json'};
+
+    var response = await _api.sendRequest.post(
+      '/admin/user-rooms',
+      data: {'room_id': roomId, 'user_id': userId},
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json', // Set your content type as needed
+          'Authorization': 'Bearer $accessToken', // Add your API key here
+        },
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      var data = UserAssignedMsgModel.fromJson(response.data);
+      return data;
+    } else {
+      throw Exception(response.statusCode);
     }
   }
 }

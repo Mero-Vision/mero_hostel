@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:mero_hostel/models/owner/rooms/getAssignRoomModel.dart';
 import 'package:mero_hostel/models/owner/rooms/roomModel.dart';
+
 import 'package:mero_hostel/repo/apis/AuthApi.dart';
 import 'package:mero_hostel/repo/apis/api.dart';
 
@@ -54,7 +55,7 @@ class RoomGetApi {
 
   Future<GetAssignRoomModel> getRoomToAssign(
       int hostelId, String? accessToken) async {
-  //  var headers = {'Accept': 'application/json'};
+    //  var headers = {'Accept': 'application/json'};
 
     var response = await _authApi.sendRequest.get(
       '/admin/user-rooms?hostel_id=$hostelId',
@@ -73,4 +74,6 @@ class RoomGetApi {
       throw Exception(response.statusCode);
     }
   }
+
+
 }

@@ -14,7 +14,7 @@ import 'package:mero_hostel/views/normalUser/hostelTab/widget/createHostel.dart'
 // ignore: must_be_immutable
 class HostelPage extends StatelessWidget {
   HostelPage({super.key});
-  var controller = Get.find<HostelController>();
+  // var controller = Get.find<HostelController>();
   final LoginController _loginController = Get.find();
   HostelController hostelController = Get.put(HostelController());
 
@@ -22,49 +22,55 @@ class HostelPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
+    // if (_loginController.user?.value?.data.user.status == 'Hostel_Owner') {
+    hostelController.getAllHostel();
+    hostelController.getBoysHostel();
+    hostelController.getGirlsHostel();
+    //}
 
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Hostels'),
-          backgroundColor: AppColor.KBackgroundColor,
-          bottom: TabBar(tabs: [
-            Text('ALL').paddingAll(15),
-            Text('BOYS').paddingAll(15),
-            Text('GIRLS').paddingAll(15)
-          ]),
-        ),
-        floatingActionButton: Obx(
-          () => SizedBox(
-              height: 60.h,
-              width: 200.h,
-              child: _loginController.userStatus.value != 'Hostel_Owner'
-                  ? _loginController.isLoggedIn.value
-                      ? FloatingActionButton(
-                          backgroundColor: AppColor.KButtonColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          child: MyText(
-                            color: Colors.white,
-                            text: 'Create Hostel',
-                            size: 20.h,
-                          ),
-                          onPressed: () {
-                            Get.to(() => CreateHostelPage(
-                                screenHeight: screenHeight,
-                                screenWidth: screenWidth));
-                          },
-                        )
-                      : const SizedBox()
-                  : const SizedBox()),
-        ),
-        body: TabBarView(children: [
-          dynamicHostel(hostelController.hostels),
-          dynamicHostel(hostelController.boysHostels),
-          dynamicHostel(hostelController.girlsHostels)
-        ]),
-      ),
+          appBar: AppBar(
+            title: const Text('Hostels'),
+            backgroundColor: AppColor.KBackgroundColor,
+            bottom: TabBar(tabs: [
+              Text('ALL').paddingAll(15),
+              Text('BOYS').paddingAll(15),
+              Text('GIRLS').paddingAll(15)
+            ]),
+          ),
+          floatingActionButton: Obx(
+            () => SizedBox(
+                height: 60.h,
+                width: 200.h,
+                child: _loginController.userStatus.value != 'Hostel_Owner'
+                    ? _loginController.isLoggedIn.value
+                        ? FloatingActionButton(
+                            backgroundColor: AppColor.KButtonColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            child: MyText(
+                              color: Colors.white,
+                              text: 'Create Hostel',
+                              size: 20.h,
+                            ),
+                            onPressed: () {
+                              Get.to(() => CreateHostelPage(
+                                  screenHeight: screenHeight,
+                                  screenWidth: screenWidth));
+                            },
+                          )
+                        : const SizedBox()
+                    : const SizedBox()),
+          ),
+          body: Obx(
+            () => TabBarView(children: [
+              dynamicHostel(hostelController.hostels),
+              dynamicHostel(hostelController.boysHostels),
+              dynamicHostel(hostelController.girlsHostels)
+            ]),
+          )),
     );
   }
 
@@ -78,8 +84,8 @@ class HostelPage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (_) => ViewHostel(
-                        hostelData: controller.isEmpty.value
-                            ? controller.hostels[index]
+                        hostelData: hostelController.isEmpty.value
+                            ? hostelController.hostels[index]
                             : hostelData[index])));
           },
           child: Container(
