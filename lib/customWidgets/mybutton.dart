@@ -6,7 +6,7 @@ import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 
 import 'package:mero_hostel/utils/constant.dart';
 
-var loginController = Get.find<LoginController>();
+var loginController = Get.put<LoginController>(LoginController());
 
 class MyButton extends GetView<LoginController> {
   const MyButton({

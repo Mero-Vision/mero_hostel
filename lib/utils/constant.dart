@@ -10,6 +10,7 @@ abstract class AppColor {
   static Color KBackgroundColor = Color.fromARGB(255, 230, 232, 234);
   static Color KGreenColor = const Color(0xff0E6A28);
   static Color KAppBarSubTitleColor = const Color(0xffA84343);
+  static Color KsubBlackColor = Color.fromARGB(221, 43, 43, 43);
 }
 
 abstract class AppSize {

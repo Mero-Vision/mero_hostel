@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:get/get.dart';
+import 'package:mero_hostel/controller/internetController.dart';
 import 'package:mero_hostel/controller/owner/ownerController.dart';
 import 'package:mero_hostel/controller/utilController/bottomNavBarController.dart';
 import 'package:mero_hostel/controller/hostel/ImageController.dart';
@@ -10,6 +11,10 @@ import 'package:mero_hostel/controller/loginRegister/forgotpasswordController.da
 import 'package:mero_hostel/controller/loginRegister/registrationController.dart';
 
 class MyControllerBinding extends Bindings {
+  static void init() {
+    Get.put(InternetController(), permanent: true);
+  }
+
   @override
   void dependencies() {
     // Initialize your controllers or dependencies here

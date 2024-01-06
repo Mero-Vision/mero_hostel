@@ -4,92 +4,63 @@ import 'package:get/get.dart';
 import 'package:mero_hostel/SplashScreen.dart';
 import 'package:mero_hostel/controller/userController.dart/userController.dart';
 import 'package:mero_hostel/models/LoginUserModel.dart';
+import 'package:mero_hostel/repo/login_Signin/loginRepo.dart';
 import 'package:mero_hostel/views/hostelOwner/pages/Hostel_Owner.dart';
 import 'package:mero_hostel/views/hostel_user/hostel_user_home.dart';
 import 'package:mero_hostel/views/normalUser/bottomNavBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../repo/login_Signin/loginRepo.dart';
 
 class LoginController extends GetxController {
   final LoginRepo repo = LoginRepo();
+  final isLoading = false.obs;
+  final Rx<String?> userStatus = ''.obs;
+  final Rx<LoginUserModel?> user = Rx<LoginUserModel?>(null);
+  final isLoggedIn = false.obs;
+
   @override
   void onInit() {
     checkLoginStatus();
     super.onInit();
   }
 
-  final isLoading = false.obs;
-  Rx<String?> userStatus = ''.obs;
-  //
-  final Rx<LoginUserModel?>? user = Rx<LoginUserModel?>(null);
-  RxBool isLoggedIn = false.obs;
-//
-  Future checkLoginStatus() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    var user_status = preferences.getString('UserStatus');
-    if (user_status != null) {
-      userStatus.value = user_status;
-    }
-    if (user_status != '' && user_status == 'Hostel_Owner') {
-      var email = preferences.getString('userEmail');
-      var password = preferences.getString('userPassword');
-      final data = await repo.userLogin(email!, password!);
-      await preferences.setString('AccessToken', data!.data.token);
-      var accessToken = preferences.getString('AccessToken');
+  Future<void> checkLoginStatus() async {
+    final preferences = await SharedPreferences.getInstance();
+    final userStatus = preferences.getString('UserStatus');
 
-      //   AuthApi(accessToken: accessToken);
-      if (data.data.user.status == 'Hostel_Owner') {
-        var userData = await UserController().getUserInfo(
-            accessToken: accessToken!, userId: data.data.user.id.toString());
-        isLoggedIn.value = true;
-        Get.offAll(() => HostelOwner(
-              userDataModel: userData,
-            ));
-      } else {
-        await preferences.setString('UserStatus', '');
-        checkLoginStatus();
-      }
-    } else if (user_status != '' && user_status == 'Hostel_User') {
-      var email = preferences.getString('userEmail');
-      var password = preferences.getString('userPassword');
+    if (userStatus == 'Hostel_Owner' ||
+        userStatus == 'Hostel_User' ||
+        userStatus == 'Normal_User') {
+      final email = preferences.getString('userEmail');
+      final password = preferences.getString('userPassword');
       final data = await repo.userLogin(email!, password!);
-      await preferences.setString('AccessToken', data!.data.token);
-      var accessToken = preferences.getString('AccessToken');
-      UserController().getUserInfo(
-          accessToken: accessToken!, userId: data.data.user.id.toString());
-      //  AuthApi(accessToken: accessToken);
-      var userData = await UserController().getUserInfo(
-          accessToken: accessToken, userId: data.data.user.id.toString());
-      isLoggedIn.value = true;
 
-      // Get.offAll(() {
-      //   HostelUserHomePage(
-      //     userDataModel: userData,
-      //   );
-      // });
-    } else if (user_status != '' && user_status == 'Normal_User') {
-      var email = preferences.getString('userEmail');
-      var password = preferences.getString('userPassword');
-      final data = await repo.userLogin(email!, password!);
       preferences.setString('AccessToken', data!.data.token);
-      var accessToken = preferences.getString('AccessToken');
-      //  AuthApi(accessToken: accessToken);
-      var userData = await UserController().getUserInfo(
-          accessToken: accessToken!, userId: data.data.user.id.toString());
-      isLoggedIn.value = true;
-      Get.offAll(() => BottomNavBar(
-            userValue: userData.data,
-          ));
+      final accessToken = preferences.getString('AccessToken');
+
+      if (data.data.user.status == 'Hostel_Owner') {
+        isLoggedIn.value = true;
+        final userData = await UserController().getUserInfo(
+            accessToken: accessToken!, userId: data.data.user.id.toString());
+        Get.offAll(() => HostelOwner(userDataModel: userData));
+      } else if (data.data.user.status == 'Hostel_User') {
+        isLoggedIn.value = true;
+        final userData = await UserController().getUserInfo(
+            accessToken: accessToken!, userId: data.data.user.id.toString());
+        Get.offAll(() => HostelUserHomePage());
+      } else {
+        isLoggedIn.value = true;
+        final userData = await UserController().getUserInfo(
+            accessToken: accessToken!, userId: data.data.user.id.toString());
+        Get.offAll(() => BottomNavBar(userValue: userData.data));
+      }
     } else {
-      await Future.delayed(
-        const Duration(milliseconds: 1500),
-      );
+      await Future.delayed(const Duration(milliseconds: 1500));
       Get.offAll(() => BottomNavBar());
     }
   }
 
   void logout() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final preferences = await SharedPreferences.getInstance();
     preferences.setString('userEmail', '');
     preferences.setString('userPassword', '');
     preferences.setString('UserStatus', '');
@@ -98,61 +69,49 @@ class LoginController extends GetxController {
     Get.offAll(() => SplashScreen());
   }
 
-  Future login(String email, String password) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
+  Future<void> login(String email, String password) async {
+    final preferences = await SharedPreferences.getInstance();
     isLoading(true);
     final data = await repo.userLogin(email, password);
     preferences.setString('userEmail', email);
     preferences.setString('userPassword', password);
+
     if (data == null) {
-      user?.value = null;
-      Get.snackbar("Oops!", "Invalid Credentials ",
-          icon: const Icon(Icons.person, color: Colors.white),
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.shade300,
-          borderRadius: 20,
-          margin: const EdgeInsets.all(15),
-          colorText: Colors.white,
-          forwardAnimationCurve: Curves.easeIn,
-          reverseAnimationCurve: Curves.easeIn,
-          duration: const Duration(seconds: 3));
+      user.value = null;
+      Get.snackbar(
+        "Oops!",
+        "Invalid Credentials",
+        icon: const Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.shade300,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        forwardAnimationCurve: Curves.easeIn,
+        reverseAnimationCurve: Curves.easeIn,
+        duration: const Duration(seconds: 3),
+      );
       isLoading(false);
     } else {
       isLoading(false);
-      user?.value = data;
-
+      user.value = data;
       preferences.setString('AccessToken', data.data.token);
-      String? accessToken = preferences.getString('AccessToken');
-      var userdata = await UserController().getUserInfo(
+      final accessToken = preferences.getString('AccessToken');
+      final userData = await UserController().getUserInfo(
           accessToken: accessToken!, userId: data.data.user.id.toString());
-      // AuthApi(accessToken: accessToken);
 
       if (data.data.user.status == 'Hostel_Owner') {
         preferences.setString('UserStatus', 'Hostel_Owner');
-        var user_status = preferences.getString('UserStatus');
-        userStatus.value = user_status;
-
+        userStatus.value = 'Hostel_Owner';
         isLoggedIn.value = true;
-
-        Get.offAll(() => HostelOwner(
-              userDataModel: userdata,
-            ));
-      }
-
-      if (data.data.user.status == 'Hostel_User') {
-        preferences.setString('UserStatus', 'Hostel_Owner');
-        var user_status = preferences.getString('UserStatus');
-        userStatus.value = user_status;
-
+        Get.offAll(() => HostelOwner(userDataModel: userData));
+      } else if (data.data.user.status == 'Hostel_User') {
+        preferences.setString('UserStatus', 'Hostel_User');
+        userStatus.value = 'Hostel_User';
         isLoggedIn.value = true;
-
-        Get.offAll(() => HostelUserHomePage(
-            //  userDataModel: userdata,
-            ));
-      }
-      if (data.data.user.status == null) {
-        await preferences.setString('UserStatus', 'Normal_User');
-
+        Get.offAll(() => HostelUserHomePage());
+      } else {
+        preferences.setString('UserStatus', 'Normal_User');
         checkLoginStatus();
       }
       print('success');

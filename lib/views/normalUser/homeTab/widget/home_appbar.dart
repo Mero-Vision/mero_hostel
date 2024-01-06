@@ -52,6 +52,9 @@ class HomeAppBar extends StatelessWidget {
               _barController.selectedIndex.value = 3;
               if (userData != null && userData?.status == 'Hostel_Owner') {
                 Get.to(() => ProfileScreen(userData: userData));
+              } else if (userData != null &&
+                  userData?.status == 'Hostel_User') {
+                Get.to(() => ProfileScreen(userData: userData));
               }
             },
             child: Container(
