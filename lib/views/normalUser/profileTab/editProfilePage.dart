@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mero_hostel/controller/hostel/ImageController.dart';
 import 'package:mero_hostel/controller/userController.dart/userController.dart';
-import 'package:mero_hostel/controller/utilController/OptionController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/myImageNetwork.dart';
 import 'package:mero_hostel/customWidgets/myTextFormField.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
+import 'package:mero_hostel/utils/constant.dart';
 
 // ignore: must_be_immutable
 class EditProfilePage extends StatelessWidget {
@@ -25,7 +25,6 @@ class EditProfilePage extends StatelessWidget {
   final String userId;
   var imageController = Get.put<ImageController>(ImageController());
   UserController userController = Get.put(UserController());
-  OptionController optionController = Get.put(OptionController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,25 +32,17 @@ class EditProfilePage extends StatelessWidget {
     TextEditingController nameController = TextEditingController();
     var emailController = TextEditingController();
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 205, 205, 205),
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 205, 205, 205),
+          title: Text('Edit Profile'),
+        ),
         body: SingleChildScrollView(
-      child: Stack(
-        children: [
-          Positioned(
-              top: 30.h,
-              left: 5.h,
-              child: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    size: 40,
-                  ))),
-          SizedBox(
+          child: SizedBox(
             height: screenHeight,
             width: screenWidth,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 InkWell(
                   onTap: () async {
@@ -74,17 +65,16 @@ class EditProfilePage extends StatelessWidget {
                                           height: 100.h,
                                           width: 100.h)
                                       : MyImageNetwork(
-                                          imageUrl:
-                                              'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg',
+                                          imageUrl: AppConstants.userImageDummy,
                                           boxFit: BoxFit.cover,
                                           height: 140.h,
                                           width: 140.h)),
                             )).marginOnly(top: 30.h);
                       }),
-                ),
+                ).marginAll(30.h),
                 SingleChildScrollView(
                   child: SizedBox(
-                    height: 600,
+                    height: 400.h,
                     child: Card(
                       child: Form(
                         child: GetBuilder<UserController>(builder: (context) {
@@ -103,27 +93,38 @@ class EditProfilePage extends StatelessWidget {
                                           '',
                                       emailController)
                                   .marginOnly(bottom: 50.h),
-                              MyButton(
-                                  text: 'Create',
-                                  onTap: () {
-                                    userController.editUserProfile(
-                                        userId: userId,
-                                        newName: (nameController.text.trim() ==
-                                                '')
-                                            ? userController
-                                                .userData!.data!.name!
-                                            : nameController.text.toString(),
-                                        newEmail:
-                                            emailController.text.trim() == ''
+                              GetBuilder<UserController>(builder: (value) {
+                                return MyButton(
+                                    text: value.isLoaded
+                                        ? 'Loading...'
+                                        : 'Conform edit',
+                                    onTap: () {
+                                      // value.isLoaded = true;
+                                      if (!value.isLoaded) {
+                                        userController.editUserProfile(
+                                            userId: userId,
+                                            newName: (nameController.text
+                                                        .trim() ==
+                                                    '')
                                                 ? userController
-                                                    .userData!.data!.email!
-                                                    .toLowerCase()
-                                                : emailController.text
-                                                    .trim()
-                                                    .toString()
-                                                    .toLowerCase(),
-                                        newProfile: imageController.file);
-                                  }).marginOnly(top: 10)
+                                                    .userData!.data!.name!
+                                                : nameController.text
+                                                    .toString(),
+                                            newEmail:
+                                                emailController.text.trim() ==
+                                                        ''
+                                                    ? userController
+                                                        .userData!.data!.email!
+                                                        .toLowerCase()
+                                                    : emailController.text
+                                                        .trim()
+                                                        .toString()
+                                                        .toLowerCase(),
+                                            newProfile: imageController.file);
+                                      }
+                                      print('Noaction');
+                                    }).marginOnly(top: 10);
+                              })
                             ],
                           );
                         }),
@@ -134,9 +135,7 @@ class EditProfilePage extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
-    ));
+        ));
   }
 }
 

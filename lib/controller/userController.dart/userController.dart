@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mero_hostel/controller/dialoug_controller.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/models/user/user_model.dart';
 import 'package:mero_hostel/repo/user/changeStatus.dart';
@@ -11,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserController extends GetxController {
   UserDataModel? userData;
+  bool isLoaded = false;
 
   Future<UserDataModel> getUserInfo(
       {required String? accessToken, required String userId}) async {
@@ -37,6 +39,8 @@ class UserController extends GetxController {
     required File? newProfile,
     required String userId,
   }) async {
+    isLoaded = true;
+    update();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var token = preferences.getString('AccessToken');
     var newData = await EditProfileRepo().editProfileRequest(
@@ -46,8 +50,9 @@ class UserController extends GetxController {
         newProfile: newProfile,
         token: token!);
     if (newData != null) {
-      Get.defaultDialog(
-          title: 'SuccessFully Changed', content: Text('Profile Data Changed'));
+      DialogController.showDoneSimpleDialog(
+          'SuccessFully Changed', 'Profile Data Changed');
+
       preferences.setString('userEmail', newData.data!.email!);
       LoginController().checkLoginStatus();
     }

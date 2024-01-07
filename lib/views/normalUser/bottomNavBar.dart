@@ -29,7 +29,7 @@ class BottomNavBar extends StatelessWidget {
     final List<Widget> tabItems = [
       HomePage(userData: userValue),
       SearchPage(),
-      HostelPage(),
+      HostelPage(userStatus: userValue == null ? '' : 'Normal_User'),
       (_loginController.isLoggedIn.value
           ? ProfileScreen(
               userData: userValue,

@@ -7,7 +7,7 @@ import 'package:mero_hostel/repo/apis/AuthApi.dart';
 
 class PostHostelApi {
   final AuthApi _api = AuthApi();
-  Future<Datum> postHostel(
+  Future<Datum?> postHostel(
       String hostelNameController,
       String hostelAddressController,
       String hostelPhoneController,
@@ -46,11 +46,10 @@ class PostHostelApi {
         Datum data = Datum.fromJson(response.data);
         return data;
       } else {
-        throw Exception(
-            'Received unexpected status code: ${response.statusCode}');
+        return null;
       }
     } catch (e) {
-      throw Exception('Failed to load hostels: $e');
+      return null;
     }
   }
 
@@ -72,11 +71,12 @@ class PostHostelApi {
       if (response.statusCode == 201 || response.statusCode == 200) {
         var data = RequestBookingModel.fromJson(response.data);
         return data;
+      } else {
+        return null;
       }
       //
     } catch (e) {
-      throw Exception('Failed to load hostels: $e');
+      return null;
     }
-    return null;
   }
 }

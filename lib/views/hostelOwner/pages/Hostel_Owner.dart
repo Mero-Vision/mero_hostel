@@ -8,12 +8,13 @@ import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/controller/owner/ownerController.dart';
 import 'package:mero_hostel/controller/owner/room/RoomController.dart';
+import 'package:mero_hostel/controller/owner/usersOnHostel/userOnHostelController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/myImageNetwork.dart';
-import 'package:mero_hostel/customWidgets/mybutton.dart';
 import 'package:mero_hostel/models/user/user_model.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/hostelOwner/pages/bookingReqPage.dart';
+import 'package:mero_hostel/views/hostelOwner/pages/hostelUserData.dart';
 import 'package:mero_hostel/views/hostelOwner/pages/rooms/hostelRoom.dart';
 import 'package:mero_hostel/views/hostelOwner/widgets/listHosteldata.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
@@ -26,6 +27,8 @@ class HostelOwner extends StatelessWidget {
     required this.userDataModel,
   }) : super(key: key);
   final UserDataModel userDataModel;
+  final UserOnHostel userOnHostel = Get.put(UserOnHostel());
+
   LoginController controller = Get.find();
   OwnerController ownerController = Get.put(OwnerController());
   RoomController roomController = Get.put(RoomController());
@@ -35,8 +38,11 @@ class HostelOwner extends StatelessWidget {
     double screenHeight = AppSize.KScreenHeight.h;
     double screenWidth = AppSize.KScreenWidth.w;
     var userData = userDataModel.data;
-    ownerController.getOwnerHostel(userData!.id!).then(
-        (value) => roomController.getSingleRoom(value!.data![0].id.toString()));
+    ownerController.getOwnerHostel(userData!.id!).then((value) {
+      roomController.getSingleRoom(value!.data![0].id.toString());
+      userOnHostel
+          .getAllUserOnHostel(ownerController.hostelData?.data![0].id ?? 0);
+    });
 
     ownerController.getBookingReq(userData.id ?? 0);
 
@@ -75,7 +81,7 @@ class HostelOwner extends StatelessWidget {
                           //
                           Get.to(() => BookingReqPage(
                                 ownerController: value,
-                                userId: userData.id!,
+                                ownerId: userData.id!,
                               ));
                         },
                       );
@@ -162,7 +168,11 @@ class HostelOwner extends StatelessWidget {
         width: 200.w,
         height: 200.h,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Get.to(() => HostelUserDataPage(
+                  allUserOnHostel: userOnHostel.allUserOnHostel?.data ?? [],
+                ));
+          },
           borderRadius: BorderRadius.circular(15.h),
           child: Container(
             width: 200.w,
@@ -175,14 +185,16 @@ class HostelOwner extends StatelessWidget {
                   CupertinoIcons.person,
                   color: Colors.white,
                 ),
-                Text(
-                  "  User's",
-                  style: TextStyle(
-                    fontSize: 20.sp,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                GetBuilder<UserOnHostel>(builder: (value) {
+                  return Text(
+                    " ${value.allUserOnHostel?.data?.length ?? 0} User's",
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                })
               ],
             ),
           ),
@@ -289,7 +301,7 @@ class HostelOwner extends StatelessWidget {
                 Container(
                   color: Colors.white,
                   width: AppSize.KScreenWidth,
-                  child: Row(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipRRect(
@@ -298,8 +310,8 @@ class HostelOwner extends StatelessWidget {
                             imageUrl: hostelData?.hostelImages ??
                                 'https://i.pinimg.com/564x/04/dd/5b/04dd5bf46aeb55c60918da9efd2bd3d7.jpg',
                             boxFit: BoxFit.cover,
-                            height: 100.h,
-                            width: 100.h),
+                            height: 180.h,
+                            width: double.infinity),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -322,7 +334,9 @@ class HostelOwner extends StatelessWidget {
                 ),
                 ListTile(
                   onTap: () {
-                    Get.to(() => HostelPage());
+                    Get.to(() => HostelPage(
+                          userStatus: 'Hostel_Owner',
+                        ));
                   },
                   leading: Icon(
                     CupertinoIcons.house_alt_fill,

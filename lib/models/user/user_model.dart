@@ -27,6 +27,7 @@ class UserDataModel {
 
 class Data {
   int? id;
+  int? hostelId;
   String? name;
   String? email;
   dynamic emailVerifiedAt;
@@ -37,6 +38,7 @@ class Data {
 
   Data({
     this.id,
+    this.hostelId,
     this.name,
     this.email,
     this.emailVerifiedAt,
@@ -48,6 +50,7 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
+        hostelId: json["hostel_id"],
         name: json["name"],
         email: json["email"],
         emailVerifiedAt: json["email_verified_at"],
@@ -63,6 +66,7 @@ class Data {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "hostel_id": hostelId,
         "name": name,
         "email": email,
         "email_verified_at": emailVerifiedAt,

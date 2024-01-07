@@ -10,7 +10,6 @@ import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/controller/owner/room/RoomController.dart';
 import 'package:mero_hostel/customWidgets/myImageNetwork.dart';
 import 'package:mero_hostel/customWidgets/skeleton.dart';
-import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/login/loginPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
@@ -44,15 +43,20 @@ class ViewHostel extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              MyButton(
-                text: 'Book Now',
-                onTap: () {
-                  _controller.isLoggedIn.value
-                      ? postHostelController.sendBookingReq(hostelData.id!)
-                      : Get.to(() => const LoginPage());
-                },
-                right: 10.h,
-              )
+              Obx(() => MyButton(
+                    text: postHostelController.isBooking.value
+                        ? 'Requesting.....'
+                        : 'Book Now',
+                    onTap: () {
+                      _controller.isLoggedIn.value
+                          ? postHostelController.isBooking.value
+                              ? null
+                              : postHostelController
+                                  .sendBookingReq(hostelData.id!)
+                          : Get.to(() => const LoginPage());
+                    },
+                    right: 10.h,
+                  ))
             ],
           ).marginAll(10.h),
         ),
@@ -357,113 +361,3 @@ class ViewHostel extends StatelessWidget {
     );
   }
 }
-// SizedBox(
-//                     height: 850.h,
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Container(
-//                           //   height: 300.h,
-//                           width: double.infinity,
-//                           decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               borderRadius: BorderRadius.circular(15)),
-//                           child: Row(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             children: [
-//                               ClipRRect(
-//                                 borderRadius: BorderRadius.circular(15.h),
-//                                 child: MyImageNetwork(
-//                                     imageUrl: data.hostelImages ?? '',
-//                                     boxFit: BoxFit.cover,
-//                                     height: 100.h,
-//                                     width: 100.h),
-//                               ),
-//                               SizedBox(
-//                                 //  color: Colors.amberAccent,
-
-//                                 child: Column(
-//                                   mainAxisAlignment: MainAxisAlignment.start,
-//                                   crossAxisAlignment: CrossAxisAlignment.start,
-//                                   children: [
-//                                     MyText(
-//                                         text: data.hostelName ?? '',
-//                                         size: 24,
-//                                         fontWeight: FontWeight.w500),
-//                                     MyText(
-//                                         text: 'Address: ${data.address}',
-//                                         size: 16),
-//                                     MyText(
-//                                         text: 'Email: ${data.email}', size: 16),
-//                                     MyText(
-//                                         text: 'Type: ${data.hostelType}',
-//                                         size: 16),
-//                                     Row(
-//                                       children: [
-//                                         IconButton(
-//                                             onPressed: () {},
-//                                             color: Colors.blue,
-//                                             iconSize: 40.h,
-//                                             icon: Icon(Icons.facebook)),
-//                                         IconButton(
-//                                             onPressed: () {},
-//                                             iconSize: 40.h,
-//                                             icon: Icon(
-//                                                 Icons.south_america_outlined)),
-//                                       ],
-//                                     )
-//                                   ],
-//                                 ).marginOnly(left: 10.h),
-//                               ),
-//                             ],
-//                           ).marginAll(10.h),
-//                         ),
-//                         SizedBox(
-//                             width: double.infinity,
-//                             child: Card(
-//                               color: Colors.white,
-//                               child: const Column(
-//                                 mainAxisAlignment: MainAxisAlignment.center,
-//                                 crossAxisAlignment: CrossAxisAlignment.start,
-//                                 children: [
-//                                   MyText(
-//                                     text: 'Features',
-//                                     size: 20,
-//                                     fontWeight: FontWeight.w600,
-//                                   ),
-//                                   MyText(text: '', size: 16),
-//                                 ],
-//                               ).marginAll(10.h),
-//                             )),
-//                         Expanded(
-//                             child: SizedBox(
-//                           width: screenWidth,
-//                           child: Card(
-//                             color: Colors.grey.shade200,
-//                             child: const Column(
-//                               children: [
-//                                 Text('hello'),
-//                               ],
-//                             ),
-//                           ).marginOnly(top: 30.h, bottom: 30.h),
-//                         )),
-//                         SizedBox(
-//                           height: 180.h,
-//                           width: double.infinity,
-//                           child: Card(
-//                             color: Colors.grey.shade100,
-//                             child: const Column(
-//                               mainAxisAlignment: MainAxisAlignment.center,
-//                               crossAxisAlignment: CrossAxisAlignment.start,
-//                               children: [
-//                                 MyText(
-//                                     text: 'Contact:',
-//                                     size: 20,
-//                                     fontWeight: FontWeight.w600),
-//                               ],
-//                             ).marginOnly(left: 10.h, bottom: 10.h),
-//                           ),
-//                         ).marginOnly(bottom: 20),
-//                       ],
-//                     ),
-//                   ).paddingOnly(top: 20.h, left: 20.h, right: 20.h);

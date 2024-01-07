@@ -36,25 +36,16 @@ class CreateHostelPage extends StatelessWidget {
     var hostelEmailController = TextEditingController();
     var hostelWebsiteController = TextEditingController();
     return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+        ),
         body: SingleChildScrollView(
-      child: Stack(
-        children: [
-          Positioned(
-              top: 30.h,
-              left: 5.h,
-              child: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    size: 40,
-                  ))),
-          SizedBox(
-            height: screenHeight,
+          child: SizedBox(
+            height: screenHeight - 50,
             width: screenWidth,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 InkWell(
                   onTap: () async {
@@ -74,61 +65,65 @@ class CreateHostelPage extends StatelessWidget {
                                       'assets/icons/imagePlaceHolder.svg',
                                       fit: BoxFit.fill,
                                     )),
-                        ).marginOnly(top: 30.h);
+                        ).marginOnly(top: 0.h);
                       }),
                 ),
                 SingleChildScrollView(
                   child: SizedBox(
                     height: 600,
-                    child: Card(
-                      child: Form(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _buildTextFields(
-                                'Hostel Name', hostelNameController),
-                            _buildTextFields(
-                                'Address', hostelAddressController),
-                            _buildTextFields(
-                                'Phone number ', hostelPhoneController),
-                            _buildTextFields('Email', hostelEmailController),
-                            _buildTextFields(
-                                'Website', hostelWebsiteController),
-                            const MyText(text: 'Hostel Type', size: 18)
-                                .marginOnly(bottom: 10.h),
-                            Obx(
-                              () => Container(
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
-                                      borderRadius: BorderRadius.circular(15)),
-                                  width: 400.h,
-                                  child: DropdownButton<String>(
-                                    padding: EdgeInsets.only(
-                                        left: 10.h, right: 10.h),
-                                    value: optionController.hostelOption.value,
-                                    underline: Container(),
-                                    borderRadius: BorderRadius.circular(15),
-                                    onChanged: (String? newValue) {
-                                      optionController.hostelOption.value =
-                                          newValue!;
-                                    },
-                                    isExpanded: true,
-                                    items: <String>[
-                                      'Boys hostel',
-                                      'Girls hostel',
-                                    ].map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                  )),
-                            ),
-                            MyButton(
-                                text: 'Create',
-                                onTap: () {
+                    child: Form(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildTextFields('Hostel Name', 'Hostel name',
+                              hostelNameController),
+                          _buildTextFields('Address', 'Hostel Address',
+                              hostelAddressController),
+                          _buildTextFields('Phone number ',
+                              'Hostel Phone Number', hostelPhoneController),
+                          _buildTextFields('Email', 'Owner/Hostel Email',
+                              hostelEmailController),
+                          _buildTextFields('Website', 'Hostel Website',
+                              hostelWebsiteController),
+                          const MyText(text: 'Hostel Type', size: 18)
+                              .marginOnly(bottom: 10.h),
+                          Obx(
+                            () => Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(15)),
+                                width: 400.h,
+                                child: DropdownButton<String>(
+                                  padding:
+                                      EdgeInsets.only(left: 10.h, right: 10.h),
+                                  value: optionController.hostelOption.value,
+                                  underline: Container(),
+                                  borderRadius: BorderRadius.circular(15),
+                                  onChanged: (String? newValue) {
+                                    optionController.hostelOption.value =
+                                        newValue!;
+                                  },
+                                  isExpanded: true,
+                                  items: <String>[
+                                    'Boys hostel',
+                                    'Girls hostel',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                )),
+                          ),
+                          Obx(() => MyButton(
+                              width: screenWidth,
+                              text: controller.isBooking.value
+                                  ? 'Creating....'
+                                  : 'Create Hostel',
+                              onTap: () {
+                                if (!controller.isBooking.value) {
                                   controller
                                       .createHostel(
                                           hostelNameController.text.trim(),
@@ -148,8 +143,8 @@ class CreateHostelPage extends StatelessWidget {
                                         preferences.getString('userPassword');
                                     await preferences.setString(
                                         'UserStatus', 'Hostel_Owner');
-                                    var token = preferences
-                                        .getString('AccessToken');
+                                    var token =
+                                        preferences.getString('AccessToken');
 
                                     var response =
                                         await userController.changeUserStatus(
@@ -158,28 +153,28 @@ class CreateHostelPage extends StatelessWidget {
                                       loginController.login(email, pass!);
                                     }
                                   });
-                                }).marginOnly(top: 10)
-                          ],
-                        ),
-                      ).paddingAll(20.h),
-                    ),
+                                }
+                                print('no action ');
+                              }).marginOnly(top: 10))
+                        ],
+                      ),
+                    ).paddingAll(20.h),
                   ).marginOnly(bottom: 20.h, right: 10.h, left: 10.h),
                 ),
               ],
             ),
           ),
-        ],
-      ),
-    ));
+        ));
   }
 }
 
-Widget _buildTextFields(String text, TextEditingController textController) {
+Widget _buildTextFields(
+    String text, String hintText, TextEditingController textController) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       MyText(text: text, size: 18).marginOnly(bottom: 10.h),
-      MyTextFormField(hintText: 'Hostel Name', controller: textController),
+      MyTextFormField(hintText: hintText, controller: textController),
     ],
   );
 }

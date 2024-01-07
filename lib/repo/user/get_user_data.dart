@@ -21,7 +21,6 @@ class GetUserData {
 
       if (response.statusCode == 201 || response.statusCode == 200) {
         var data = UserDataModel.fromJson(response.data);
-
         return data;
       } else {
         throw Exception(

@@ -18,14 +18,15 @@ class BookingReqPage extends StatelessWidget {
   BookingReqPage({
     Key? key,
     required this.ownerController,
-    required this.userId,
+    required this.ownerId,
   }) : super(key: key);
   final OwnerController ownerController;
-  final int userId;
+  final int ownerId;
+
   final RoomController _roomController = Get.put(RoomController());
   @override
   Widget build(BuildContext context) {
-    ownerController.getBookingReq(userId);
+    ownerController.getBookingReq(ownerId);
     /////
     return GetBuilder<OwnerController>(builder: (value) {
       List<Datum>? snapshot = value.bookingRequestModel?.data;
@@ -113,9 +114,9 @@ class BookingReqPage extends StatelessWidget {
                 );
 
                 if (check) {
-                  Get.to(() => UserAssignRoom(
+                  Get.off(() => UserAssignRoom(
                         userName: snapshot?[index].name ?? '',
-                        userId: userId,
+                        userId: snapshot?[index].userId ?? 0,
                         hostelId: ownerController.hostelData?.data?[0].id ?? 0,
                       ));
                 }

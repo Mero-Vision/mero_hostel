@@ -1,8 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import 'package:mero_hostel/controller/hostel/hostelController.dart';
 import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
@@ -13,7 +15,11 @@ import 'package:mero_hostel/views/normalUser/hostelTab/widget/createHostel.dart'
 
 // ignore: must_be_immutable
 class HostelPage extends StatelessWidget {
-  HostelPage({super.key});
+  HostelPage({
+    Key? key,
+    required this.userStatus,
+  }) : super(key: key);
+  final String userStatus;
   // var controller = Get.find<HostelController>();
   final LoginController _loginController = Get.find();
   HostelController hostelController = Get.put(HostelController());
@@ -27,7 +33,7 @@ class HostelPage extends StatelessWidget {
     hostelController.getBoysHostel();
     hostelController.getGirlsHostel();
     //}
-
+    print(_loginController.userStatusRx.value);
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -40,30 +46,28 @@ class HostelPage extends StatelessWidget {
               Text('GIRLS').paddingAll(15)
             ]),
           ),
-          floatingActionButton: Obx(
-            () => SizedBox(
-                height: 60.h,
-                width: 200.h,
-                child: _loginController.userStatus.value != 'Hostel_Owner'
-                    ? _loginController.isLoggedIn.value
-                        ? FloatingActionButton(
-                            backgroundColor: AppColor.KButtonColor,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            child: MyText(
-                              color: Colors.white,
-                              text: 'Create Hostel',
-                              size: 20.h,
-                            ),
-                            onPressed: () {
-                              Get.to(() => CreateHostelPage(
-                                  screenHeight: screenHeight,
-                                  screenWidth: screenWidth));
-                            },
-                          )
-                        : const SizedBox()
-                    : const SizedBox()),
-          ),
+          floatingActionButton: SizedBox(
+              height: 60.h,
+              width: 200.h,
+              child: userStatus != 'Hostel_Owner' && userStatus != 'Hostel_User'
+                  ? _loginController.isLoggedIn.value
+                      ? FloatingActionButton(
+                          backgroundColor: AppColor.KButtonColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          child: MyText(
+                            color: Colors.white,
+                            text: 'Create Hostel',
+                            size: 20.h,
+                          ),
+                          onPressed: () {
+                            Get.to(() => CreateHostelPage(
+                                screenHeight: screenHeight,
+                                screenWidth: screenWidth));
+                          },
+                        )
+                      : const SizedBox()
+                  : const SizedBox()),
           body: Obx(
             () => TabBarView(children: [
               dynamicHostel(hostelController.hostels),

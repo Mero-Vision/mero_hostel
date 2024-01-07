@@ -34,22 +34,10 @@ class CreateRoomPage extends StatelessWidget {
     var priceController = TextEditingController();
     var featuresController = TextEditingController();
     return Scaffold(
+        appBar: AppBar(),
         body: SingleChildScrollView(
-      child: Stack(
-        children: [
-          Positioned(
-              top: 30.h,
-              left: 5.h,
-              child: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    size: 40,
-                  ))),
-          SizedBox(
-            height: screenHeight,
+          child: SizedBox(
+            height: screenHeight - 20,
             width: screenWidth,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +50,7 @@ class CreateRoomPage extends StatelessWidget {
                       init: ImageController(),
                       builder: (value) {
                         return SizedBox(
-                          height: 200.h,
+                          height: 180.h,
                           width: 300.h,
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(14),
@@ -70,7 +58,7 @@ class CreateRoomPage extends StatelessWidget {
                                   ? Image.file(value.file!)
                                   : SvgPicture.asset(
                                       'assets/icons/imagePlaceHolder.svg',
-                                      fit: BoxFit.fill,
+                                      fit: BoxFit.cover,
                                     )),
                         ).marginOnly(top: 30.h);
                       }),
@@ -84,15 +72,18 @@ class CreateRoomPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            _buildTextFields('Room number', 'Add room number',
+                                roomNumberController),
+                            _buildTextFields('Room capacity ', 'Room capacity',
+                                capacityController),
+                            _buildTextFields('Is room available ?', 'Yes/No',
+                                availabilityController),
+                            _buildTextFields('Room price', 'Price in number',
+                                priceController),
                             _buildTextFields(
-                                'Room number', roomNumberController),
-                            _buildTextFields(
-                                'Room capacity ', capacityController),
-                            _buildTextFields(
-                                'Is room available ?', availabilityController),
-                            _buildTextFields('Room price', priceController),
-                            _buildTextFields(
-                                'Room features', featuresController),
+                                'Room features',
+                                'Washing machine,Heater,etc.....',
+                                featuresController),
                             const MyText(text: 'Room Type', size: 18)
                                 .marginOnly(bottom: 10.h),
                             Obx(
@@ -124,19 +115,26 @@ class CreateRoomPage extends StatelessWidget {
                                     }).toList(),
                                   )),
                             ),
-                            MyButton(
-                                text: 'Create',
-                                onTap: () {
-                                  roomController.createSingleRoom(
-                                      roomNumberController.text.trim(),
-                                      optionController.roomOptions.value,
-                                      capacityController.text.trim(),
-                                      availabilityController.text.trim(),
-                                      priceController.text.trim(),
-                                      featuresController.text.trim(),
-                                      hostelId,
-                                      imageController.file);
-                                }).marginOnly(top: 10)
+                            GetBuilder<RoomController>(builder: (value) {
+                              return MyButton(
+                                  width: screenWidth,
+                                  text: value.isLoading
+                                      ? 'Loading....'
+                                      : 'Create',
+                                  onTap: () {
+                                    if (!value.isLoading) {
+                                      value.createSingleRoom(
+                                          roomNumberController.text.trim(),
+                                          optionController.roomOptions.value,
+                                          capacityController.text.trim(),
+                                          availabilityController.text.trim(),
+                                          priceController.text.trim(),
+                                          featuresController.text.trim(),
+                                          hostelId,
+                                          imageController.file);
+                                    }
+                                  }).marginOnly(top: 10);
+                            })
                           ],
                         ),
                       ).paddingAll(20.h),
@@ -146,18 +144,17 @@ class CreateRoomPage extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
-    ));
+        ));
   }
 }
 
-Widget _buildTextFields(String text, TextEditingController textController) {
+Widget _buildTextFields(
+    String text, String hintText, TextEditingController textController) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       MyText(text: text, size: 18).marginOnly(bottom: 10.h),
-      MyTextFormField(hintText: 'Hostel Name', controller: textController),
+      MyTextFormField(hintText: hintText, controller: textController),
     ],
   );
 }

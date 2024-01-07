@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:get/get.dart';
-import 'package:mero_hostel/customWidgets/Mytext.dart';
+import 'package:mero_hostel/controller/dialoug_controller.dart';
 import 'package:mero_hostel/models/owner/rooms/createRoomModel.dart';
 import 'package:mero_hostel/models/owner/rooms/getAssignRoomModel.dart';
 import 'package:mero_hostel/models/owner/rooms/roomModel.dart';
@@ -13,6 +13,8 @@ class RoomController extends GetxController {
   RxBool isLoaded = false.obs;
   int numOfRooms = 0;
   RxBool isSelected = false.obs;
+  bool isLoading = false;
+
   RxInt currentIndex = 1922.obs;
   //
   CreateRoomsModel? createRoomsModel;
@@ -32,6 +34,9 @@ class RoomController extends GetxController {
     String hostelId,
     File? roomImage,
   ) async {
+    isLoading = true;
+    update();
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     String? accessToken = pref.getString("AccessToken");
 
@@ -47,19 +52,20 @@ class RoomController extends GetxController {
           roomImage,
           accessToken);
       if (response != null) {
-        Get.defaultDialog(
-            title: 'Success!',
-            content: MyText(text: response.message.toString(), size: 20));
+        Get.back();
+        Get.back();
+
         createRoomsModel = response;
+        isLoading = false;
         update();
       } else {
-        Get.defaultDialog(
-            title: 'Oops!',
-            content: MyText(
-                text: response?.message ?? 'something Went Wrong', size: 20));
+        DialogController.showErrorSimpleDialog(
+            'Oops!', response?.message ?? 'something Went Wrong');
+        isLoading = false;
       }
     } catch (e) {
-      print(e);
+      DialogController.showErrorSimpleDialog('Oops!', 'something Went Wrong');
+      isLoading = false;
     }
   }
 

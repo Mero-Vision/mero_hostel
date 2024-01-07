@@ -2,24 +2,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mero_hostel/controller/hostel_user/hostel_user_controller.dart';
 import 'package:mero_hostel/customWidgets/Mytext.dart';
 import 'package:mero_hostel/customWidgets/mybutton.dart';
+import 'package:mero_hostel/models/user/user_model.dart';
 import 'package:mero_hostel/utils/constant.dart';
 import 'package:mero_hostel/views/normalUser/homeTab/widget/home_appbar.dart';
+import 'package:mero_hostel/views/normalUser/hostelTab/hostelPage.dart';
 
 class HostelUserHomePage extends StatelessWidget {
-  const HostelUserHomePage({super.key});
-  
+  HostelUserHomePage({super.key, required this.userDataModel});
+  final UserDataModel userDataModel;
+  final HostelUserController hostelUserController =
+      Get.put(HostelUserController());
 
   @override
   Widget build(BuildContext context) {
+    hostelUserController.getHostelUserData(userId: userDataModel.data?.id ?? 0);
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: HomeAppBar(), //----------------------------------------
+        title: HomeAppBar(
+            userImageURL: userDataModel.data?.profileImage,
+            username: userDataModel.data?.name,
+            userData:
+                userDataModel.data), //----------------------------------------
       ),
       bottomNavigationBar: MyButton(
           height: 60.h,
@@ -30,66 +40,75 @@ class HostelUserHomePage extends StatelessWidget {
             loginController.logout();
           }),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MyText(
-                  text: 'Foodmandu Boys Hostel',
-                  size: 30.h,
-                  fontWeight: FontWeight.w700,
-                  color: AppColor.KsubBlackColor,
-                ).marginSymmetric(vertical: 10.h),
-                MyText(
-                  text: 'Address : Nakxal',
-                  size: 20.h,
-                  fontWeight: FontWeight.w700,
-                  color: AppColor.KsubBlackColor,
-                ).marginOnly(bottom: 10.h),
-                MyText(
-                  text: 'Number : 9820182777',
-                  size: 18.h,
-                  fontWeight: FontWeight.w700,
-                  color: AppColor.KsubBlackColor,
-                ).marginOnly(bottom: 10.h),
-              ],
-            )
-            //------------------
-            ,
-            Column(
-              children: [
-                _midSection(
-                    flex1: 5,
-                    flex2: 3,
-                    title1: 'Expenses',
-                    title2: 'Room 2',
-                    color1: AppColor.KGreenColor,
-                    color2: AppColor.KsubBlackColor,
-                    onTap1: () {},
-                    onTap2: () {}),
-                _midSection(
-                    flex1: 2,
-                    flex2: 3,
-                    title1: 'Owner',
-                    title2: 'Room Mates',
-                    color1: AppColor.KButtonSubColor,
-                    color2: AppColor.KsubBlackColor,
-                    onTap1: () {},
-                    onTap2: () {})
-              ],
-            ),
+        child: GetBuilder<HostelUserController>(builder: (value) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyText(
+                    text: value.hostelUserDataModel.data?[0].hostelName ?? '',
+                    size: 30.h,
+                    fontWeight: FontWeight.w700,
+                    color: AppColor.KsubBlackColor,
+                  ).marginSymmetric(vertical: 10.h),
+                  MyText(
+                    text:
+                        'Address : ${value.hostelUserDataModel.data?[0].address ?? ''}',
+                    size: 20.h,
+                    fontWeight: FontWeight.w700,
+                    color: AppColor.KsubBlackColor,
+                  ).marginOnly(bottom: 10.h),
+                  MyText(
+                    text:
+                        'Number : ${value.hostelUserDataModel.data?[0].phoneNumber ?? ''}',
+                    size: 18.h,
+                    fontWeight: FontWeight.w700,
+                    color: AppColor.KsubBlackColor,
+                  ).marginOnly(bottom: 10.h),
+                ],
+              )
+              //------------------
+              ,
+              Column(
+                children: [
+                  _midSection(
+                      flex1: 5,
+                      flex2: 3,
+                      title1: 'Expenses',
+                      title2:
+                          'Room ${value.hostelUserDataModel.data?[0].roomNumber ?? ''}',
+                      color1: AppColor.KGreenColor,
+                      color2: AppColor.KsubBlackColor,
+                      onTap1: () {},
+                      onTap2: () {}),
+                  _midSection(
+                      flex1: 2,
+                      flex2: 3,
+                      title1: 'All Hostel',
+                      title2: 'Room Mates',
+                      color1: AppColor.KButtonSubColor,
+                      color2: AppColor.KsubBlackColor,
+                      onTap1: () {
+                        Get.to(() => HostelPage(
+                              userStatus: 'Hostel_User',
+                            ));
+                      },
+                      onTap2: () {})
+                ],
+              ),
 
-            //     Expanded(flex: 2, child: Container()),
-            //----------------------------------------------------
+              //     Expanded(flex: 2, child: Container()),
+              //----------------------------------------------------
 
-            //--------------------------------------------------------------
+              //--------------------------------------------------------------
 
-            // Expanded(flex: 1, child: Container()),
-          ],
-        ).marginSymmetric(horizontal: 15.h, vertical: 15.h),
+              // Expanded(flex: 1, child: Container()),
+            ],
+          ).marginSymmetric(horizontal: 15.h, vertical: 15.h);
+        }),
       ),
     );
   }

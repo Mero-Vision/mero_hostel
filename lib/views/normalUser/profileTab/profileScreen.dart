@@ -8,6 +8,7 @@ import 'package:mero_hostel/controller/loginRegister/loginController.dart';
 import 'package:mero_hostel/models/user/user_model.dart';
 
 import 'package:mero_hostel/views/normalUser/profileTab/widgets/topsection.dart';
+import 'package:mero_hostel/views/settings/aboutPage.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
@@ -75,7 +76,9 @@ class ProfileScreen extends StatelessWidget {
                   child: ListTile(
                     leading: const Icon(Icons.info),
                     title: const Text('About us'),
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => AboutPage());
+                    },
                   ),
                 ).marginAll(10.h)
               ],

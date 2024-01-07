@@ -70,7 +70,7 @@ class HomeAppBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14.r),
                   child: MyImageNetwork(
                       imageUrl: userImageURL == '' || userImageURL == null
-                          ? 'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg'
+                          ? AppConstants.userImageDummy
                           : userImageURL!,
                       boxFit: BoxFit.cover,
                       height: 54.h,
@@ -82,6 +82,7 @@ class HomeAppBar extends StatelessWidget {
     );
   }
 }
+//'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg'
 //  Image.network(
 //                     userImageURL ??
 //                         'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg',

@@ -13,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoginController extends GetxController {
   final LoginRepo repo = LoginRepo();
   final isLoading = false.obs;
-  final Rx<String?> userStatus = ''.obs;
+  final Rx<String?> userStatusRx = ''.obs;
   final Rx<LoginUserModel?> user = Rx<LoginUserModel?>(null);
   final isLoggedIn = false.obs;
 
@@ -39,14 +39,16 @@ class LoginController extends GetxController {
 
       if (data.data.user.status == 'Hostel_Owner') {
         isLoggedIn.value = true;
+        userStatusRx.value = 'Hostel_Owner';
         final userData = await UserController().getUserInfo(
             accessToken: accessToken!, userId: data.data.user.id.toString());
         Get.offAll(() => HostelOwner(userDataModel: userData));
       } else if (data.data.user.status == 'Hostel_User') {
         isLoggedIn.value = true;
+        preferences.setString('UserStatus', 'Hostel_User');
         final userData = await UserController().getUserInfo(
             accessToken: accessToken!, userId: data.data.user.id.toString());
-        Get.offAll(() => HostelUserHomePage());
+        Get.offAll(() => HostelUserHomePage(userDataModel: userData));
       } else {
         isLoggedIn.value = true;
         final userData = await UserController().getUserInfo(
@@ -102,14 +104,16 @@ class LoginController extends GetxController {
 
       if (data.data.user.status == 'Hostel_Owner') {
         preferences.setString('UserStatus', 'Hostel_Owner');
-        userStatus.value = 'Hostel_Owner';
+        userStatusRx.value = 'Hostel_Owner';
         isLoggedIn.value = true;
         Get.offAll(() => HostelOwner(userDataModel: userData));
       } else if (data.data.user.status == 'Hostel_User') {
         preferences.setString('UserStatus', 'Hostel_User');
-        userStatus.value = 'Hostel_User';
+        userStatusRx.value = 'Hostel_User';
         isLoggedIn.value = true;
-        Get.offAll(() => HostelUserHomePage());
+        Get.offAll(() => HostelUserHomePage(
+              userDataModel: userData,
+            ));
       } else {
         preferences.setString('UserStatus', 'Normal_User');
         checkLoginStatus();

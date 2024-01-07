@@ -33,12 +33,14 @@ class BookingRequestModel {
 
 class Datum {
   int? id;
+  int? userId;
   String? name;
   String? email;
   String? requested;
 
   Datum({
     this.id,
+    this.userId,
     this.name,
     this.email,
     this.requested,
@@ -46,6 +48,7 @@ class Datum {
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
+        userId: json["user_id"],
         name: json["name"],
         email: json["email"],
         requested: json["requested"],
@@ -53,6 +56,7 @@ class Datum {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "user_id": userId,
         "name": name,
         "email": email,
         "requested": requested,

@@ -77,8 +77,7 @@ class ProfileTopSection extends StatelessWidget {
                                   height: 140.h,
                                   width: 140.h)
                               : MyImageNetwork(
-                                  imageUrl:
-                                      'https://i.pinimg.com/564x/f7/9a/62/f79a625ca3bd114f6e0560df9c3626e6.jpg',
+                                  imageUrl: AppConstants.userImageDummy,
                                   boxFit: BoxFit.cover,
                                   height: 140.h,
                                   width: 140.h))
