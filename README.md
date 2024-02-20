@@ -30,8 +30,6 @@ Mero Hostel is a Flutter application designed to streamline the hostel search pr
 
 Mero Hostel offers a convenient platform for hostel seekers and owners to connect, making the hostel search and booking process efficient and hassle-free. With its intuitive interface and essential features, Mero Hostel ensures a seamless experience for all users involved in the hostel ecosystem.
 
-# Some ScreenShots -
-![loading](<assets/screenshot/Screenshot 2024-02-20 200119.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200215.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200259.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200329.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200401.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200452.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200522.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200602.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200633.png>)
 
 # Tech Used -
 **FrontEnd  - Flutter**
@@ -49,3 +47,6 @@ Emails:
 azzaya2060@gmail.com
 hanciewanem@gmail.com
 nitesh0hamal@gmail.com
+
+# Some ScreenShots -
+![loading](<assets/screenshot/Screenshot 2024-02-20 200119.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200215.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200259.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200329.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200401.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200452.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200522.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200602.png>) ![loading](<assets/screenshot/Screenshot 2024-02-20 200633.png>)
