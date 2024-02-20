@@ -6,7 +6,7 @@ class Api {
 
   Api() {
     _dio.options.baseUrl = 'https://merohostel.hancie-phago.com.np/api';
-
+ 
     _dio.interceptors.add(PrettyDioLogger(
       requestBody: true,
     ));

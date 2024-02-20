@@ -10,7 +10,7 @@
 
     <application
         android:name="${applicationName}"
-        android:label="mero_hostel"
+        android:label="Mero Hostel"
         android:icon="@mipmap/ic_launcher">
 
         <!-- Main Activity -->
